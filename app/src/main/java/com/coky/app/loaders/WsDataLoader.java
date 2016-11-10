@@ -14,8 +14,23 @@ public class WsDataLoader {
     private String mMessage;
     private String mStatus;
     private Boolean opSuccessful;
+    private Boolean checkCompleted = false;
 
+    public Boolean getCheckCompleted() {
+        return checkCompleted;
+    }
 
+    public String getmMessage() {
+        return mMessage;
+    }
+
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public Boolean getOpSuccessful() {
+        return opSuccessful;
+    }
 
     public void prijava(ArrayList<String> data){
         FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
@@ -41,6 +56,7 @@ public class WsDataLoader {
                 }else{
                     opSuccessful = false;
                 }
+                checkCompleted = true;
             }
         }
     };

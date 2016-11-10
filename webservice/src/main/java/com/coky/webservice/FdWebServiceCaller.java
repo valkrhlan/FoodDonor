@@ -37,6 +37,7 @@ public class FdWebServiceCaller {
         Call<FdWebServiceResponse> call;
         if(method == "registracijaVolontera"){
             call = fdWebService.setFizickaOsoba(
+                    "registracijaVolontera",
                     params.get(0),
                     params.get(1),
                     params.get(2),
@@ -44,10 +45,10 @@ public class FdWebServiceCaller {
                     params.get(4),
                     params.get(5),
                     params.get(6),
-                    params.get(7),
-                    params.get(8));
+                    params.get(7));
         }else if (method == "registracijaOstali"){
             call = fdWebService.setPravnaOsoba(
+                    "registracijaOstali",
                     params.get(0),
                     params.get(1),
                     params.get(2),
@@ -55,13 +56,12 @@ public class FdWebServiceCaller {
                     params.get(4),
                     params.get(5),
                     params.get(6),
-                    params.get(7),
-                    params.get(8));
+                    params.get(7));
         }else{
             call = fdWebService.getKorisnik(
+                    "prijava",
                     params.get(0),
-                    params.get(1),
-                    params.get(2));
+                    params.get(1));
         }
 
         if(call != null){
@@ -71,10 +71,10 @@ public class FdWebServiceCaller {
                     try{
                         if(response.isSuccess()){
                             Gson gson = new Gson();
-                            String message = gson.fromJson(response.body().getMessage(), String.class);
-                            String status = gson.fromJson(response.body().getStatus(), String.class);
+                            String[] message = gson.fromJson(response.body().getMessage(), String[].class);
+                            String[] status = gson.fromJson(response.body().getStatus(), String[].class);
                             if(fdWebServiceHandler != null){
-                                fdWebServiceHandler.onDataArrived(message,status,true);
+                                fdWebServiceHandler.onDataArrived(message[0],status[0],true);
                             }
                         }
                     }catch (Exception ex){
