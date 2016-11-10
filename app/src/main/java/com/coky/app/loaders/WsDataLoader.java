@@ -10,37 +10,44 @@ import java.util.ArrayList;
  */
 
 public class WsDataLoader {
+
+    private String message;
+    private Boolean opSuccessful;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Boolean getOpSuccessful() {
+        return opSuccessful;
+    }
+
     public void prijava(ArrayList<String> data){
-        FdWebServiceCaller prijavaWs = new FdWebServiceCaller(prijavaHandler);
+        FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
         prijavaWs.CallWs("prijava",data);
     }
     public void registracijaFizicka(ArrayList<String> data){
-        FdWebServiceCaller regFizickaWs = new FdWebServiceCaller(regFizickaHandler);
-                regFizickaWs.CallWs("prijava",data);
+        FdWebServiceCaller regFizickaWs = new FdWebServiceCaller(responseHandler);
+        regFizickaWs.CallWs("registracijaVolontera",data);
     }
     public void registracijaPravna(ArrayList<String> data){
-        FdWebServiceCaller regPravnaWs = new FdWebServiceCaller(regPravnaHandler);
-                regPravnaWs.CallWs("prijava",data);
+        FdWebServiceCaller regPravnaWs = new FdWebServiceCaller(responseHandler);
+        regPravnaWs.CallWs("registracijaOstali",data);
     }
 
-    FdWebServiceHandler prijavaHandler = new FdWebServiceHandler() {
+    FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
-        public void onDataArrived(String message, boolean ok) {
-
+        public void onDataArrived(String data, boolean ok) {
+            if(ok){
+                message = data;
+                if(data.startsWith("U")){
+                    opSuccessful = true;
+                }else{
+                    opSuccessful = false;
+                }
+            }
         }
     };
 
-    FdWebServiceHandler regFizickaHandler = new FdWebServiceHandler() {
-        @Override
-        public void onDataArrived(String message, boolean ok) {
 
-        }
-    };
-
-    FdWebServiceHandler regPravnaHandler = new FdWebServiceHandler() {
-        @Override
-        public void onDataArrived(String message, boolean ok) {
-
-        }
-    };
 }

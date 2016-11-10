@@ -22,7 +22,6 @@ public class FdWebServiceCaller {
 
     private final String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
 
-    //Fali još Handler
     public FdWebServiceCaller(FdWebServiceHandler fdWebServiceHandler){
         this.fdWebServiceHandler = fdWebServiceHandler;
         OkHttpClient okHttpClient  = new OkHttpClient();
