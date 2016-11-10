@@ -1,6 +1,6 @@
 package com.coky.webservice;
 
-import com.coky.webservice.responses.FbWebServiceResponse;
+import com.coky.webservice.responses.FdWebServiceResponse;
 
 import retrofit.Call;
 import retrofit.http.GET;
@@ -15,11 +15,11 @@ public interface FdWebService {
 
     String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
 
-    @GET(baseUrl + "prijava/{email}/{lozinka}/")
-    Call<FbWebServiceResponse> getKorisnik(@Path("email") String email, @Path("lozinka") String loznika);
+    @GET(baseUrl + "prijava/{metoda}/{email}/{lozinka}/")
+    Call<FdWebServiceResponse> getKorisnik(@Path("metoda") String metoda, @Path("email") String email, @Path("lozinka") String loznika);
 
     @POST(baseUrl + "registracija/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{ime}/{prezime}/")
-    Call<FbWebServiceResponse> setFizickaOsoba(
+    Call<FdWebServiceResponse> setFizickaOsoba(
             @Path("metoda") String metoda,
             @Path("email") String email,
             @Path("lozinka") String lozinka,
@@ -34,7 +34,7 @@ public interface FdWebService {
     //Krhlanko, daj provjeri ovo i onaj word, nekaj smo fulali u nastavku URL-a.
 
     @POST(baseUrl + "registracijaOstali/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{naziv}/{tip}/")
-    Call<FbWebServiceResponse> setPravnaOsoba(
+    Call<FdWebServiceResponse> setPravnaOsoba(
             @Path("metoda") String metoda,
             @Path("email") String email,
             @Path("lozinka") String lozinka,

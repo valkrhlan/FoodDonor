@@ -4,7 +4,7 @@ package com.coky.webservice.responses;
  * Created by Čoky on 9.11.2016..
  */
 
-public class FbWebServiceResponse {
+public class FdWebServiceResponse {
     public String Status;
     public int nbResults;
     public String message;
