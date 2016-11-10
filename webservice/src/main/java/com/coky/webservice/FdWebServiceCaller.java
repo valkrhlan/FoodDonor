@@ -66,16 +66,14 @@ public class FdWebServiceCaller {
 
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {
+
                 @Override
                 public void onResponse(Response<FdWebServiceResponse> response, Retrofit retrofit) {
+
                     try{
                         if(response.isSuccess()){
-                            Gson gson = new Gson();
-                            String[] message = gson.fromJson(response.body().getMessage(), String[].class);
-                            String[] status = gson.fromJson(response.body().getStatus(), String[].class);
-                            if(fdWebServiceHandler != null){
-                                fdWebServiceHandler.onDataArrived(message[0],status[0],true);
-                            }
+                            if(fdWebServiceHandler != null)
+                                fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getStatus().toString(),true);
                         }
                     }catch (Exception ex){
                         ex.printStackTrace();

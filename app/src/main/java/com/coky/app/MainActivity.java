@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         wsDataLoader.prijava(arrayList);
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("rezultat prijave");
+        System.out.println(wsDataLoader.getmMessage());
         alertDialog.setMessage("Status: " + wsDataLoader.getmStatus() + "\nMessage: " + wsDataLoader.getmMessage());
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {

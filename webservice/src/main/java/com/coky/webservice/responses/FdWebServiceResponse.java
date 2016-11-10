@@ -5,17 +5,17 @@ package com.coky.webservice.responses;
  */
 
 public class FdWebServiceResponse {
-    public String Status;
+    public String status;
     public int nbResults;
     public String message;
     public String data;
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        status = status;
     }
 
     public int getNbResults() {

@@ -1,9 +1,17 @@
 package com.coky.app.loaders;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.widget.TextView;
+
+import com.coky.app.MainActivity;
+import com.coky.app.R;
 import com.coky.webservice.FdWebServiceCaller;
 import com.coky.webservice.FdWebServiceHandler;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
  * Created by Čoky on 10.11.2016..
@@ -35,6 +43,7 @@ public class WsDataLoader {
     public void prijava(ArrayList<String> data){
         FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
         prijavaWs.CallWs("prijava",data);
+
     }
     public void registracijaFizicka(ArrayList<String> data){
         FdWebServiceCaller regFizickaWs = new FdWebServiceCaller(responseHandler);
@@ -57,6 +66,7 @@ public class WsDataLoader {
                     opSuccessful = false;
                 }
                 checkCompleted = true;
+                System.out.println(getmMessage() + " " + getmStatus());
             }
         }
     };
