@@ -60,5 +60,5 @@
         android:layout_alignStart="@+id/textPassword"
         android:layout_marginStart="50dp"
         android:layout_marginTop="120dp"
-        android:id="@+id/prijava" />
+        android:id="@+id/prijavaBtn" />
 </RelativeLayout>
