@@ -17,12 +17,14 @@ import retrofit.Retrofit;
  */
 
 public class FdWebServiceCaller {
+    FdWebServiceHandler fdWebServiceHandler;
     Retrofit retrofit;
 
     private final String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
 
     //Fali još Handler
-    public FdWebServiceCaller(){
+    public FdWebServiceCaller(FdWebServiceHandler fdWebServiceHandler){
+        this.fdWebServiceHandler = fdWebServiceHandler;
         OkHttpClient okHttpClient  = new OkHttpClient();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -71,7 +73,9 @@ public class FdWebServiceCaller {
                         if(response.isSuccess()){
                             Gson gson = new Gson();
                             String message = gson.fromJson(response.body().getMessage(), String.class);
-                            //Fali kod za Handler
+                            if(fdWebServiceHandler != null){
+                                fdWebServiceHandler.onDataArrived(message,true);
+                            }
                         }
                     }catch (Exception ex){
                         ex.printStackTrace();
