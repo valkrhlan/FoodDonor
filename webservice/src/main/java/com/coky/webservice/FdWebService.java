@@ -13,12 +13,10 @@ import retrofit.http.Path;
 
 public interface FdWebService {
 
-    String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
-
-    @GET(baseUrl + "prijava/{metoda}/{email}/{lozinka}/")
+    @GET("prijava/{metoda}/{email}/{lozinka}/")
     Call<FdWebServiceResponse> getKorisnik(@Path("metoda") String metoda, @Path("email") String email, @Path("lozinka") String loznika);
 
-    @POST(baseUrl + "registracija/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{ime}/{prezime}/")
+    @POST("registracija/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{ime}/{prezime}/")
     Call<FdWebServiceResponse> setFizickaOsoba(
             @Path("metoda") String metoda,
             @Path("email") String email,
@@ -32,7 +30,7 @@ public interface FdWebService {
 
 
 
-    @POST(baseUrl + "registracijaOstali/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{naziv}/{tip}/")
+    @POST("registracijaOstali/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{naziv}/{tip}/")
     Call<FdWebServiceResponse> setPravnaOsoba(
             @Path("metoda") String metoda,
             @Path("email") String email,
