@@ -10,4 +10,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.coky.app.MainActivity">
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:id="@+id/labelEmail"
+        tools:text="Email:"
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:id="@+id/labelPassword"
+        tools:text="Password:"
+        android:layout_below="@+id/textEmail"
+        android:layout_alignEnd="@+id/labelEmail" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textEmail"
+        android:layout_alignEnd="@+id/textEmail"
+        android:layout_marginTop="42dp"
+        android:id="@+id/textPassword" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/textEmail"
+        android:layout_marginStart="20dp"
+        android:layout_alignBaseline="@+id/labelEmail"
+        android:layout_alignBottom="@+id/labelEmail"
+        android:layout_toEndOf="@+id/labelEmail" />
+
+    <Button
+        android:text="Prijavi se"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPassword"
+        android:layout_alignStart="@+id/textPassword"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="120dp"
+        android:id="@+id/prijava" />
 </RelativeLayout>
