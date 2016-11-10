@@ -31,7 +31,6 @@ public interface FdWebService {
             @Path("prezime") String prezime);
 
 
-    //Krhlanko, daj provjeri ovo i onaj word, nekaj smo fulali u nastavku URL-a.
 
     @POST(baseUrl + "registracijaOstali/{metoda}/{email}/{lozinka}/{oib}/{grad}/{adresa}/{kontakt}/{naziv}/{tip}/")
     Call<FdWebServiceResponse> setPravnaOsoba(

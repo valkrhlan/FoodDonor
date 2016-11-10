@@ -72,8 +72,9 @@ public class FdWebServiceCaller {
                         if(response.isSuccess()){
                             Gson gson = new Gson();
                             String message = gson.fromJson(response.body().getMessage(), String.class);
+                            String status = gson.fromJson(response.body().getStatus(), String.class);
                             if(fdWebServiceHandler != null){
-                                fdWebServiceHandler.onDataArrived(message,true);
+                                fdWebServiceHandler.onDataArrived(message,status,true);
                             }
                         }
                     }catch (Exception ex){

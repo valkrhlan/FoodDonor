@@ -11,16 +11,11 @@ import java.util.ArrayList;
 
 public class WsDataLoader {
 
-    private String message;
+    private String mMessage;
+    private String mStatus;
     private Boolean opSuccessful;
 
-    public String getMessage() {
-        return message;
-    }
 
-    public Boolean getOpSuccessful() {
-        return opSuccessful;
-    }
 
     public void prijava(ArrayList<String> data){
         FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
@@ -37,10 +32,11 @@ public class WsDataLoader {
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
-        public void onDataArrived(String data, boolean ok) {
+        public void onDataArrived(String message, String status, boolean ok) {
             if(ok){
-                message = data;
-                if(data.startsWith("U")){
+                mMessage = message;
+                mStatus = status;
+                if(mStatus.startsWith("O")){
                     opSuccessful = true;
                 }else{
                     opSuccessful = false;
