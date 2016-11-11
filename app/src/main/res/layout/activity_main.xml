@@ -56,9 +56,17 @@
         android:text="Prijavi se"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:id="@+id/prijavaBtn"
         android:layout_below="@+id/textPassword"
-        android:layout_alignStart="@+id/textPassword"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="120dp"
-        android:id="@+id/prijavaBtn" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Registracija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:id="@+id/registracijaBtn"
+        android:layout_below="@+id/prijavaBtn"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
