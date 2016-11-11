@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     @Override
-    public void onWsDataLoaded(String message, String status, boolean opSuccessful) {
+    public void onWsDataLoaded(String message, String status, final boolean opSuccessful) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Rezultat prijave");
         alertDialog.setMessage(message);
@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        if(opSuccessful){
+                            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
+                            startActivity(intent);
+                            editPassword.setText("");
+                            editEmail.setText("");
+                        }
                     }
                 });
         alertDialog.show();

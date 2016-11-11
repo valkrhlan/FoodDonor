@@ -34,12 +34,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/textEmail"
         android:layout_alignEnd="@+id/textEmail"
         android:layout_marginTop="42dp"
-        android:id="@+id/textPassword" />
+        android:id="@+id/textPassword"
+        android:inputType="textPassword" />
 
     <EditText
         android:layout_width="wrap_content"
