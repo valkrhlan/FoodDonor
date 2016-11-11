@@ -14,7 +14,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".Registracija"></activity>
+        <activity android:name=".RegistracijaPravniKorisnik"></activity>
     </application>
 
 </manifest>
