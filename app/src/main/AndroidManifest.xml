@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistracijaPravniKorisnik" />
-        <activity android:name=".RegistracijaFizickiKorisnik"></activity>
+        <activity android:name=".RegistracijaFizickiKorisnik" />
+        <activity android:name=".PopisPaketa"></activity>
     </application>
 
 </manifest>
