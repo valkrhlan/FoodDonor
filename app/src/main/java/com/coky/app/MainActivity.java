@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WsDataLoadedListener {
 
     @BindView(R.id.prijavaBtn)
     Button btnPrijava;
@@ -44,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         WsDataLoader wsDataLoader = new WsDataLoader();
-        wsDataLoader.prijava(arrayList);
+        wsDataLoader.prijava(arrayList, this);
+    }
+
+
+    @Override
+    public void onWsDataLoaded(String message, String status, boolean opSuccessful) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("rezultat prijave");
-        System.out.println(wsDataLoader.getmMessage());
-        alertDialog.setMessage("Status: " + wsDataLoader.getmStatus() + "\nMessage: " + wsDataLoader.getmMessage());
+        alertDialog.setMessage("Status: " + status + "\nMessage: " + message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -56,8 +60,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-
     }
-
-
 }

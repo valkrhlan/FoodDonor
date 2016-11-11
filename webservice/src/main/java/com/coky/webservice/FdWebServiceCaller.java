@@ -37,7 +37,7 @@ public class FdWebServiceCaller {
         Call<FdWebServiceResponse> call;
         if(method == "registracijaVolontera"){
             call = fdWebService.setFizickaOsoba(
-                    "registracijaVolontera",
+                    method,
                     params.get(0),
                     params.get(1),
                     params.get(2),
@@ -48,7 +48,7 @@ public class FdWebServiceCaller {
                     params.get(7));
         }else if (method == "registracijaOstali"){
             call = fdWebService.setPravnaOsoba(
-                    "registracijaOstali",
+                    method,
                     params.get(0),
                     params.get(1),
                     params.get(2),
@@ -59,7 +59,7 @@ public class FdWebServiceCaller {
                     params.get(7));
         }else{
             call = fdWebService.getKorisnik(
-                    "prijava",
+                    method,
                     params.get(0),
                     params.get(1));
         }

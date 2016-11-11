@@ -19,37 +19,21 @@ import butterknife.BindView;
 
 public class WsDataLoader {
 
-    private String mMessage;
-    private String mStatus;
     private Boolean opSuccessful;
-    private Boolean checkCompleted = false;
+    private WsDataLoadedListener wsDataLoadedListener;
 
-    public Boolean getCheckCompleted() {
-        return checkCompleted;
-    }
-
-    public String getmMessage() {
-        return mMessage;
-    }
-
-    public String getmStatus() {
-        return mStatus;
-    }
-
-    public Boolean getOpSuccessful() {
-        return opSuccessful;
-    }
-
-    public void prijava(ArrayList<String> data){
+    public void prijava(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener = wsDataLoadedListener;
         FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
         prijavaWs.CallWs("prijava",data);
-
     }
-    public void registracijaFizicka(ArrayList<String> data){
+    public void registracijaFizicka(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener = wsDataLoadedListener;
         FdWebServiceCaller regFizickaWs = new FdWebServiceCaller(responseHandler);
         regFizickaWs.CallWs("registracijaVolontera",data);
     }
-    public void registracijaPravna(ArrayList<String> data){
+    public void registracijaPravna(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener = wsDataLoadedListener;
         FdWebServiceCaller regPravnaWs = new FdWebServiceCaller(responseHandler);
         regPravnaWs.CallWs("registracijaOstali",data);
     }
@@ -58,15 +42,12 @@ public class WsDataLoader {
         @Override
         public void onDataArrived(String message, String status, boolean ok) {
             if(ok){
-                mMessage = message;
-                mStatus = status;
-                if(mStatus.startsWith("O")){
+                if(status.startsWith("O")){
                     opSuccessful = true;
                 }else{
                     opSuccessful = false;
                 }
-                checkCompleted = true;
-                System.out.println(getmMessage() + " " + getmStatus());
+                wsDataLoadedListener.onWsDataLoaded(message,status,opSuccessful);
             }
         }
     };
