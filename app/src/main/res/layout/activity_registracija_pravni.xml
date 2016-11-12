@@ -15,8 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/editMailRF"
-        android:layout_alignBottom="@+id/editMailRF"
+        android:layout_alignBaseline="@+id/editMailRP"
+        android:layout_alignBottom="@+id/editMailRP"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -24,25 +24,27 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:layout_below="@+id/editPonovljenaRF"
-        android:layout_alignStart="@+id/editPonovljenaRF"
-        android:id="@+id/editOibRF" />
+        android:layout_below="@+id/editPonovljenaRP"
+        android:layout_alignStart="@+id/editPonovljenaRP"
+        android:id="@+id/editOibRP" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_below="@+id/editOibRF"
-        android:layout_alignStart="@+id/editOibRF"
-        android:id="@+id/editGradRF" />
+        android:layout_below="@+id/editOibRP"
+        android:layout_alignStart="@+id/editOibRP"
+        android:id="@+id/editGradRP"
+        android:inputType="textPersonName"
+        />
 
     <TextView
         android:text="Lozinka:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
-        android:layout_alignBaseline="@+id/editLozinkaRF"
-        android:layout_alignBottom="@+id/editLozinkaRF"
+        android:layout_alignBaseline="@+id/editLozinkaRP"
+        android:layout_alignBottom="@+id/editLozinkaRP"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -50,8 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView7"
-        android:layout_alignBaseline="@+id/editOibRF"
-        android:layout_alignBottom="@+id/editOibRF"
+        android:layout_alignBaseline="@+id/editOibRP"
+        android:layout_alignBottom="@+id/editOibRP"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -59,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView8"
-        android:layout_alignBaseline="@+id/editGradRF"
-        android:layout_alignBottom="@+id/editGradRF"
+        android:layout_alignBaseline="@+id/editGradRP"
+        android:layout_alignBottom="@+id/editGradRP"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -68,8 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView9"
-        android:layout_alignBaseline="@+id/editAdresaRF"
-        android:layout_alignBottom="@+id/editAdresaRF"
+        android:layout_alignBaseline="@+id/editAdresaRP"
+        android:layout_alignBottom="@+id/editAdresaRP"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -77,35 +79,35 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/editKontaktRF"
-        android:layout_alignEnd="@+id/editKontaktRF"
-        android:id="@+id/editImeRF" />
+        android:layout_below="@+id/editKontaktRP"
+        android:layout_alignEnd="@+id/editKontaktRP"
+        android:id="@+id/editNazivRP" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editAdresaRF"
-        android:layout_below="@+id/editGradRF"
-        android:layout_alignStart="@+id/editGradRF" />
+        android:id="@+id/editAdresaRP"
+        android:layout_below="@+id/editGradRP"
+        android:layout_alignStart="@+id/editGradRP" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editKontaktRF"
-        android:layout_below="@+id/editAdresaRF"
-        android:layout_alignStart="@+id/editAdresaRF" />
+        android:id="@+id/editKontaktRP"
+        android:layout_below="@+id/editAdresaRP"
+        android:layout_alignStart="@+id/editAdresaRP" />
 
     <TextView
         android:text="Naziv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView11"
-        android:layout_alignBaseline="@+id/editImeRF"
-        android:layout_alignBottom="@+id/editImeRF"
+        android:layout_alignBaseline="@+id/editNazivRP"
+        android:layout_alignBottom="@+id/editNazivRP"
         android:layout_alignParentStart="true" />
 
 
@@ -115,8 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView10"
-        android:layout_alignBaseline="@+id/editKontaktRF"
-        android:layout_alignBottom="@+id/editKontaktRF"
+        android:layout_alignBaseline="@+id/editKontaktRP"
+        android:layout_alignBottom="@+id/editKontaktRP"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -124,7 +126,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editMailRF"
+        android:id="@+id/editMailRP"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp" />
@@ -134,35 +136,25 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:id="@+id/editPonovljenaRF"
-        android:layout_below="@+id/editLozinkaRF"
-        android:layout_alignStart="@+id/editLozinkaRF" />
+        android:id="@+id/editPonovljenaRP"
+        android:layout_below="@+id/editLozinkaRP"
+        android:layout_alignStart="@+id/editLozinkaRP" />
 
     <TextView
         android:text="Lozinka (Ponovljena):"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView6"
-        android:layout_above="@+id/editOibRF"
+        android:layout_above="@+id/editOibRP"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editLozinkaRF"
-        android:layout_toStartOf="@+id/editOibRF" />
-
-    <Button
-        android:text="Odustani"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonOdustaniRP"
-        android:layout_alignBaseline="@+id/buttonRegistrirajSeRF"
-        android:layout_alignBottom="@+id/buttonRegistrirajSeRF"
-        android:layout_toEndOf="@+id/buttonRegistrirajSeRF"
-        android:layout_marginStart="32dp" />
+        android:layout_below="@+id/editLozinkaRP"
+        android:layout_toStartOf="@+id/editOibRP" />
 
     <TextView
         android:text="Tip:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editImeRF"
+        android:layout_below="@+id/editNazivRP"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp"
         android:id="@+id/textView3" />
@@ -171,9 +163,10 @@
         android:layout_width="215dp"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_above="@+id/buttonRegistrirajSeRF"
-        android:layout_alignStart="@+id/editImeRF"
-        android:layout_marginBottom="12dp">
+        android:layout_above="@+id/buttonRegistrirajSeRP"
+        android:layout_alignStart="@+id/editNazivRP"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/radioGroup">
 
         <RadioButton
             android:text="Donor"
@@ -196,7 +189,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:id="@+id/buttonRegistrirajSeRF"
+        android:id="@+id/buttonRegistrirajSeRP"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/textView5" />
 
@@ -205,9 +198,18 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editLozinkaRF"
-        android:layout_below="@+id/editMailRF"
-        android:layout_alignStart="@+id/editMailRF" />
+        android:id="@+id/editLozinkaRP"
+        android:layout_below="@+id/editMailRP"
+        android:layout_alignStart="@+id/editMailRP" />
+
+    <Button
+        android:text="Odustani"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonOdustaniRP"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup"
+        android:layout_marginEnd="19dp" />
 
 
 </RelativeLayout>

@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:inputType="number"
         android:ems="10"
         android:layout_below="@+id/editPonovljenaRF"
         android:layout_alignStart="@+id/editPonovljenaRF"
@@ -31,7 +31,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/editOibRF"
         android:layout_alignStart="@+id/editOibRF"
@@ -130,15 +130,6 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editPonovljenaRF"
-        android:layout_below="@+id/editLozinkaRF"
-        android:layout_alignStart="@+id/editLozinkaRF" />
-
     <TextView
         android:text="Lozinka (Ponovljena):"
         android:layout_width="wrap_content"
@@ -162,7 +153,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/editLozinkaRF"
         android:layout_below="@+id/editMailRF"
@@ -194,4 +185,13 @@
         android:id="@+id/buttonRegistrirajSeRF"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/textView10" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPonovljenaRF"
+        android:layout_below="@+id/editLozinkaRF"
+        android:layout_alignStart="@+id/editLozinkaRF" />
 </RelativeLayout>

@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,17 +41,30 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
     }
+    public static final Pattern email_check =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validate(String emailStr) {
+        Matcher matcher = email_check.matcher(emailStr);
+        return matcher.find();
+    }
 
     @OnClick(R.id.prijavaBtn)
     public void prijavaBtnClick(View view){
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(0,editEmail.getText().toString());
         arrayList.add(1,editPassword.getText().toString());
-        if(editEmail.getText() == null){
-            return;
+        if(!editEmail.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()){
+            if(validate(editEmail.getText().toString())){
+                WsDataLoader wsDataLoader = new WsDataLoader();
+                wsDataLoader.prijava(arrayList, this);
+            }
+            else Toast.makeText(this,"Nije dobra struktura emaila!",Toast.LENGTH_SHORT).show();
         }
-        WsDataLoader wsDataLoader = new WsDataLoader();
-        wsDataLoader.prijava(arrayList, this);
+        else{
+            Toast.makeText(this,"Popunite sva polja!",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
