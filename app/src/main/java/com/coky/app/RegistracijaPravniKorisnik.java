@@ -114,7 +114,7 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
             else {
                 Toast.makeText(this,"Uspješan unos!",Toast.LENGTH_SHORT).show();
                 WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.registracijaFizicka(arrayLisRegistracija,this);
+                wsDataLoader.registracijaPravna(arrayLisRegistracija,this);
             }
         }else {
                 Toast.makeText(this,"Popunite sva polja za unos!",Toast.LENGTH_LONG).show();
