@@ -51,6 +51,8 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
     @BindView(R.id.editOibRF)
     EditText editOib;
 
+    @BindView(R.id.buttonOdustaniRF)
+    Button odustani;
 
     public static final Pattern email_check =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -110,6 +112,11 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
 
 
 }
+
+    @OnClick(R.id.buttonOdustaniRF)
+    public void odustaniClick(View view){
+        finish();
+    }
 
     @Override
     public void onWsDataLoaded(String message, String status, boolean opSuccessful) {

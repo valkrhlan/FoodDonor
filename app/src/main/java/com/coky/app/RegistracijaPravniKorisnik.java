@@ -43,10 +43,10 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
     RadioButton radioDonor;
     @BindView(R.id.radioPotrebitiRP)
     RadioButton radioPotrebiti;
-
-
     @BindView(R.id.editNazivRP)
     EditText editNaziv;
+    @BindView(R.id.buttonOdustaniRP)
+    Button odustani;
 
 
     public static final Pattern email_check =
@@ -68,10 +68,10 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
     public static final Pattern numbers_only_check =
             Pattern.compile("^[1-9]+$", Pattern.CASE_INSENSITIVE);
 
-    public static boolean validate_numbers(String numbers) {
+    /*public static boolean validate_numbers(String numbers) {
         Matcher matcher = numbers_only_check.matcher(numbers);
         return matcher.find();
-    }
+    }*/
 
 
 
@@ -122,6 +122,11 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
             }
 
 }
+
+    @OnClick(R.id.buttonOdustaniRP)
+    public void odustaniClick(View view){
+        finish();
+    }
 
     @Override
     public void onWsDataLoaded(String message, String status, boolean opSuccessful) {
