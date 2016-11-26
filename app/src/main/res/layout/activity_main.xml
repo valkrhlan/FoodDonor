@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,65 +9,69 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@android:color/background_light"
     tools:context="com.coky.app.MainActivity">
 
-    <TextView
-        android:text="Email:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:id="@+id/labelEmail"
-        tools:text="Email:"
-        android:layout_marginTop="62dp"
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/banner"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        app:srcCompat="@android:color/darker_gray"
+        android:id="@+id/imageView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Password:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
-        android:id="@+id/labelPassword"
-        tools:text="Password:"
-        android:layout_below="@+id/textEmail"
-        android:layout_alignEnd="@+id/labelEmail" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_below="@+id/textEmail"
-        android:layout_alignEnd="@+id/textEmail"
-        android:layout_marginTop="42dp"
-        android:id="@+id/textPassword"
-        android:inputType="textPassword" />
-
-    <EditText
+        android:textColorHint="@android:color/holo_orange_light"
+        android:hint="Email"
+        android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/textEmail"
-        android:layout_marginStart="20dp"
-        android:layout_alignBaseline="@+id/labelEmail"
-        android:layout_alignBottom="@+id/labelEmail"
-        android:layout_toEndOf="@+id/labelEmail" />
 
-    <Button
-        android:text="Prijavi se"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <EditText
+        android:textAlignment="center"
+        android:fontFamily="sans-serif"
+        android:textColorHint="@android:color/holo_orange_light"
+        android:hint="Lozinka"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:id="@+id/prijavaBtn"
-        android:layout_below="@+id/textPassword"
-        android:layout_centerHorizontal="true" />
+        android:ems="10"
+        android:id="@+id/textPassword"
+        android:inputType="textPassword"
+        android:layout_below="@+id/textEmail"
+        android:layout_marginTop="21dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
     <Button
         android:text="Registracija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:id="@+id/registracijaBtn"
-        android:layout_below="@+id/prijavaBtn"
-        android:layout_centerHorizontal="true" />
+
+        android:background="@android:color/holo_orange_dark"
+        android:layout_marginBottom="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textPassword"
+        android:layout_marginEnd="23dp" />
+
+    <Button
+        android:text="Prijavi se"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/prijavaBtn"
+        android:background="@android:color/holo_orange_dark"
+        android:layout_marginStart="28dp"
+        android:layout_alignBaseline="@+id/registracijaBtn"
+        android:layout_alignBottom="@+id/registracijaBtn"
+        android:layout_alignStart="@+id/textPassword" />
 </RelativeLayout>
