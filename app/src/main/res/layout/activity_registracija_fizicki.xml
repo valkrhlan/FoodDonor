@@ -17,7 +17,9 @@
         android:id="@+id/textView"
         android:layout_alignBaseline="@+id/editMailRF"
         android:layout_alignBottom="@+id/editMailRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -44,7 +46,8 @@
         android:id="@+id/textView5"
         android:layout_alignBaseline="@+id/editLozinkaRF"
         android:layout_alignBottom="@+id/editLozinkaRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"/>
 
     <TextView
         android:text="OIB:"
@@ -53,16 +56,9 @@
         android:id="@+id/textView7"
         android:layout_alignBaseline="@+id/editOibRF"
         android:layout_alignBottom="@+id/editOibRF"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Grad:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:layout_alignBaseline="@+id/editGradRF"
-        android:layout_alignBottom="@+id/editGradRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <TextView
         android:text="Adresa:"
@@ -71,7 +67,9 @@
         android:id="@+id/textView9"
         android:layout_alignBaseline="@+id/editAdresaRF"
         android:layout_alignBottom="@+id/editAdresaRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -107,7 +105,9 @@
         android:id="@+id/textView11"
         android:layout_alignBaseline="@+id/editImeRF"
         android:layout_alignBottom="@+id/editImeRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
 
 
@@ -118,7 +118,9 @@
         android:id="@+id/textView10"
         android:layout_alignBaseline="@+id/editKontaktRF"
         android:layout_alignBottom="@+id/editKontaktRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -138,17 +140,9 @@
         android:layout_above="@+id/editOibRF"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editLozinkaRF"
-        android:layout_toStartOf="@+id/editOibRF" />
-
-    <Button
-        android:text="Odustani"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonOdustaniRF"
-        android:layout_alignBaseline="@+id/buttonRegistrirajSeRF"
-        android:layout_alignBottom="@+id/buttonRegistrirajSeRF"
-        android:layout_toEndOf="@+id/buttonRegistrirajSeRF"
-        android:layout_marginStart="32dp" />
+        android:layout_toStartOf="@+id/editOibRF"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -166,7 +160,9 @@
         android:layout_marginTop="13dp"
         android:id="@+id/textView3"
         android:layout_below="@+id/editImeRF"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -177,15 +173,6 @@
         android:layout_alignStart="@+id/editImeRF"
         android:id="@+id/editPrezimeRF" />
 
-    <Button
-        android:text="Registriraj se"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/buttonRegistrirajSeRF"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/textView10" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -194,4 +181,37 @@
         android:id="@+id/editPonovljenaRF"
         android:layout_below="@+id/editLozinkaRF"
         android:layout_alignStart="@+id/editLozinkaRF" />
+
+    <TextView
+        android:textColor="@android:color/holo_orange_dark"
+        android:text="Grad:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:layout_alignBaseline="@+id/editGradRF"
+        android:layout_alignBottom="@+id/editGradRF"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Odustani"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonOdustaniRF"
+        android:background="@android:drawable/btn_default_small"
+        tools:background="@android:drawable/btn_default"
+        android:layout_marginStart="24dp"
+        android:layout_alignBaseline="@+id/buttonRegistrirajSeRF"
+        android:layout_alignBottom="@+id/buttonRegistrirajSeRF"
+        android:layout_toEndOf="@+id/buttonRegistrirajSeRF" />
+
+    <Button
+        android:text="Registriraj se"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/buttonRegistrirajSeRF"
+        android:background="@android:drawable/btn_default_small"
+        tools:background="@android:drawable/btn_default"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView3" />
 </RelativeLayout>

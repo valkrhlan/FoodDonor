@@ -17,7 +17,9 @@
         android:id="@+id/textView"
         android:layout_alignBaseline="@+id/editMailRP"
         android:layout_alignBottom="@+id/editMailRP"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/holo_orange_dark"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,6 +41,7 @@
         />
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Lozinka:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +51,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="OIB:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +61,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Grad:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,6 +71,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Adresa:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,6 +108,7 @@
         android:layout_alignStart="@+id/editAdresaRP" />
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Naziv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,6 +120,7 @@
 
 
     <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Kontakt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -131,26 +139,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:id="@+id/editPonovljenaRP"
-        android:layout_below="@+id/editLozinkaRP"
-        android:layout_alignStart="@+id/editLozinkaRP" />
-
     <TextView
-        android:text="Lozinka (Ponovljena):"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/editOibRP"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editLozinkaRP"
-        android:layout_toStartOf="@+id/editOibRP" />
-
-    <TextView
+        android:textColor="@android:color/holo_orange_dark"
         android:text="Tip:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -191,7 +181,9 @@
         android:layout_marginBottom="16dp"
         android:id="@+id/buttonRegistrirajSeRP"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/textView5" />
+        android:layout_toEndOf="@+id/textView5"
+        android:background="@android:drawable/btn_default_small"
+        tools:background="@android:drawable/btn_default" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -207,9 +199,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonOdustaniRP"
+        android:layout_marginEnd="17dp"
+        android:background="@android:drawable/btn_default_small"
         android:layout_below="@+id/radioGroup"
-        android:layout_alignEnd="@+id/radioGroup"
-        android:layout_marginEnd="19dp" />
+        android:layout_alignEnd="@+id/radioGroup" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:id="@+id/editPonovljenaRP"
+        android:layout_below="@+id/editLozinkaRP"
+        android:layout_alignStart="@+id/editLozinkaRP" />
+
+    <TextView
+        android:textColor="@android:color/holo_orange_dark"
+        android:text="Lozinka (ponovljena):"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_above="@+id/editOibRP"
+        android:layout_alignParentStart="true"
+        android:layout_alignBaseline="@+id/editPonovljenaRP"
+        />
 
 
 </RelativeLayout>
