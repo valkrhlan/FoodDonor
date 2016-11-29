@@ -5,5 +5,5 @@ package com.coky.app.loaders;
  */
 
 public interface WsDataLoadedListener {
-    void onWsDataLoaded(String message, String status, boolean opSuccessful);
+    void onWsDataLoaded(String message, int tip, boolean opSuccessful);
 }

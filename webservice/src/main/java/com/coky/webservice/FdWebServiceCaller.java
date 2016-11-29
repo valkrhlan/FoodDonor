@@ -73,7 +73,7 @@ public class FdWebServiceCaller {
                     try{
                         if(response.isSuccess()){
                             if(fdWebServiceHandler != null)
-                                fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getStatus().toString(),true);
+                                fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
                         }
                     }catch (Exception ex){
                         ex.printStackTrace();

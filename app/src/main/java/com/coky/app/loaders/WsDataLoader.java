@@ -40,14 +40,14 @@ public class WsDataLoader {
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
-        public void onDataArrived(String message, String status, boolean ok) {
+        public void onDataArrived(String message, int tip, boolean ok) {
             if(ok){
-                if(status.startsWith("O")){
+                if(tip != 0){
                     opSuccessful = true;
                 }else{
                     opSuccessful = false;
                 }
-                wsDataLoadedListener.onWsDataLoaded(message,status,opSuccessful);
+                wsDataLoadedListener.onWsDataLoaded(message,tip,opSuccessful);
             }
         }
     };

@@ -3,6 +3,8 @@ package com.coky.app;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     @Override
-    public void onWsDataLoaded(String message, String status, final boolean opSuccessful) {
+    public void onWsDataLoaded(String message, final int tip, final boolean opSuccessful) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Rezultat prijave");
         alertDialog.setMessage(message);
@@ -108,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         if(opSuccessful){
+                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putInt("tipKorisnika", tip);
+                            editor.commit();
                             Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
                             startActivity(intent);
                             editPassword.setText("");

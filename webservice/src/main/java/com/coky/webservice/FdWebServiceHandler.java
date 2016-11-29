@@ -5,5 +5,5 @@ package com.coky.webservice;
  */
 
 public interface FdWebServiceHandler {
-    void onDataArrived(String message, String status, boolean ok);
+    void onDataArrived(String message, int status, boolean ok);
 }
