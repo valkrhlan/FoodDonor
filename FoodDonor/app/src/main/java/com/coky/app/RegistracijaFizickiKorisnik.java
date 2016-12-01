@@ -76,6 +76,7 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registracija_fizicki);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Registracija fizičkog korisnika");
     }
 
     @OnClick(R.id.buttonRegistrirajSeRF)

@@ -80,6 +80,7 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registracija_pravni);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Registracija pravnog korisnika");
     }
 
     @OnClick(R.id.buttonRegistrirajSeRP)

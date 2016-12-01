@@ -18,6 +18,7 @@ public class PopisPaketa extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_paketa);
+        getSupportActionBar().setTitle("Popis paketa");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         tipKorisnika = prefs.getInt("tipKorisnika", 0);
     }

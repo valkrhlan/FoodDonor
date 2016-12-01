@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Prijava");
         ButterKnife.bind(this);
     }
     public static final Pattern email_check =
