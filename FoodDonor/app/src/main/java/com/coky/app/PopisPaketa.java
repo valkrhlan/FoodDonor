@@ -1,22 +1,34 @@
 package com.coky.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class PopisPaketa extends AppCompatActivity {
+
+    public int tipKorisnika = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_paketa);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        tipKorisnika = prefs.getInt("tipKorisnika", 0);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem dodajPaketItem = menu.findItem(R.id.dodajPaket);
+        if(tipKorisnika == 1){
+            dodajPaketItem.setVisible(true);
+        }
         return true;
     }
 
