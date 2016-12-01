@@ -11,20 +11,31 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.coky.app.fragments.DonorNoviPaket;
 import com.coky.app.fragments.DonorPopisPaketa;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class PopisPaketa extends AppCompatActivity {
+
+
+   /* @BindView(R.id.btnNatragNoviPaket)
+    Button btnNatragNoviPaket;*/
 
     public int tipKorisnika = 0;
     FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction1, fragmentTransaction2;
+    FragmentTransaction fragmentTransaction1, fragmentTransaction2, fragmentTransaction3;
     Fragment popisPaketa, noviPaket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //ButterKnife.bind(this);
         setContentView(R.layout.activity_popis_paketa);
         getSupportActionBar().setTitle("Popis paketa");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -58,11 +69,17 @@ public class PopisPaketa extends AppCompatActivity {
         else if (id == R.id.dodajPaket){
             noviPaket = new DonorNoviPaket();
             fragmentTransaction2 = fragmentManager.beginTransaction();
-            fragmentTransaction2.remove(popisPaketa);
             fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket,"noviPaket");
             fragmentTransaction2.commit();
         }
         //-----
         return super.onOptionsItemSelected(item);
     }
+
+    /*@OnClick(R.id.btnNatragNoviPaket)
+    public void NatragBtnClicked(View view) {
+        fragmentTransaction3 = fragmentManager.beginTransaction();
+        fragmentTransaction3.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
+        fragmentTransaction3.commit();
+    }*/
 }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_donor_novi_paket"
-    tools:context="com.coky.app.fragments.DonorPopisPaketa">
+    tools:context="com.coky.app.fragments.DonorPopisPaketa"
+    android:orientation="horizontal">
 
     <!-- TODO: Update blank fragment layout -->
     <!--<TextView
