@@ -24,12 +24,13 @@ public class PopisPaketa extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        //-----Ovo se može maknuti ako će se napraviti floating button koji služi za dodavanje paketa
         MenuItem dodajPaketItem = menu.findItem(R.id.dodajPaket);
         if(tipKorisnika == 1){
             dodajPaketItem.setVisible(true);
         }
+        //-----
         return true;
     }
 
