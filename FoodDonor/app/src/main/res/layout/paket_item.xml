@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#edb544"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paketBroj"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="35dp"
+        android:text="1"
+        android:textSize="56dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paketDatum"
+        android:text="Datum izrade paketa"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/paketBroj"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginBottom="2dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paketStatus"
+        android:layout_below="@+id/paketDatum"
+        android:layout_toEndOf="@+id/paketBroj"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="(ne)preuzeto"/>
+
+</RelativeLayout>

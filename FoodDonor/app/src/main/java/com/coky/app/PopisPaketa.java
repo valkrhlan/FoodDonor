@@ -38,7 +38,7 @@ public class PopisPaketa extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        //-----Ovo se može maknuti ako će se napraviti floating button koji služi za dodavanje paketa
+        //-----Ovo se može prebaciti u floating button (ako ćemo to uzeti kao element dizajna) koji služi za dodavanje paketa #1
         MenuItem dodajPaketItem = menu.findItem(R.id.dodajPaket);
         if(tipKorisnika == 1){
             dodajPaketItem.setVisible(true);
@@ -54,6 +54,7 @@ public class PopisPaketa extends AppCompatActivity {
             finish();
             return true;
         }
+        //-----Ovo se može prebaciti u floating button (ako ćemo to uzeti kao element dizajna) koji služi za dodavanje paketa #2
         else if (id == R.id.dodajPaket){
             noviPaket = new DonorNoviPaket();
             fragmentTransaction2 = fragmentManager.beginTransaction();
@@ -61,6 +62,7 @@ public class PopisPaketa extends AppCompatActivity {
             fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket,"noviPaket");
             fragmentTransaction2.commit();
         }
+        //-----
         return super.onOptionsItemSelected(item);
     }
 }
