@@ -105,22 +105,24 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Rezultat prijave");
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        if(opSuccessful){
-                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putInt("tipKorisnika", tip);
-                            editor.commit();
-                            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
-                            startActivity(intent);
-                            editPassword.setText("");
-                            editEmail.setText("");
+        if(message.startsWith("U")){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("tipKorisnika", tip);
+            editor.commit();
+            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
+            startActivity(intent);
+            editPassword.setText("");
+            editEmail.setText("");
+        }
+        else{
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
-                    }
-                });
-        alertDialog.show();
+                    });
+            alertDialog.show();
+        }
     }
 }
