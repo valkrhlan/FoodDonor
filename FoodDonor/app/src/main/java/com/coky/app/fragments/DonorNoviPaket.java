@@ -2,17 +2,22 @@ package com.coky.app.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.coky.app.PopisPaketa;
 import com.coky.app.R;
+import com.coky.app.adapters.VrstaHraneSpinnerAdapter;
+import com.coky.core.entities.VrstaHrane;
 
 
 /**
@@ -23,6 +28,9 @@ public class DonorNoviPaket extends Fragment {
     Button btnNatragNoviPaket;
     Fragment popisPaketa;
     FragmentTransaction fragmentTransaction;
+
+    private Spinner vrstaHraneSpinner;
+    private VrstaHraneSpinnerAdapter vrstaHraneSpinnerAdapter;
 
     public DonorNoviPaket(){
         // Required empty public constructor
@@ -57,9 +65,21 @@ public class DonorNoviPaket extends Fragment {
                 //-------
             }
         });
+
+
+
+        //mock up data
+       /* VrstaHrane[] vrstaHrane = new VrstaHrane[2];
+        vrstaHrane[0] = new VrstaHrane(1,"riba");
+        vrstaHrane[1] = new VrstaHrane(2,"povrće");
+
+        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP,vrstaHrane);
+        vrstaHraneSpinner = (Spinner)fragmentView.findViewById(R.id.spinnerNazivHraneNP);
+
+        vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
+        */
         return  fragmentView;
     }
-
 
 
 }

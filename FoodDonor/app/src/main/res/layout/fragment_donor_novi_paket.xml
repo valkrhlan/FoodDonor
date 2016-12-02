@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:id="@+id/nazivHraneNP"
-        android:layout_alignBottom="@+id/editNazivHraneNP"
+        android:layout_alignBottom="@+id/spnnerNazivHraneNP"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/holo_orange_dark"
         />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:id="@+id/editNazivHraneNP"
+        android:id="@+id/spinnerNazivHraneNP"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp"
@@ -33,8 +33,8 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/editVrstaNP"
-        android:layout_below="@+id/editNazivHraneNP"
-        android:layout_alignStart="@+id/editNazivHraneNP" />
+        android:layout_below="@+id/spinnerNazivHraneNP"
+        android:layout_alignStart="@+id/spinnerNazivHraneNP" />
 
     />
     <TextView
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:id="@+id/editJedinicaKolicineNP"
+        android:id="@+id/spinnerJedinicaKolicineNP"
         android:layout_below="@+id/editKolicinaNP"
         android:layout_alignStart="@+id/editKolicinaNP" />
 
@@ -86,8 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:id="@+id/jedinicaKolicinaNP"
-        android:layout_alignBaseline="@+id/editJedinicaKolicineNP"
-        android:layout_alignBottom="@+id/editJedinicaKolicineNP"
+        android:layout_alignBaseline="@+id/spinnerJedinicaKolicineNP"
+        android:layout_alignBottom="@+id/spinnerJedinicaKolicineNP"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/holo_orange_dark"
         />
