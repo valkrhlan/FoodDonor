@@ -22,10 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PopisPaketa extends AppCompatActivity {
-
-
-   /* @BindView(R.id.btnNatragNoviPaket)
-    Button btnNatragNoviPaket;*/
+    
 
     public int tipKorisnika = 0;
     FragmentManager fragmentManager;
@@ -67,19 +64,16 @@ public class PopisPaketa extends AppCompatActivity {
         }
         //-----Ovo se može prebaciti u floating button (ako ćemo to uzeti kao element dizajna) koji služi za dodavanje paketa #2
         else if (id == R.id.dodajPaket){
-            noviPaket = new DonorNoviPaket();
+            noviPaket = fragmentManager.findFragmentByTag("noviPaket");
+            if(noviPaket == null){
+                noviPaket = new DonorNoviPaket();
+            }
             fragmentTransaction2 = fragmentManager.beginTransaction();
-            fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket,"noviPaket");
+            fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket, "noviPaket");
             fragmentTransaction2.commit();
         }
         //-----
         return super.onOptionsItemSelected(item);
     }
 
-    /*@OnClick(R.id.btnNatragNoviPaket)
-    public void NatragBtnClicked(View view) {
-        fragmentTransaction3 = fragmentManager.beginTransaction();
-        fragmentTransaction3.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
-        fragmentTransaction3.commit();
-    }*/
 }
