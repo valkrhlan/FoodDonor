@@ -24,7 +24,7 @@ public class DonorNoviPaket extends Fragment {
     Fragment popisPaketa;
     FragmentTransaction fragmentTransaction;
 
-    public DonorNoviPaket() {
+    public DonorNoviPaket(){
         // Required empty public constructor
     }
 

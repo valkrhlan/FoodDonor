@@ -1,5 +1,6 @@
 package com.coky.app;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.coky.app.fragments.DonorNoviPaket;
 import com.coky.app.fragments.DonorPopisPaketa;
@@ -29,10 +31,13 @@ public class PopisPaketa extends AppCompatActivity {
     FragmentTransaction fragmentTransaction1, fragmentTransaction2, fragmentTransaction3;
     Fragment popisPaketa, noviPaket;
 
+    @BindView(R.id.btnNoviPaket)
+    Button buttonNoviPaket;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //ButterKnife.bind(this);
         setContentView(R.layout.activity_popis_paketa);
         getSupportActionBar().setTitle("Popis paketa");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -42,7 +47,23 @@ public class PopisPaketa extends AppCompatActivity {
         fragmentTransaction1 = fragmentManager.beginTransaction();
         fragmentTransaction1.add(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
         fragmentTransaction1.commit();
+        ButterKnife.bind(this);
     }
+
+
+    @OnClick(R.id.btnNoviPaket)
+    public void btnNoviPaketClick(View view){
+        buttonNoviPaket.setVisibility(view.GONE);
+        noviPaket = fragmentManager.findFragmentByTag("noviPaket");
+        if(noviPaket == null){
+            noviPaket = new DonorNoviPaket();
+        }
+        fragmentTransaction2 = fragmentManager.beginTransaction();
+        fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket, "noviPaket");
+        fragmentTransaction2.commit();
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -63,6 +84,7 @@ public class PopisPaketa extends AppCompatActivity {
             return true;
         }
         //-----Ovo se može prebaciti u floating button (ako ćemo to uzeti kao element dizajna) koji služi za dodavanje paketa #2
+        //ovo treba obrisat ak neće bit u izborniku
         else if (id == R.id.dodajPaket){
             noviPaket = fragmentManager.findFragmentByTag("noviPaket");
             if(noviPaket == null){
@@ -75,5 +97,9 @@ public class PopisPaketa extends AppCompatActivity {
         //-----
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 
 }
