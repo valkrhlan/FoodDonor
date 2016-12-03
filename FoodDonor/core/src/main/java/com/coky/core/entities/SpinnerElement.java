@@ -4,11 +4,11 @@ package com.coky.core.entities;
  * Created by Valentina on 2.12.2016..
  */
 
-public class Jedinica {
-    int id;
-    String naziv;
+public class SpinnerElement {
+    public int id;
+    public String naziv;
 
-    public Jedinica(int id, String naziv) {
+    public SpinnerElement(int id, String naziv) {
         this.id = id;
         this.naziv = naziv;
     }

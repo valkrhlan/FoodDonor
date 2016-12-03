@@ -2,25 +2,20 @@ package com.coky.app.fragments;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.coky.app.PopisPaketa;
 import com.coky.app.R;
 import com.coky.app.adapters.VrstaHraneSpinnerAdapter;
-import com.coky.core.entities.VrstaHrane;
+import com.coky.core.entities.SpinnerElement;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 
 /**
@@ -75,11 +70,11 @@ public class DonorNoviPaket extends Fragment {
 
 
         //mock up data
-        VrstaHrane[] vrstaHrane = new VrstaHrane[2];
-        vrstaHrane[0] = new VrstaHrane(1,"riba");
-        vrstaHrane[1] = new VrstaHrane(2,"povrće");
+        SpinnerElement[] SpinnerElement = new SpinnerElement[2];
+        SpinnerElement[0] = new SpinnerElement(1,"riba");
+        SpinnerElement[1] = new SpinnerElement(2,"povrće");
 
-        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP,vrstaHrane);
+        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, SpinnerElement);
         vrstaHraneSpinner = (Spinner)fragmentView.findViewById(R.id.spinnerNazivHraneNP);
 
         vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);

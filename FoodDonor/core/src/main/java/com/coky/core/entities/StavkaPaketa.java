@@ -9,9 +9,9 @@ public class StavkaPaketa {
     public String naziv;
     public int kolicina;
     public String jedinica;
-    public VrstaHrane vrsta;
+    public SpinnerElement vrsta;
 
-    public StavkaPaketa(int id, String naziv, int kolicina, String jedinica, VrstaHrane vrsta) {
+    public StavkaPaketa(int id, String naziv, int kolicina, String jedinica, SpinnerElement vrsta) {
         this.id = id;
         this.naziv = naziv;
         this.kolicina = kolicina;
@@ -51,11 +51,11 @@ public class StavkaPaketa {
         this.kolicina = kolicina;
     }
 
-    public VrstaHrane getVrsta() {
+    public SpinnerElement getVrsta() {
         return vrsta;
     }
 
-    public void setVrsta(VrstaHrane vrsta) {
+    public void setVrsta(SpinnerElement vrsta) {
         this.vrsta = vrsta;
     }
 }

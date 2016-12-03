@@ -8,20 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.coky.core.entities.VrstaHrane;
-
-import java.util.List;
+import com.coky.core.entities.SpinnerElement;
 
 /**
  * Created by Valentina on 2.12.2016..
  */
 
-public class VrstaHraneSpinnerAdapter extends ArrayAdapter<VrstaHrane> {
+public class VrstaHraneSpinnerAdapter extends ArrayAdapter<SpinnerElement> {
 
     private Context context;
-    private VrstaHrane[] values;
+    private SpinnerElement[] values;
 
-    public VrstaHraneSpinnerAdapter(Context context, int textViewResourceId, VrstaHrane[] values) {
+    public VrstaHraneSpinnerAdapter(Context context, int textViewResourceId, SpinnerElement[] values) {
         super(context, textViewResourceId,values);
         this.context = context;
         this.values = values;
@@ -30,7 +28,7 @@ public class VrstaHraneSpinnerAdapter extends ArrayAdapter<VrstaHrane> {
    public int getCount(){
        return values.length;
    }
-    public VrstaHrane getItem(int position){
+    public SpinnerElement getItem(int position){
         return  values[position];
     }
     //int nemre umjesto long?? pogledat zakaj nije oke
