@@ -8,8 +8,8 @@ import java.util.List;
  */
 
 public class VrstaJedinica {
-    List<SpinnerElement> vrsta;
-    List<SpinnerElement> jedinica;
+    public List<SpinnerElement> vrsta;
+    public List<SpinnerElement> jedinica;
 
     public VrstaJedinica(List<SpinnerElement> vrsta, List<SpinnerElement> jedinica) {
         this.vrsta = vrsta;
