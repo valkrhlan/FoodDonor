@@ -41,4 +41,7 @@ public interface FdWebService {
             @Path("kontakt") String kontakt,
             @Path("naziv") String naziv,
             @Path("tip") String tip);
+
+    @GET("vrstaJedinica/all/")
+    Call<FdWebServiceResponse> getVrstaJedinica();
 }

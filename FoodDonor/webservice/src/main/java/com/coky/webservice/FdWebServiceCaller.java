@@ -35,7 +35,7 @@ public class FdWebServiceCaller {
     public void CallWs(String method, ArrayList<String> params){
         FdWebService fdWebService = retrofit.create(FdWebService.class);
         Call<FdWebServiceResponse> call;
-        if(method == "registracijaVolontera"){
+    if(method == "registracijaVolontera"){
             call = fdWebService.setFizickaOsoba(
                     method,
                     params.get(0),
@@ -57,11 +57,13 @@ public class FdWebServiceCaller {
                     params.get(5),
                     params.get(6),
                     params.get(7));
-        }else{
+        }else if(method == "prijava"){
             call = fdWebService.getKorisnik(
                     method,
                     params.get(0),
                     params.get(1));
+        }else{
+             call  = fdWebService.getVrstaJedinica();
         }
 
         if(call != null){
