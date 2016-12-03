@@ -32,60 +32,67 @@ public class FdWebServiceCaller {
                 .build();
     }
 
-    public void CallWs(String method, ArrayList<String> params){
+    public void CallWs(final String method, ArrayList<String> params){
         FdWebService fdWebService = retrofit.create(FdWebService.class);
         Call<FdWebServiceResponse> call;
-    if(method == "registracijaVolontera"){
-            call = fdWebService.setFizickaOsoba(
-                    method,
-                    params.get(0),
-                    params.get(1),
-                    params.get(2),
-                    params.get(3),
-                    params.get(4),
-                    params.get(5),
-                    params.get(6),
-                    params.get(7));
-        }else if (method == "registracijaOstali"){
-            call = fdWebService.setPravnaOsoba(
-                    method,
-                    params.get(0),
-                    params.get(1),
-                    params.get(2),
-                    params.get(3),
-                    params.get(4),
-                    params.get(5),
-                    params.get(6),
-                    params.get(7));
-        }else if(method == "prijava"){
-            call = fdWebService.getKorisnik(
-                    method,
-                    params.get(0),
-                    params.get(1));
-        }else{
-             call  = fdWebService.getVrstaJedinica();
-        }
+        if(method == "registracijaVolontera"){
+                call = fdWebService.setFizickaOsoba(
+                        method,
+                        params.get(0),
+                        params.get(1),
+                        params.get(2),
+                        params.get(3),
+                        params.get(4),
+                        params.get(5),
+                        params.get(6),
+                        params.get(7));
+            }else if (method == "registracijaOstali"){
+                call = fdWebService.setPravnaOsoba(
+                        method,
+                        params.get(0),
+                        params.get(1),
+                        params.get(2),
+                        params.get(3),
+                        params.get(4),
+                        params.get(5),
+                        params.get(6),
+                        params.get(7));
+            }else if(method == "prijava"){
+                call = fdWebService.getKorisnik(
+                        method,
+                        params.get(0),
+                        params.get(1));
+            }else{
 
-        if(call != null){
-            call.enqueue(new Callback<FdWebServiceResponse>() {
+                 call  = fdWebService.getVrstaJedinica();
+            }
 
-                @Override
-                public void onResponse(Response<FdWebServiceResponse> response, Retrofit retrofit) {
+            if(call != null){
+                call.enqueue(new Callback<FdWebServiceResponse>() {
 
-                    try{
-                        if(response.isSuccess()){
-                            if(fdWebServiceHandler != null)
-                                fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
+                    @Override
+                    public void onResponse(Response<FdWebServiceResponse> response, Retrofit retrofit) {
+
+                        try{
+                            if(response.isSuccess()){
+                                if(fdWebServiceHandler != null)
+                                    if(method=="vrstaJedinica"){
+                                        fdWebServiceHandler.onDataArrived(response.body().getData(),response.body().getNbResults(),true);
+
+                                    }else{
+                                        fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
+
+                                    }
+                                    }
+                        }catch (Exception ex){
+                            ex.printStackTrace();
                         }
-                    }catch (Exception ex){
-                        ex.printStackTrace();
                     }
-                }
-                @Override
-                public void onFailure(Throwable t) {
-                    t.printStackTrace();
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+            }
     }
 }

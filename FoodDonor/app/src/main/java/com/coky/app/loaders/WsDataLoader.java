@@ -6,10 +6,13 @@ import android.widget.TextView;
 
 import com.coky.app.MainActivity;
 import com.coky.app.R;
+import com.coky.core.entities.SpinnerElement;
+import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.FdWebServiceCaller;
 import com.coky.webservice.FdWebServiceHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -48,6 +51,18 @@ public class WsDataLoader {
                     opSuccessful = false;
                 }
                 wsDataLoadedListener.onWsDataLoaded(message,tip,opSuccessful);
+            }
+        }
+
+        @Override
+        public void onDataArrived(VrstaJedinica data, int tip, boolean ok) {
+            if(ok){
+                if(tip != 0){
+                    opSuccessful = true;
+                }else{
+                    opSuccessful = false;
+                }
+                wsDataLoadedListener.onWsDataLoaded(data,tip,opSuccessful);
             }
         }
     };

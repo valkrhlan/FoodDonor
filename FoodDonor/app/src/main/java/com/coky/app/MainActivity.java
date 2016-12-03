@@ -102,11 +102,12 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     @Override
-    public void onWsDataLoaded(String message, final int tip, final boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, final int tip, final boolean opSuccessful) {
+
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Rezultat prijave");
-        alertDialog.setMessage(message);
-        if(message.startsWith("U")){
+        alertDialog.setMessage(message.toString());
+        if(message.toString().startsWith("U")){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("tipKorisnika", tip);

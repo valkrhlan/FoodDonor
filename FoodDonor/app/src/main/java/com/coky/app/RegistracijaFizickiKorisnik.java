@@ -12,6 +12,7 @@ import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,7 +121,7 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
     }
 
     @Override
-    public void onWsDataLoaded(String message, int tip, boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
         Toast.makeText(this,"Uspješna registracija!",Toast.LENGTH_SHORT).show();
         finish();
     }
