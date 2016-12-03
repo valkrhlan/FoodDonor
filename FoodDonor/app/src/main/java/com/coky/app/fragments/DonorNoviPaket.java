@@ -69,7 +69,7 @@ public class DonorNoviPaket extends Fragment {
 
 
         //mock up data
-       /* VrstaHrane[] vrstaHrane = new VrstaHrane[2];
+        VrstaHrane[] vrstaHrane = new VrstaHrane[2];
         vrstaHrane[0] = new VrstaHrane(1,"riba");
         vrstaHrane[1] = new VrstaHrane(2,"povrće");
 
@@ -77,7 +77,7 @@ public class DonorNoviPaket extends Fragment {
         vrstaHraneSpinner = (Spinner)fragmentView.findViewById(R.id.spinnerNazivHraneNP);
 
         vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
-        */
+
         return  fragmentView;
     }
 
