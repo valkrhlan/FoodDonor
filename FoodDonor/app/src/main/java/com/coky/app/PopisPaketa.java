@@ -48,6 +48,8 @@ public class PopisPaketa extends AppCompatActivity {
         fragmentTransaction1.add(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
         fragmentTransaction1.commit();
         ButterKnife.bind(this);
+
+
     }
 
 
@@ -98,7 +100,9 @@ public class PopisPaketa extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+  public void postaviVidljivost(){
+      buttonNoviPaket.setVisibility(findViewById(R.id.btnNoviPaket).VISIBLE);
+  }
 
 
 

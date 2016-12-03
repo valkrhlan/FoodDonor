@@ -19,6 +19,9 @@ import com.coky.app.R;
 import com.coky.app.adapters.VrstaHraneSpinnerAdapter;
 import com.coky.core.entities.VrstaHrane;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,13 +39,14 @@ public class DonorNoviPaket extends Fragment {
         // Required empty public constructor
     }
 
-
+    @BindView(R.id.btnNoviPaket)
+    Button buttonNoviPaket;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
+        final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
         btnNatragNoviPaket = (Button) fragmentView.findViewById(R.id.btnNatragNoviPaket);
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +55,13 @@ public class DonorNoviPaket extends Fragment {
                 if(popisPaketa == null){
                     popisPaketa = new DonorPopisPaketa();
                 }
+                ((PopisPaketa)getActivity()).postaviVidljivost();
                 fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
                 fragmentTransaction.commit();
-                //------- Neuspjeli pokušaju handlanja s fragmentom. Bum ostavil valjda bude kaj trebalo da dalje
+
+
+              //------- Neuspjeli pokušaju handlanja s fragmentom. Bum ostavil valjda bude kaj trebalo da dalje
                 //fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 //fragmentTransaction.remove(getActivity().getSupportFragmentManager().findFragmentByTag("noviPaket"));
                 //getActivity().getSupportFragmentManager().popBackStack();
@@ -65,7 +72,6 @@ public class DonorNoviPaket extends Fragment {
                 //-------
             }
         });
-
 
 
         //mock up data
@@ -80,6 +86,5 @@ public class DonorNoviPaket extends Fragment {
 
         return  fragmentView;
     }
-
 
 }
