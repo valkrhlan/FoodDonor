@@ -10,6 +10,5 @@ import java.util.List;
  */
 
 public interface FdWebServiceHandler {
-    void onDataArrived(String message, int status, boolean ok);
-    void onDataArrived(VrstaJedinica data, int status, boolean ok);
+    void onDataArrived(Object message, int status, boolean ok);
 }
