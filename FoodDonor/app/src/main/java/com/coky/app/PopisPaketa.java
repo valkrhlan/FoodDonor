@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.coky.app.fragments.DonorNoviPaket;
 import com.coky.app.fragments.DonorPopisPaketa;
+import com.coky.app.loaders.WsDataLoader;
+import com.coky.core.entities.VrstaJedinica;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,7 +105,5 @@ public class PopisPaketa extends AppCompatActivity {
   public void postaviVidljivost(){
       buttonNoviPaket.setVisibility(findViewById(R.id.btnNoviPaket).VISIBLE);
   }
-
-
 
 }

@@ -8,6 +8,7 @@ import com.coky.app.MainActivity;
 import com.coky.app.R;
 import com.coky.core.entities.SpinnerElement;
 import com.coky.core.entities.VrstaJedinica;
+import com.coky.webservice.FdWebService;
 import com.coky.webservice.FdWebServiceCaller;
 import com.coky.webservice.FdWebServiceHandler;
 
@@ -40,6 +41,11 @@ public class WsDataLoader {
         FdWebServiceCaller regPravnaWs = new FdWebServiceCaller(responseHandler);
         regPravnaWs.CallWs("registracijaOstali",data);
     }
+    public void dohvatiVrstaJedinica(WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWebServiceCaller vrstaJedinicaWs= new FdWebServiceCaller(responseHandler);
+        vrstaJedinicaWs.CallWs("vrstaJedinica", new ArrayList<String>());
+    }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
@@ -53,7 +59,6 @@ public class WsDataLoader {
                 wsDataLoadedListener.onWsDataLoaded(message,tip,opSuccessful);
             }
         }
-
     };
 
 

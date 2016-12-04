@@ -5,19 +5,19 @@ package com.coky.core.entities;
  */
 
 public class SpinnerElement {
-    public int id;
+    public String id;
     public String naziv;
 
-    public SpinnerElement(int id, String naziv) {
+    public SpinnerElement(String id, String naziv) {
         this.id = id;
         this.naziv = naziv;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

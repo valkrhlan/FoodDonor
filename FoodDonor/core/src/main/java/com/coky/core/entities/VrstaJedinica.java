@@ -1,5 +1,7 @@
 package com.coky.core.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,10 @@ import java.util.List;
  */
 
 public class VrstaJedinica {
+
+    @SerializedName("vrsta")
     public List<SpinnerElement> vrsta;
+    @SerializedName("jedinica")
     public List<SpinnerElement> jedinica;
 
     public VrstaJedinica(List<SpinnerElement> vrsta, List<SpinnerElement> jedinica) {
@@ -20,7 +25,7 @@ public class VrstaJedinica {
         return vrsta;
     }
 
-    public void setVrsta(List<SpinnerElement> vrsta) {
+    public void setVrsta(ArrayList<SpinnerElement> vrsta) {
         this.vrsta = vrsta;
     }
 
@@ -28,7 +33,7 @@ public class VrstaJedinica {
         return jedinica;
     }
 
-    public void setJedinica(List<SpinnerElement> jedinica) {
+    public void setJedinica(ArrayList<SpinnerElement> jedinica) {
         this.jedinica = jedinica;
     }
 }
