@@ -43,7 +43,7 @@ public class WsDataLoader {
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
-        public void onDataArrived(String message, int tip, boolean ok) {
+        public void onDataArrived(Object message, int tip, boolean ok) {
             if(ok){
                 if(tip != 0){
                     opSuccessful = true;
@@ -54,17 +54,6 @@ public class WsDataLoader {
             }
         }
 
-        @Override
-        public void onDataArrived(VrstaJedinica data, int tip, boolean ok) {
-            if(ok){
-                if(tip != 0){
-                    opSuccessful = true;
-                }else{
-                    opSuccessful = false;
-                }
-                wsDataLoadedListener.onWsDataLoaded(data,tip,opSuccessful);
-            }
-        }
     };
 
 
