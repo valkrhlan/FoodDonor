@@ -22,7 +22,7 @@ public class VrstaJedinica {
         return vrsta;
     }
 
-    public void setVrsta(ArrayList<SpinnerElement> vrsta) {
+    public void setVrsta(List<SpinnerElement> vrsta) {
         this.vrsta = vrsta;
     }
 
@@ -30,7 +30,7 @@ public class VrstaJedinica {
         return jedinica;
     }
 
-    public void setJedinica(ArrayList<SpinnerElement> jedinica) {
+    public void setJedinica(List<SpinnerElement> jedinica) {
         this.jedinica = jedinica;
     }
 }

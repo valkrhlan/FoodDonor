@@ -19,6 +19,9 @@ import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.SpinnerElement;
 import com.coky.core.entities.VrstaJedinica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 
 
@@ -32,8 +35,10 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     FragmentTransaction fragmentTransaction;
 
     private Spinner vrstaHraneSpinner;
+    private Spinner jedinicaHraneSpinner;
     private VrstaHraneSpinnerAdapter vrstaHraneSpinnerAdapter;
-
+    private VrstaHraneSpinnerAdapter jedinicaSpinnerAdapter;
+    private View pomFragmentView;
     public DonorNoviPaket(){
         // Required empty public constructor
     }
@@ -46,6 +51,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         // Inflate the layout for this fragment
 
         final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
+        pomFragmentView=fragmentView;
+
         dohvatiVrsteHraneJedinice();
         btnNatragNoviPaket = (Button) fragmentView.findViewById(R.id.btnNatragNoviPaket);
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +83,15 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
 
         //mock up data
-        SpinnerElement[] SpinnerElement = new SpinnerElement[2];
-        SpinnerElement[0] = new SpinnerElement("1","riba");
-        SpinnerElement[1] = new SpinnerElement("2","povrće");
+      /*  SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[2];
+        vrstaSpinnerElement[0] = new SpinnerElement("1","riba");
+        vrstaSpinnerElement[1] = new SpinnerElement("2","povrće");
 
-        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, SpinnerElement);
+        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
         vrstaHraneSpinner = (Spinner)fragmentView.findViewById(R.id.spinnerNazivHraneNP);
 
         vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
+        */
 
         return  fragmentView;
     }
@@ -99,6 +107,29 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
     @Override
     public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
-        Toast.makeText(getActivity(),"wohoooo",Toast.LENGTH_SHORT).show();
+        VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
+        List<SpinnerElement> pom=vrstaJedinica.getVrsta();
+
+       SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[pom.size()];
+        for (int i=0;i<pom.size();i++){
+            vrstaSpinnerElement[i]=pom.get(i);
+        }
+
+        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
+        vrstaHraneSpinner = (Spinner)pomFragmentView.findViewById(R.id.spinnerNazivHraneNP);
+
+        vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
+
+        List<SpinnerElement> pomJedinica=vrstaJedinica.getJedinica();
+        SpinnerElement[] jedinicaSpinnerElement = new SpinnerElement[pomJedinica.size()];
+        for (int i=0;i<pomJedinica.size();i++){
+            jedinicaSpinnerElement[i]=pomJedinica.get(i);
+        }
+
+        jedinicaSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerJedinicaKolicineNP,jedinicaSpinnerElement);
+        jedinicaHraneSpinner=(Spinner)pomFragmentView.findViewById(R.id.spinnerJedinicaKolicineNP);
+        jedinicaHraneSpinner.setAdapter(jedinicaSpinnerAdapter);
+
+
     }
 }
