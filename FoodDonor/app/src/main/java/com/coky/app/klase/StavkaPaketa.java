@@ -19,6 +19,9 @@ public class StavkaPaketa {
         this.jedinica = jedinica;
     }
 
+    public StavkaPaketa() {
+    }
+
     public String getNaziv() {
         return naziv;
     }

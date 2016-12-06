@@ -4,6 +4,7 @@ package com.coky.app.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.SpinnerElement;
 import com.coky.core.entities.VrstaJedinica;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
     Button btnNatragNoviPaket;
     Button btnDodajStvaku;
+    Button btnDodajPaket;
 
     Fragment popisPaketa;
     FragmentTransaction fragmentTransaction;
@@ -109,6 +112,14 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
             }
         });
 
+        btnDodajPaket=(Button)fragmentView.findViewById(R.id.btnDodajPaketNP);
+        btnDodajPaket.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                dodajNoviPaket();
+            }
+        });
+
         return  fragmentView;
     }
 
@@ -170,5 +181,14 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         }
     }
 
-
+ private void dodajNoviPaket(){
+     if(stavke.isEmpty()){
+         Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stvaku!",Toast.LENGTH_SHORT).show();
+     }else{
+         String json=new Gson().toJson(stavke);
+         Log.d("json:",json);
+         Toast.makeText(getActivity().getBaseContext(),json,Toast.LENGTH_SHORT).show();
+     }
+    // Toast.makeText(getActivity().getBaseContext(),"wohoooo",Toast.LENGTH_SHORT).show();
+ }
 }

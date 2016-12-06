@@ -13,6 +13,9 @@ public class SpinnerElement {
         this.naziv = naziv;
     }
 
+    public SpinnerElement() {
+    }
+
     public String getId() {
         return id;
     }
