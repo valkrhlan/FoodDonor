@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="#edc">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nazivHraneSI"
+        android:textStyle="bold"
+        android:text="naziv"
+        android:paddingLeft="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vrstaHraneSI"
+        android:layout_below="@+id/nazivHraneSI"
+        android:text="vrsta"
+        android:paddingLeft="15dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kolicinaHraneSI"
+        android:layout_below="@+id/vrstaHraneSI"
+        android:text="1000"
+        android:paddingLeft="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jedinicaHraneSI"
+        android:text="količina"
+        android:paddingLeft="15dp"
+        android:layout_alignBaseline="@+id/kolicinaHraneSI"
+        android:layout_alignBottom="@+id/vrstaHraneSI"
+        android:layout_toEndOf="@+id/vrstaHraneSI" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="13dp"
+        android:id="@+id/btnObisiStavkuSI" />
+
+</RelativeLayout>

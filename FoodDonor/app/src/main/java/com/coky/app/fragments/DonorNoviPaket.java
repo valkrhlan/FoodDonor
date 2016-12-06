@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
@@ -31,6 +33,8 @@ import butterknife.BindView;
 public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
     Button btnNatragNoviPaket;
+    Button btnDodajStvaku;
+
     Fragment popisPaketa;
     FragmentTransaction fragmentTransaction;
 
@@ -39,12 +43,13 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     private VrstaHraneSpinnerAdapter vrstaHraneSpinnerAdapter;
     private VrstaHraneSpinnerAdapter jedinicaSpinnerAdapter;
     private View pomFragmentView;
+
+
     public DonorNoviPaket(){
         // Required empty public constructor
     }
 
-    @BindView(R.id.btnNoviPaket)
-    Button buttonNoviPaket;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,9 +71,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                 fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
                 fragmentTransaction.commit();
-
-
-
               //------- Neuspjeli pokušaju handlanja s fragmentom. Bum ostavil valjda bude kaj trebalo da dalje
                 //fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 //fragmentTransaction.remove(getActivity().getSupportFragmentManager().findFragmentByTag("noviPaket"));
@@ -79,19 +81,17 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_popis_paketa, getFragmentManager().findFragmentByTag("popisPaketa"), "popisPaketa");
                 //-------
             }
+
         });
-
-
-        //mock up data
-      /*  SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[2];
-        vrstaSpinnerElement[0] = new SpinnerElement("1","riba");
-        vrstaSpinnerElement[1] = new SpinnerElement("2","povrće");
-
-        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
-        vrstaHraneSpinner = (Spinner)fragmentView.findViewById(R.id.spinnerNazivHraneNP);
-
-        vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
-        */
+        btnDodajStvaku = (Button)fragmentView.findViewById(R.id.btnDodajStavkuNP);
+        btnDodajStvaku.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(validacija()){
+                    popuniListu();
+                }
+            }
+        });
 
         return  fragmentView;
     }
@@ -101,12 +101,11 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
  public void dohvatiVrsteHraneJedinice(){
     WsDataLoader wsDataLoader = new WsDataLoader();
      wsDataLoader.dohvatiVrstaJedinica(this);
-
-
  }
 
     @Override
     public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
+
         VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
         List<SpinnerElement> pom=vrstaJedinica.getVrsta();
 
@@ -130,6 +129,31 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         jedinicaHraneSpinner=(Spinner)pomFragmentView.findViewById(R.id.spinnerJedinicaKolicineNP);
         jedinicaHraneSpinner.setAdapter(jedinicaSpinnerAdapter);
 
+    }
+    private boolean  validacija() {
+        String rez="";
+        EditText nazivHrane=(EditText)pomFragmentView.findViewById(R.id.editNazivHraneNP);
+        EditText kolicinaHrane=(EditText)pomFragmentView.findViewById(R.id.editKolicinaNP);
+        if(nazivHrane.getText().toString().isEmpty()){
+            rez="Morate unijeti naziv hrane!";
+        }
+        if(kolicinaHrane.getText().toString().isEmpty()){
+            rez+="Morate unijeti količinu hrane!";
+        }else{
+            if(kolicinaHrane.getText().toString().equals("0")){
+                rez+="Količina mora biti veća od 0";
+            }
+        }
 
+        if(rez.isEmpty()){
+            return true;
+        }
+        else{
+            Toast.makeText(getActivity(),rez,Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+    private void popuniListu(){
+        
     }
 }
