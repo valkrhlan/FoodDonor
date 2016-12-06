@@ -7,14 +7,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.coky.app.PopisPaketa;
 import com.coky.app.R;
+import com.coky.app.adapters.StavkePaketaListAdapter;
 import com.coky.app.adapters.VrstaHraneSpinnerAdapter;
+import com.coky.app.klase.StavkaPaketa;
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.SpinnerElement;
@@ -44,6 +48,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     private VrstaHraneSpinnerAdapter jedinicaSpinnerAdapter;
     private View pomFragmentView;
 
+    private List<StavkaPaketa> stavke = new ArrayList<StavkaPaketa>();
 
     public DonorNoviPaket(){
         // Required empty public constructor
@@ -89,6 +94,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
             public void onClick(View v) {
                 if(validacija()){
                     popuniListu();
+                    popuniListView();
                 }
             }
         });
@@ -154,6 +160,12 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         }
     }
     private void popuniListu(){
-        
+        stavke.add(new StavkaPaketa("naziv",new SpinnerElement("1","paprika"),"100",new SpinnerElement("1","kilogram")));
+        stavke.add(new StavkaPaketa("drugi naziv",new SpinnerElement("2","test"),"4",new SpinnerElement("2","kom")));
+    }
+    private void popuniListView(){
+        ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
+        ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
+        list.setAdapter(stvakaPaketaListViewAdapter);
     }
 }

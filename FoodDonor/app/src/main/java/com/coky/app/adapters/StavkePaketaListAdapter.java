@@ -1,0 +1,58 @@
+package com.coky.app.adapters;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.coky.app.R;
+import com.coky.app.klase.StavkaPaketa;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Valentina on 6.12.2016..
+ */
+
+public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
+    private Context context;
+    private List<StavkaPaketa> stavkePaketaList;
+    private int resource;
+
+    public StavkePaketaListAdapter(Context context, int resource, List<StavkaPaketa> stavkePaketaList){
+        super(context, resource,stavkePaketaList);
+        this.context=context;
+        this.stavkePaketaList=stavkePaketaList;
+        this.resource=resource;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View itemView = convertView;
+        if(convertView==null){
+             itemView = LayoutInflater.from(getContext()).inflate(R.layout.stavka_item, parent, false);
+
+        }
+        //find
+        StavkaPaketa trenutnaSavka=stavkePaketaList.get(position);
+        TextView naslov=(TextView) itemView.findViewById(R.id.nazivHraneSI);
+        TextView vrsta=(TextView)itemView.findViewById(R.id.vrstaHraneSI);
+        TextView kolicina = (TextView)itemView.findViewById(R.id.kolicinaHraneSI);
+        TextView jedinica = (TextView)itemView.findViewById(R.id.jedinicaHraneSI);
+      //  ImageButton btn=(ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
+      //  btn.setImageIcon();
+        naslov.setText(trenutnaSavka.getNaziv());
+        vrsta.setText(trenutnaSavka.getVrsta().getNaziv());
+        kolicina.setText((trenutnaSavka.getKolicina()));
+        jedinica.setText(trenutnaSavka.getJedinica().getNaziv());
+        return itemView;
+    }
+}
