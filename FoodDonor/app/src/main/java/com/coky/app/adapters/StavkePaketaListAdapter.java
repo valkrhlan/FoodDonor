@@ -39,16 +39,14 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
         View itemView = convertView;
         if(convertView==null){
              itemView = LayoutInflater.from(getContext()).inflate(R.layout.stavka_item, parent, false);
-
         }
-        //find
+
         StavkaPaketa trenutnaSavka=stavkePaketaList.get(position);
         TextView naslov=(TextView) itemView.findViewById(R.id.nazivHraneSI);
         TextView vrsta=(TextView)itemView.findViewById(R.id.vrstaHraneSI);
         TextView kolicina = (TextView)itemView.findViewById(R.id.kolicinaHraneSI);
         TextView jedinica = (TextView)itemView.findViewById(R.id.jedinicaHraneSI);
-      //  ImageButton btn=(ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
-      //  btn.setImageIcon();
+
         naslov.setText(trenutnaSavka.getNaziv());
         vrsta.setText(trenutnaSavka.getVrsta().getNaziv());
         kolicina.setText((trenutnaSavka.getKolicina()));

@@ -63,6 +63,10 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
         pomFragmentView=fragmentView;
 
+        final ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
+        final ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
+        list.setAdapter(stvakaPaketaListViewAdapter);
+
         dohvatiVrsteHraneJedinice();
         btnNatragNoviPaket = (Button) fragmentView.findViewById(R.id.btnNatragNoviPaket);
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +97,14 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
             @Override
             public void onClick(View v) {
                 if(validacija()){
-                    popuniListu();
-                    popuniListView();
+                    SpinnerElement vrsta=(SpinnerElement)vrstaHraneSpinner.getSelectedItem();
+                    SpinnerElement jedinica=(SpinnerElement)jedinicaHraneSpinner.getSelectedItem();
+                    EditText naziv=(EditText)pomFragmentView.findViewById(R.id.editNazivHraneNP);
+                    EditText kolicina=(EditText)pomFragmentView.findViewById(R.id.editKolicinaNP);
+                    stavke.add(new StavkaPaketa(naziv.getText().toString(),vrsta, kolicina.getText().toString(),jedinica));
+                    stvakaPaketaListViewAdapter.notifyDataSetChanged();
+                    naziv.setText("");
+                    kolicina.setText("");
                 }
             }
         });
@@ -159,13 +169,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
             return false;
         }
     }
-    private void popuniListu(){
-        stavke.add(new StavkaPaketa("naziv",new SpinnerElement("1","paprika"),"100",new SpinnerElement("1","kilogram")));
-        stavke.add(new StavkaPaketa("drugi naziv",new SpinnerElement("2","test"),"4",new SpinnerElement("2","kom")));
-    }
-    private void popuniListView(){
-        ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
-        ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
-        list.setAdapter(stvakaPaketaListViewAdapter);
-    }
+
+
 }
