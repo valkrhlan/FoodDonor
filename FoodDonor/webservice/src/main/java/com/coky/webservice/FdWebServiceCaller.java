@@ -1,5 +1,6 @@
 package com.coky.webservice;
 
+import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.responses.FdWebServiceResponse;
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import retrofit.Retrofit;
 public class FdWebServiceCaller {
     FdWebServiceHandler fdWebServiceHandler;
     Retrofit retrofit;
+    Call<FdWebServiceResponse> call;
 
     private final String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
 
@@ -32,6 +34,41 @@ public class FdWebServiceCaller {
                 .client(okHttpClient)
                 .build();
     }
+
+    public void CallWsForRegistiraniKorisnik(RegistriraniKorisnik data) {
+        FdWebService fdWebService = retrofit.create(FdWebService.class);
+        call = fdWebService.getKorisnik("prijava",data.getEmail(),data.getLozinka());
+        HandleResponseFromCall("prijava");
+    }
+
+    public void HandleResponseFromCall(final String method){
+        if(call != null){
+            call.enqueue(new Callback<FdWebServiceResponse>() {
+                @Override
+                public void onResponse(Response<FdWebServiceResponse> response, Retrofit retrofit) {
+                    try{
+                        if(response.isSuccess()){
+                            if(fdWebServiceHandler != null)
+                                if(method=="vrstaJedinica"){
+                                    // fdWebServiceHandler.onDataArrived(response.body().getData(),response.body().getNbResults(),true);
+                                    handleVstaJedinica(response);
+                                }else{
+                                    fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
+
+                                }
+                        }
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
+                @Override
+                public void onFailure(Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
+    }
+
 
     public void CallWs(final String method, ArrayList<String> params){
         FdWebService fdWebService = retrofit.create(FdWebService.class);

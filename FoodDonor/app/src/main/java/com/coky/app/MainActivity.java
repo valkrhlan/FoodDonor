@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
+import com.coky.core.entities.RegistriraniKorisnik;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -76,13 +77,11 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
 
     @OnClick(R.id.prijavaBtn)
     public void prijavaBtnClick(View view){
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(0,editEmail.getText().toString());
-        arrayList.add(1,editPassword.getText().toString());
         if(!editEmail.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()){
             if(validateMail(editEmail.getText().toString())){
+                RegistriraniKorisnik korisnik = new RegistriraniKorisnik(editEmail.getText().toString(), editPassword.getText().toString());
                 WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.prijava(arrayList, this);
+                wsDataLoader.prijava(korisnik, this);
             }
             else Toast.makeText(this,"Nije dobra struktura emaila!",Toast.LENGTH_SHORT).show();
         }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.coky.app.MainActivity;
 import com.coky.app.R;
+import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.SpinnerElement;
 import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.FdWebService;
@@ -26,10 +27,10 @@ public class WsDataLoader {
     private Boolean opSuccessful;
     private WsDataLoadedListener wsDataLoadedListener;
 
-    public void prijava(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+    public void prijava(RegistriraniKorisnik data, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener = wsDataLoadedListener;
         FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
-        prijavaWs.CallWs("prijava",data);
+        prijavaWs.CallWsForRegistiraniKorisnik(data);
     }
     public void registracijaFizicka(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener = wsDataLoadedListener;
