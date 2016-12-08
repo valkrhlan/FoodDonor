@@ -53,11 +53,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
     private List<StavkaPaketa> stavke = new ArrayList<StavkaPaketa>();
 
-    public DonorNoviPaket(){
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -144,7 +139,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
         vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
         vrstaHraneSpinner = (Spinner)pomFragmentView.findViewById(R.id.spinnerNazivHraneNP);
-
         vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
 
         List<SpinnerElement> pomJedinica=vrstaJedinica.getJedinica();

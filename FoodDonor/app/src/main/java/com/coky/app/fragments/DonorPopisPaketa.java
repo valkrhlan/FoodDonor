@@ -1,12 +1,9 @@
 package com.coky.app.fragments;
 
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +77,7 @@ public class DonorPopisPaketa extends Fragment {
     }
 
     @OnClick(R.id.btnNoviPaket2)
-    public void btnNoviPaketClick(View view){
+    public void btnNoviPaketClick(){
         Fragment noviPaket = new DonorNoviPaket();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.activity_popis_paketa, noviPaket);
