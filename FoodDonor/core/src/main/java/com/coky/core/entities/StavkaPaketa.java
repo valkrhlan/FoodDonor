@@ -5,11 +5,11 @@ package com.coky.core.entities;
  */
 
 public class StavkaPaketa {
-    public int id;
-    public String naziv;
-    public int kolicina;
-    public String jedinica;
-    public SpinnerElement vrsta;
+    private int id;
+    private String naziv;
+    private int kolicina;
+    private String jedinica;
+    private SpinnerElement vrsta;
 
     public StavkaPaketa(int id, String naziv, int kolicina, String jedinica, SpinnerElement vrsta) {
         this.id = id;

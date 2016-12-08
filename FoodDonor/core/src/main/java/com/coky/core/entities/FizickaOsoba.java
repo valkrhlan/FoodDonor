@@ -5,8 +5,8 @@ package com.coky.core.entities;
  */
 
 public class FizickaOsoba extends Korisnik {
-    public String ime;
-    public String prezime;
+    private String ime;
+    private String prezime;
 
     public FizickaOsoba(String metoda, String email, String lozinka, String oib, String grad, String adresa, String kontakt, String ime, String prezime) {
         super(metoda, email, lozinka, oib, grad, adresa, kontakt);

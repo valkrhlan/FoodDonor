@@ -5,13 +5,13 @@ package com.coky.core.entities;
  */
 
 public abstract class Korisnik {
-    public String metoda;
-    public String email;
-    public String lozinka;
-    public String oib;
-    public String grad;
-    public String adresa;
-    public String kontakt;
+    private String metoda;
+    private String email;
+    private String lozinka;
+    private String oib;
+    private String grad;
+    private String adresa;
+    private String kontakt;
 
     public Korisnik(String metoda, String email, String lozinka, String oib, String grad, String adresa, String kontakt) {
         this.metoda = metoda;

@@ -5,8 +5,8 @@ package com.coky.core.entities;
  */
 
 public class SpinnerElement {
-    public String id;
-    public String naziv;
+    private String id;
+    private String naziv;
 
     public SpinnerElement(String id, String naziv) {
         this.id = id;

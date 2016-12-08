@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,8 +25,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements WsDataLoadedListener {
 
-    private LayoutInflater mInflator;
-
     @BindView(R.id.prijavaBtn)
     Button btnPrijava;
 
@@ -37,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     @BindView(R.id.textPassword)
     EditText editPassword;
 
+    private Pattern email_check =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +44,34 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         getSupportActionBar().setTitle("Prijava");
         ButterKnife.bind(this);
     }
-    public static final Pattern email_check =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    public static boolean validate(String emailStr) {
-        Matcher matcher = email_check.matcher(emailStr);
-        return matcher.find();
+    @Override
+    protected void onStart(){
+        super.onStart();
+        editPassword.setText("");
+        editEmail.setText("");
+    }
+
+    @Override
+    public void onWsDataLoaded(Object message, final int tip, final boolean opSuccessful) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Rezultat prijave");
+        alertDialog.setMessage(message.toString());
+        if(message.toString().startsWith("U")){
+            setSharedPrefs(tip, editEmail.getText().toString());
+            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
+            startActivity(intent);
+        }
+        else{
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 
     @OnClick(R.id.prijavaBtn)
@@ -58,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         arrayList.add(0,editEmail.getText().toString());
         arrayList.add(1,editPassword.getText().toString());
         if(!editEmail.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()){
-            if(validate(editEmail.getText().toString())){
+            if(validateMail(editEmail.getText().toString())){
                 WsDataLoader wsDataLoader = new WsDataLoader();
                 wsDataLoader.prijava(arrayList, this);
             }
@@ -84,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
                         dialog.dismiss();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fizička osoba",
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Fizička osoba",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(MainActivity.this, RegistracijaFizickiKorisnik.class);
@@ -92,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
                         dialog.dismiss();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Odustani",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Odustani",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -101,31 +123,17 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         alertDialog.show();
     }
 
-    @Override
-    public void onWsDataLoaded(Object message, final int tip, final boolean opSuccessful) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Rezultat prijave");
-        alertDialog.setMessage(message.toString());
-        if(message.toString().startsWith("U")){
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("tipKorisnika", tip);
-            editor.putString("emailKorisnika", editEmail.getText().toString());
-            editor.apply();
-            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
-            startActivity(intent);
-            editPassword.setText("");
-            editEmail.setText("");
-        }
-        else{
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-        }
+    private boolean validateMail(String emailStr) {
+        Matcher matcher = email_check.matcher(emailStr);
+        return matcher.find();
+    }
+
+    private void setSharedPrefs(int tip, String email){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("tipKorisnika", tip);
+        editor.putString("emailKorisnika", email);
+        editor.apply();
     }
 }

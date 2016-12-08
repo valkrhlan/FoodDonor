@@ -25,16 +25,16 @@ import butterknife.OnClick;
  */
 public class DonorPopisPaketa extends Fragment {
 
-    View fragmentView;
-    ListView listView;
+    private View fragmentView;
+    private ListView listView;
 
     @BindView(R.id.btnNoviPaket)
     Button btnNoviPaket;
 
-    ArrayList<Paket> paketi;
-    PaketAdapter paketAdapter;
+    private ArrayList<Paket> paketi;
+    private PaketAdapter paketAdapter;
 
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
