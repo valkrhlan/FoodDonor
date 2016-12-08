@@ -28,7 +28,7 @@ public class DonorPopisPaketa extends Fragment {
     View fragmentView;
     ListView listView;
 
-    @BindView(R.id.btnNoviPaket2)
+    @BindView(R.id.btnNoviPaket)
     Button btnNoviPaket;
 
     ArrayList<Paket> paketi;
@@ -40,7 +40,7 @@ public class DonorPopisPaketa extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
         listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
-        btnNoviPaket = (Button) fragmentView.findViewById(R.id.btnNoviPaket2);
+        btnNoviPaket = (Button) fragmentView.findViewById(R.id.btnNoviPaket);
         ButterKnife.bind(this, fragmentView);
         fragmentManager = getActivity().getSupportFragmentManager();
         return fragmentView;
@@ -76,7 +76,7 @@ public class DonorPopisPaketa extends Fragment {
         listView.setAdapter(paketAdapter);
     }
 
-    @OnClick(R.id.btnNoviPaket2)
+    @OnClick(R.id.btnNoviPaket)
     public void btnNoviPaketClick(){
         Fragment noviPaket = new DonorNoviPaket();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
