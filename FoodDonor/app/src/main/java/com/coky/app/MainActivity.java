@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("tipKorisnika", tip);
+            editor.putString("emailKorisnika", editEmail.getText().toString());
             editor.apply();
             Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
             startActivity(intent);

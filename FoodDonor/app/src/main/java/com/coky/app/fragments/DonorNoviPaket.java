@@ -75,14 +75,15 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popisPaketa = getActivity().getSupportFragmentManager().findFragmentByTag("popisPaketa");
+               /* popisPaketa = getActivity().getSupportFragmentManager().findFragmentByTag("popisPaketa");
                 if(popisPaketa == null){
                     popisPaketa = new DonorPopisPaketa();
                 }
                 ((PopisPaketa)getActivity()).postaviVidljivost();
                 fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+                getActivity().onBackPressed();
               //------- Neuspjeli pokušaju handlanja s fragmentom. Bum ostavil valjda bude kaj trebalo da dalje
                 //fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 //fragmentTransaction.remove(getActivity().getSupportFragmentManager().findFragmentByTag("noviPaket"));

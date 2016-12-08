@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_donor_novi_paket"
-    tools:context="com.coky.app.fragments.DonorPopisPaketa"
-    android:orientation="horizontal">
+    android:id="@+id/fragmentPopisPaketa"
+    tools:context="com.coky.app.fragments.DonorPopisPaketa">
 
-    <!-- TODO: Update blank fragment layout -->
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="popis paketa" /> -->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/popisPaketa"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/btnNoviPaket2">
 
-</LinearLayout>
+    </ListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Novi paket"
+        android:id="@+id/btnNoviPaket2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

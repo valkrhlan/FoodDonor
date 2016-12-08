@@ -1,12 +1,17 @@
 package com.coky.app.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.coky.app.R;
 import com.coky.app.adapters.PaketAdapter;
@@ -14,38 +19,73 @@ import com.coky.core.entities.Paket;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DonorPopisPaketa extends ListFragment {
-    //-----Ovo neznam jel uopće potrebno, budući da bi moglo stvarati problema, zakomentiral sam
-    /*public DonorPopisPaketa() {
+public class DonorPopisPaketa extends Fragment {
+
+    View fragmentView;
+    ListView listView;
+
+    @BindView(R.id.btnNoviPaket2)
+    Button btnNoviPaket;
+
+    ArrayList<Paket> paketi;
+    PaketAdapter paketAdapter;
+
+    FragmentManager fragmentManager;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
+        listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
+        btnNoviPaket = (Button) fragmentView.findViewById(R.id.btnNoviPaket2);
+        ButterKnife.bind(this, fragmentView);
+        fragmentManager = getActivity().getSupportFragmentManager();
+        return fragmentView;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
-    }*/
+    public void onStart(){
+        super.onStart();
+        setPaketAdapter();
+    }
 
-    private ArrayList<Paket> paketi;
-    private PaketAdapter paketAdapter;
+    private void mockPaketi(){
+        addPaketToArray(new Paket(1,"1.12.2016","Dostupno"));
+        addPaketToArray(new Paket(2,"29.11.2016","Preuzeto"));
+        addPaketToArray(new Paket(1337, "11.9.2020.", "Dostupno"));
+    }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState){
-        super.onActivityCreated(savedInstanceState);
-        paketi = new ArrayList<Paket>();
-        Paket paket1 = new Paket(1,"1.12.2016","Dostupno");
-        Paket paket2 = new Paket(2,"29.11.2016","Preuzeto");
-        Paket paket3 = new Paket(1337, "11.9.2020.", "Dostupno");
-        paketi.add(paket1);
-        paketi.add(paket2);
-        paketi.add(paket3);
+    private void addPaketToArray(Paket paket){
+        if(paketi == null){
+            paketi = new ArrayList<Paket>();
+        }
+        paketi.add(paket);
+    }
+
+    private void setPaketAdapter(){
+        if(paketAdapter != null){
+            paketAdapter.clear();
+        }
+        //----------------- MOCK DATA --------------------------
+        mockPaketi();
+        //------------------------------------------------------
         paketAdapter = new PaketAdapter(getActivity(), paketi);
-        setListAdapter(paketAdapter);
-        registerForContextMenu(getListView());
+        listView.setAdapter(paketAdapter);
     }
 
-
+    @OnClick(R.id.btnNoviPaket2)
+    public void btnNoviPaketClick(View view){
+        Fragment noviPaket = new DonorNoviPaket();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.activity_popis_paketa, noviPaket);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 }

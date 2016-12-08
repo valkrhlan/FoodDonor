@@ -33,8 +33,8 @@ public class PopisPaketa extends AppCompatActivity {
     FragmentTransaction fragmentTransaction1, fragmentTransaction2, fragmentTransaction3;
     Fragment popisPaketa, noviPaket;
 
-    @BindView(R.id.btnNoviPaket)
-    Button buttonNoviPaket;
+   /* @BindView(R.id.btnNoviPaket)
+    Button buttonNoviPaket;*/
 
 
     @Override
@@ -55,7 +55,7 @@ public class PopisPaketa extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.btnNoviPaket)
+    /*@OnClick(R.id.btnNoviPaket)
     public void btnNoviPaketClick(View view){
         buttonNoviPaket.setVisibility(view.GONE);
         noviPaket = fragmentManager.findFragmentByTag("noviPaket");
@@ -66,7 +66,7 @@ public class PopisPaketa extends AppCompatActivity {
         fragmentTransaction2.replace(R.id.activity_popis_paketa, noviPaket, "noviPaket");
         fragmentTransaction2.commit();
 
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,7 +103,7 @@ public class PopisPaketa extends AppCompatActivity {
     }
 
   public void postaviVidljivost(){
-      buttonNoviPaket.setVisibility(findViewById(R.id.btnNoviPaket).VISIBLE);
+     // buttonNoviPaket.setVisibility(findViewById(R.id.btnNoviPaket).VISIBLE);
   }
 
 }

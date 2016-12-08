@@ -11,12 +11,12 @@
     tools:context="com.coky.app.PopisPaketa">
 
 
-    <Button
+    <!--<Button
         android:text="Dodaj paket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:id="@+id/btnNoviPaket"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" /> -->
 </RelativeLayout>
