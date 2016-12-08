@@ -126,7 +126,7 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
     }
 
     @Override
-    public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, int tip) {
         Toast.makeText(this,"Uspješna registracija!",Toast.LENGTH_SHORT).show();
         finish();
     }

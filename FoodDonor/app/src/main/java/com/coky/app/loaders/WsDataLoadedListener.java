@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface WsDataLoadedListener {
-    void onWsDataLoaded(Object message, int tip, boolean opSuccessful);
+    void onWsDataLoaded(Object message, int tip);
 }

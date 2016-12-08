@@ -89,7 +89,7 @@ public class FdWebServiceCaller {
                                     // fdWebServiceHandler.onDataArrived(response.body().getData(),response.body().getNbResults(),true);
                                     handleVstaJedinica(response);
                                 }else{
-                                    fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
+                                    fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 
                                 }
                         }
@@ -108,7 +108,7 @@ public class FdWebServiceCaller {
     private void handleVstaJedinica(Response<FdWebServiceResponse> response){
             Gson gson = new Gson();
             VrstaJedinica vrstaJedinicaItem=gson.fromJson(response.body().getData(),VrstaJedinica.class);
-            fdWebServiceHandler.onDataArrived((Object)vrstaJedinicaItem,response.body().getNbResults(),true);
+            fdWebServiceHandler.onDataArrived((Object)vrstaJedinicaItem,response.body().getNbResults());
     }
 
 }

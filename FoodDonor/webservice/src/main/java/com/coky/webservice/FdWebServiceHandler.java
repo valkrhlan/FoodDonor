@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface FdWebServiceHandler {
-    void onDataArrived(Object message, int status, boolean ok);
+    void onDataArrived(Object message, int status);
 }

@@ -127,7 +127,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
  }
 
     @Override
-    public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, int tip) {
 
         VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
         List<SpinnerElement> pom=vrstaJedinica.getVrsta();

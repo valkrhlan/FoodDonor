@@ -111,7 +111,7 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
     }
 
     @Override
-    public void onWsDataLoaded(Object message, int tip, boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, int tip) {
         Toast.makeText(this,"Uspješna registracija!",Toast.LENGTH_SHORT).show();
         finish();
     }

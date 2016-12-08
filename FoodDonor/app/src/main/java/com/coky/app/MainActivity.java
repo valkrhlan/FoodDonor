@@ -54,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     @Override
-    public void onWsDataLoaded(Object message, final int tip, final boolean opSuccessful) {
+    public void onWsDataLoaded(Object message, final int tip) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Rezultat prijave");
         alertDialog.setMessage(message.toString());
-        if(message.toString().startsWith("U")){
+        if(tip != 0){
             setSharedPrefs(tip, editEmail.getText().toString());
             Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
             startActivity(intent);
