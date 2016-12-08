@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.coky.app.MainActivity;
 import com.coky.app.R;
+import com.coky.core.entities.FizickaOsoba;
+import com.coky.core.entities.PravnaOsoba;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.SpinnerElement;
 import com.coky.core.entities.VrstaJedinica;
@@ -26,26 +28,27 @@ public class WsDataLoader {
 
     private Boolean opSuccessful;
     private WsDataLoadedListener wsDataLoadedListener;
+    private FdWebServiceCaller FdWs;
+
+    public WsDataLoader() {
+        FdWs = new FdWebServiceCaller(responseHandler);
+    }
 
     public void prijava(RegistriraniKorisnik data, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener = wsDataLoadedListener;
-        FdWebServiceCaller prijavaWs = new FdWebServiceCaller(responseHandler);
-        prijavaWs.CallWsForRegistiraniKorisnik(data);
+        FdWs.CallWsForRegistiraniKorisnik(data);
     }
-    public void registracijaFizicka(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+    public void registracijaFizicka(FizickaOsoba data, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener = wsDataLoadedListener;
-        FdWebServiceCaller regFizickaWs = new FdWebServiceCaller(responseHandler);
-        regFizickaWs.CallWs("registracijaVolontera",data);
+        FdWs.CallWsForFizickaOsoba(data);
     }
-    public void registracijaPravna(ArrayList<String> data, WsDataLoadedListener wsDataLoadedListener){
+    public void registracijaPravna(PravnaOsoba data, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener = wsDataLoadedListener;
-        FdWebServiceCaller regPravnaWs = new FdWebServiceCaller(responseHandler);
-        regPravnaWs.CallWs("registracijaOstali",data);
+        FdWs.CallWsForPravnaOsoba(data);
     }
     public void dohvatiVrstaJedinica(WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener=wsDataLoadedListener;
-        FdWebServiceCaller vrstaJedinicaWs= new FdWebServiceCaller(responseHandler);
-        vrstaJedinicaWs.CallWs("vrstaJedinica", new ArrayList<String>());
+        FdWs.CallWsForVrsteJedinica();
     }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {

@@ -5,7 +5,6 @@ package com.coky.core.entities;
  */
 
 public abstract class Korisnik {
-    private String metoda;
     private String email;
     private String lozinka;
     private String oib;
@@ -13,22 +12,13 @@ public abstract class Korisnik {
     private String adresa;
     private String kontakt;
 
-    public Korisnik(String metoda, String email, String lozinka, String oib, String grad, String adresa, String kontakt) {
-        this.metoda = metoda;
+    public Korisnik(String email, String lozinka, String oib, String grad, String adresa, String kontakt) {
         this.email = email;
         this.lozinka = lozinka;
         this.oib = oib;
         this.grad = grad;
         this.adresa = adresa;
         this.kontakt = kontakt;
-    }
-
-    public String getMetoda() {
-        return metoda;
-    }
-
-    public void setMetoda(String metoda) {
-        this.metoda = metoda;
     }
 
     public String getEmail() {

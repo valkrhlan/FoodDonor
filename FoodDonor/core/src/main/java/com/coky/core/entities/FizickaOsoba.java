@@ -8,8 +8,8 @@ public class FizickaOsoba extends Korisnik {
     private String ime;
     private String prezime;
 
-    public FizickaOsoba(String metoda, String email, String lozinka, String oib, String grad, String adresa, String kontakt, String ime, String prezime) {
-        super(metoda, email, lozinka, oib, grad, adresa, kontakt);
+    public FizickaOsoba(String email, String lozinka, String oib, String grad, String adresa, String kontakt, String ime, String prezime) {
+        super(email, lozinka, oib, grad, adresa, kontakt);
         this.ime = ime;
         this.prezime = prezime;
     }

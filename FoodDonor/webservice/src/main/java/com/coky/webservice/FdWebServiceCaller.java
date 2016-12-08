@@ -1,5 +1,7 @@
 package com.coky.webservice;
 
+import com.coky.core.entities.FizickaOsoba;
+import com.coky.core.entities.PravnaOsoba;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.responses.FdWebServiceResponse;
@@ -41,6 +43,40 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("prijava");
     }
 
+    public void CallWsForFizickaOsoba(FizickaOsoba data) {
+        FdWebService fdWebService = retrofit.create(FdWebService.class);
+        call = fdWebService.setFizickaOsoba("registracijaVolontera",
+                data.getEmail(),
+                data.getLozinka(),
+                data.getOib(),
+                data.getGrad(),
+                data.getAdresa(),
+                data.getKontakt(),
+                data.getIme(),
+                data.getPrezime());
+        HandleResponseFromCall("registracijaVolontera");
+    }
+
+    public void CallWsForPravnaOsoba(PravnaOsoba data) {
+        FdWebService fdWebService = retrofit.create(FdWebService.class);
+        call = fdWebService.setPravnaOsoba("registracijaOstali",
+                data.getEmail(),
+                data.getLozinka(),
+                data.getOib(),
+                data.getGrad(),
+                data.getAdresa(),
+                data.getKontakt(),
+                data.getNaziv(),
+                data.getTip());
+        HandleResponseFromCall("registracijaOstali");
+    }
+
+    public void CallWsForVrsteJedinica(){
+        FdWebService fdWebService = retrofit.create(FdWebService.class);
+        call = fdWebService.getVrstaJedinica();
+        HandleResponseFromCall("vrstaJedinica");
+    }
+
     public void HandleResponseFromCall(final String method){
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {
@@ -67,71 +103,6 @@ public class FdWebServiceCaller {
                 }
             });
         }
-    }
-
-
-    public void CallWs(final String method, ArrayList<String> params){
-        FdWebService fdWebService = retrofit.create(FdWebService.class);
-        Call<FdWebServiceResponse> call;
-        if(method == "registracijaVolontera"){
-                call = fdWebService.setFizickaOsoba(
-                        method,
-                        params.get(0),
-                        params.get(1),
-                        params.get(2),
-                        params.get(3),
-                        params.get(4),
-                        params.get(5),
-                        params.get(6),
-                        params.get(7));
-            }else if (method == "registracijaOstali"){
-                call = fdWebService.setPravnaOsoba(
-                        method,
-                        params.get(0),
-                        params.get(1),
-                        params.get(2),
-                        params.get(3),
-                        params.get(4),
-                        params.get(5),
-                        params.get(6),
-                        params.get(7));
-            }else if(method == "prijava"){
-                call = fdWebService.getKorisnik(
-                        method,
-                        params.get(0),
-                        params.get(1));
-            }else{
-
-                 call  = fdWebService.getVrstaJedinica();
-            }
-
-            if(call != null){
-                call.enqueue(new Callback<FdWebServiceResponse>() {
-
-                    @Override
-                    public void onResponse(Response<FdWebServiceResponse> response, Retrofit retrofit) {
-
-                        try{
-                            if(response.isSuccess()){
-                                if(fdWebServiceHandler != null)
-                                    if(method=="vrstaJedinica"){
-                                       // fdWebServiceHandler.onDataArrived(response.body().getData(),response.body().getNbResults(),true);
-                                        handleVstaJedinica(response);
-                                    }else{
-                                        fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults(),true);
-
-                                    }
-                                    }
-                        }catch (Exception ex){
-                            ex.printStackTrace();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-            }
     }
 
     private void handleVstaJedinica(Response<FdWebServiceResponse> response){
