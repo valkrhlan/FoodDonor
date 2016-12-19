@@ -1,6 +1,5 @@
 package com.coky.app;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +9,8 @@ import android.widget.Toast;
 
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
-import com.coky.core.entities.FizickaOsoba;
+import com.coky.core.entities.Korisnik;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,15 +69,17 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
 
     @OnClick(R.id.buttonRegistrirajSeRF)
     public void registracijBtnClick(View view){
-        FizickaOsoba osoba = new FizickaOsoba(
+        Korisnik korisnik = new Korisnik(
                 editMail.getText().toString(),
                 editLozinka.getText().toString(),
                 editOib.getText().toString(),
                 editGrad.getText().toString(),
                 editAdresa.getText().toString(),
                 editKontakt.getText().toString(),
+                "",
                 editIme.getText().toString(),
-                editPrezime.getText().toString()
+                editPrezime.getText().toString(),
+                ""
         );
         if(!editMail.getText().toString().isEmpty() && !editLozinka.getText().toString().isEmpty()  &&
                 !editOib.getText().toString().isEmpty() && !editGrad.getText().toString().isEmpty() &&
@@ -96,7 +95,7 @@ public class RegistracijaFizickiKorisnik extends AppCompatActivity implements Ws
             else {
                 Toast.makeText(this,"Uspješan unos!",Toast.LENGTH_SHORT).show();
                 WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.registracijaFizicka(osoba ,this);
+                wsDataLoader.registracijaFizicka(korisnik ,this);
             }
     }
         else {

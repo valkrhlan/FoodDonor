@@ -10,17 +10,14 @@ import android.widget.Toast;
 
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
-import com.coky.core.entities.PravnaOsoba;
+import com.coky.core.entities.Korisnik;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.button;
 
 public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsDataLoadedListener{
 
@@ -95,7 +92,7 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
         else if (radioPotrebiti.isChecked()){
             tip="potrebiti";
         }
-        PravnaOsoba osoba = new PravnaOsoba(
+        Korisnik korisnik = new Korisnik(
                 editMail.getText().toString(),
                 editLozinka.getText().toString(),
                 editOib.getText().toString(),
@@ -103,12 +100,14 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
                 editAdresa.getText().toString(),
                 editKontakt.getText().toString(),
                 editNaziv.getText().toString(),
+                editIme.getText().toString(),
+                editPrezime.getText().toString(),
                 tip
         );
         if(!editMail.getText().toString().isEmpty() && !editLozinka.getText().toString().isEmpty()  &&
                 !editOib.getText().toString().isEmpty() && !editGrad.getText().toString().isEmpty() &&
                 !editAdresa.getText().toString().isEmpty() && !editKontakt.getText().toString().isEmpty() &&
-                !editNaziv.getText().toString().isEmpty())
+                !editNaziv.getText().toString().isEmpty() && !editIme.getText().toString().isEmpty() && !editPrezime.getText().toString().isEmpty())
         {
             if(     !validate(editMail.getText().toString()) ||
                     !validate_letters(editGrad.getText().toString()) ||
@@ -117,7 +116,7 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
             else {
                 Toast.makeText(this,"Uspješan unos!",Toast.LENGTH_SHORT).show();
                 WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.registracijaPravna(osoba, this);
+                wsDataLoader.registracijaPravna(korisnik, this);
             }
         }else {
                 Toast.makeText(this,"Popunite sva polja za unos!",Toast.LENGTH_LONG).show();

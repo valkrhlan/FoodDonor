@@ -1,14 +1,11 @@
 package com.coky.webservice;
 
-import com.coky.core.entities.FizickaOsoba;
-import com.coky.core.entities.PravnaOsoba;
+import com.coky.core.entities.Korisnik;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.responses.FdWebServiceResponse;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
-
-import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -43,7 +40,7 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("prijava");
     }
 
-    public void CallWsForFizickaOsoba(FizickaOsoba data) {
+    public void CallWsForFizickaOsoba(Korisnik data) {
         FdWebService fdWebService = retrofit.create(FdWebService.class);
         call = fdWebService.setFizickaOsoba("registracijaVolontera",
                 data.getEmail(),
@@ -57,7 +54,7 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("registracijaVolontera");
     }
 
-    public void CallWsForPravnaOsoba(PravnaOsoba data) {
+    public void CallWsForPravnaOsoba(Korisnik data) {
         FdWebService fdWebService = retrofit.create(FdWebService.class);
         call = fdWebService.setPravnaOsoba("registracijaOstali",
                 data.getEmail(),
@@ -66,7 +63,7 @@ public class FdWebServiceCaller {
                 data.getGrad(),
                 data.getAdresa(),
                 data.getKontakt(),
-                data.getNaziv(),
+                data.getNaziv() + "_" + data.getIme() + "_" + data.getPrezime(),
                 data.getTip());
         HandleResponseFromCall("registracijaOstali");
     }
