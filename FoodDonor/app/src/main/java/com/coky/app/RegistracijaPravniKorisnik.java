@@ -57,6 +57,12 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
     @BindView(R.id.editNazivRP)
     EditText editNaziv;
 
+    @BindView(R.id.editImeRP)
+    EditText editIme;
+
+    @BindView(R.id.editPrezimeRP)
+    EditText editPrezime;
+
     @BindView(R.id.buttonOdustaniRP)
     Button odustani;
 
