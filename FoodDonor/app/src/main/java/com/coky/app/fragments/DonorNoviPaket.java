@@ -53,6 +53,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     private VrstaHraneSpinnerAdapter vrstaHraneSpinnerAdapter;
     private VrstaHraneSpinnerAdapter jedinicaSpinnerAdapter;
     private View pomFragmentView;
+    private  ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter;
 
     private List<StavkaPaketa> stavke = new ArrayList<StavkaPaketa>();
 
@@ -64,7 +65,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
         pomFragmentView=fragmentView;
 
-        final ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
+        //final ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
+        stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
         final ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
         list.setAdapter(stvakaPaketaListViewAdapter);
 
@@ -161,7 +163,9 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
            Toast.makeText(getActivity().getBaseContext(),message.toString(),Toast.LENGTH_SHORT).show();
            if(message.toString().startsWith("U")){
-               //doradi
+               stavke.clear();
+               stvakaPaketaListViewAdapter.notifyDataSetChanged();
+
            }
         }
 
@@ -198,10 +202,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
          String json=new Gson().toJson(stavke);
          Log.d("json:",json);
          String email=((PopisPaketa)getActivity()).getEmailKorisnika();
-         //Toast.makeText(getActivity().getBaseContext(),email,Toast.LENGTH_SHORT).show();
          WsDataLoader wsDataLoader = new WsDataLoader();
          wsDataLoader.dodajPaket(email,json,this);
-        // Toast.makeText(getActivity().getBaseContext(),json,Toast.LENGTH_SHORT).show();
-     }
+         }
   }
 }
