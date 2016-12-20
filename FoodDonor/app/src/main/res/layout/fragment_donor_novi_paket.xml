@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_donor_novi_paket"
-    tools:context="com.coky.app.fragments.DonorNoviPaket">
+    tools:context="com.coky.app.fragments.DonorNoviPaket"
+  >
 
     <TextView
         android:text="Vrsta hrane:"
@@ -25,6 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="26dp"
+
         />
 
     <Spinner
@@ -34,9 +36,11 @@
         android:ems="10"
         android:id="@+id/spinnerNazivHraneNP"
         android:layout_below="@+id/editNazivHraneNP"
-        android:layout_alignStart="@+id/editNazivHraneNP" />
+        android:layout_alignStart="@+id/editNazivHraneNP"
 
-    />
+        />
+
+
     <TextView
         android:text="Naziv hrane:"
         android:layout_width="wrap_content"
@@ -56,9 +60,10 @@
         android:ems="10"
         android:id="@+id/editKolicinaNP"
         android:layout_below="@+id/spinnerNazivHraneNP"
-        android:layout_alignStart="@+id/spinnerNazivHraneNP" />
+        android:layout_alignStart="@+id/spinnerNazivHraneNP"
+        />
 
-    />
+
     <TextView
         android:text="Količina:"
         android:layout_width="wrap_content"
@@ -77,9 +82,10 @@
         android:ems="10"
         android:id="@+id/spinnerJedinicaKolicineNP"
         android:layout_below="@+id/editKolicinaNP"
-        android:layout_alignStart="@+id/editKolicinaNP" />
+        android:layout_alignStart="@+id/editKolicinaNP"
+        />
 
-    />
+
     <TextView
         android:text="Jedinica količine:"
         android:layout_width="wrap_content"
@@ -110,7 +116,6 @@
         android:id="@+id/stavkePaketaListViewNP"
         android:layout_below="@+id/btnDodajStavkuNP"
         android:layout_above="@+id/btnNatragNoviPaket"
-
         />
 
     <Button

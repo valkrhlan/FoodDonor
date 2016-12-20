@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,6 +67,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         final ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
         final ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
         list.setAdapter(stvakaPaketaListViewAdapter);
+
+
 
         dohvatiVrsteHraneJedinice();
         btnNatragNoviPaket = (Button) fragmentView.findViewById(R.id.btnNatragNoviPaket);
@@ -132,7 +135,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     public void onWsDataLoaded(Object message, int tip) {
 
         if(message instanceof VrstaJedinica){
-            Toast.makeText(getActivity().getBaseContext(),"vrsta jedinica je",Toast.LENGTH_SHORT).show();
             VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
             List<SpinnerElement> pom=vrstaJedinica.getVrsta();
 
@@ -201,6 +203,5 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
          wsDataLoader.dodajPaket(email,json,this);
         // Toast.makeText(getActivity().getBaseContext(),json,Toast.LENGTH_SHORT).show();
      }
-    // Toast.makeText(getActivity().getBaseContext(),"wohoooo",Toast.LENGTH_SHORT).show();
- }
+  }
 }

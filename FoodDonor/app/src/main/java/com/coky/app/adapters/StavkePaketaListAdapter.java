@@ -37,7 +37,7 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         View itemView = convertView;
         if(convertView==null){
              itemView = LayoutInflater.from(getContext()).inflate(R.layout.stavka_item, parent, false);
@@ -48,13 +48,13 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
         TextView vrsta=(TextView)itemView.findViewById(R.id.vrstaHraneSI);
         TextView kolicina = (TextView)itemView.findViewById(R.id.kolicinaHraneSI);
         TextView jedinica = (TextView)itemView.findViewById(R.id.jedinicaHraneSI);
-        ImageButton btn = (ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
-
+        final ImageButton btn = (ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
+        btn.setTag(position);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Toast.m
-                Toast.makeText(context,"Brisi!",Toast.LENGTH_SHORT).show();
+                stavkePaketaList.remove((int)btn.getTag());
+                StavkePaketaListAdapter.this.notifyDataSetChanged();
 
             }
         });
