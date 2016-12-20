@@ -23,8 +23,7 @@ public class FdWebServiceCaller {
     Call<FdWebServiceResponse> call;
 
     private final String baseUrl = "https://air-web-service.000webhostapp.com/webservice/";
-
-    public FdWebServiceCaller(FdWebServiceHandler fdWebServiceHandler){
+     public FdWebServiceCaller(FdWebServiceHandler fdWebServiceHandler){
         this.fdWebServiceHandler = fdWebServiceHandler;
         OkHttpClient okHttpClient  = new OkHttpClient();
         this.retrofit = new Retrofit.Builder()

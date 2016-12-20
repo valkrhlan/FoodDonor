@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coky.app.R;
 import com.coky.app.klase.StavkaPaketa;
@@ -46,11 +48,21 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
         TextView vrsta=(TextView)itemView.findViewById(R.id.vrstaHraneSI);
         TextView kolicina = (TextView)itemView.findViewById(R.id.kolicinaHraneSI);
         TextView jedinica = (TextView)itemView.findViewById(R.id.jedinicaHraneSI);
+        ImageButton btn = (ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
 
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Toast.m
+                Toast.makeText(context,"Brisi!",Toast.LENGTH_SHORT).show();
+
+            }
+        });
         naslov.setText(trenutnaSavka.getNaziv());
         vrsta.setText(trenutnaSavka.getVrsta().getNaziv());
         kolicina.setText((trenutnaSavka.getKolicina()));
         jedinica.setText(trenutnaSavka.getJedinica().getNaziv());
         return itemView;
     }
+
 }
