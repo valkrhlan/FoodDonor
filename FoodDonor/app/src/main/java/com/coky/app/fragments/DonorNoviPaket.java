@@ -1,6 +1,7 @@
 package com.coky.app.fragments;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.coky.app.MainActivity;
 import com.coky.app.PopisPaketa;
 import com.coky.app.R;
 import com.coky.app.adapters.StavkePaketaListAdapter;
@@ -129,27 +131,38 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     @Override
     public void onWsDataLoaded(Object message, int tip) {
 
-        VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
-        List<SpinnerElement> pom=vrstaJedinica.getVrsta();
+        if(message instanceof VrstaJedinica){
+            Toast.makeText(getActivity().getBaseContext(),"vrsta jedinica je",Toast.LENGTH_SHORT).show();
+            VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
+            List<SpinnerElement> pom=vrstaJedinica.getVrsta();
 
-       SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[pom.size()];
-        for (int i=0;i<pom.size();i++){
-            vrstaSpinnerElement[i]=pom.get(i);
+            SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[pom.size()];
+            for (int i=0;i<pom.size();i++){
+                vrstaSpinnerElement[i]=pom.get(i);
+            }
+
+            vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
+            vrstaHraneSpinner = (Spinner)pomFragmentView.findViewById(R.id.spinnerNazivHraneNP);
+            vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
+
+            List<SpinnerElement> pomJedinica=vrstaJedinica.getJedinica();
+            SpinnerElement[] jedinicaSpinnerElement = new SpinnerElement[pomJedinica.size()];
+            for (int i=0;i<pomJedinica.size();i++){
+                jedinicaSpinnerElement[i]=pomJedinica.get(i);
+            }
+
+            jedinicaSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerJedinicaKolicineNP,jedinicaSpinnerElement);
+            jedinicaHraneSpinner=(Spinner)pomFragmentView.findViewById(R.id.spinnerJedinicaKolicineNP);
+            jedinicaHraneSpinner.setAdapter(jedinicaSpinnerAdapter);
+        }
+        else{
+
+           Toast.makeText(getActivity().getBaseContext(),message.toString(),Toast.LENGTH_SHORT).show();
+           if(message.toString().startsWith("U")){
+               //doradi
+           }
         }
 
-        vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
-        vrstaHraneSpinner = (Spinner)pomFragmentView.findViewById(R.id.spinnerNazivHraneNP);
-        vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
-
-        List<SpinnerElement> pomJedinica=vrstaJedinica.getJedinica();
-        SpinnerElement[] jedinicaSpinnerElement = new SpinnerElement[pomJedinica.size()];
-        for (int i=0;i<pomJedinica.size();i++){
-            jedinicaSpinnerElement[i]=pomJedinica.get(i);
-        }
-
-        jedinicaSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerJedinicaKolicineNP,jedinicaSpinnerElement);
-        jedinicaHraneSpinner=(Spinner)pomFragmentView.findViewById(R.id.spinnerJedinicaKolicineNP);
-        jedinicaHraneSpinner.setAdapter(jedinicaSpinnerAdapter);
 
     }
     private boolean  validacija() {
@@ -182,7 +195,11 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
      }else{
          String json=new Gson().toJson(stavke);
          Log.d("json:",json);
-         Toast.makeText(getActivity().getBaseContext(),json,Toast.LENGTH_SHORT).show();
+         String email=((PopisPaketa)getActivity()).getEmailKorisnika();
+         //Toast.makeText(getActivity().getBaseContext(),email,Toast.LENGTH_SHORT).show();
+         WsDataLoader wsDataLoader = new WsDataLoader();
+         wsDataLoader.dodajPaket(email,json,this);
+        // Toast.makeText(getActivity().getBaseContext(),json,Toast.LENGTH_SHORT).show();
      }
     // Toast.makeText(getActivity().getBaseContext(),"wohoooo",Toast.LENGTH_SHORT).show();
  }

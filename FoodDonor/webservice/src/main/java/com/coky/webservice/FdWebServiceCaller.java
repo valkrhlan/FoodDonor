@@ -73,6 +73,11 @@ public class FdWebServiceCaller {
         call = fdWebService.getVrstaJedinica();
         HandleResponseFromCall("vrstaJedinica");
     }
+    public void CallWsForDodajPaket(String email, String json){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.dodajPaket(email,json);
+        HandleResponseFromCall("dodajPaket");
+    }
 
     public void HandleResponseFromCall(final String method){
         if(call != null){

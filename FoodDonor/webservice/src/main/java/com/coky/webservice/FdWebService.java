@@ -44,4 +44,9 @@ public interface FdWebService {
 
     @GET("vrstaJedinica/all/")
     Call<FdWebServiceResponse> getVrstaJedinica();
+
+    @GET("paket/novi/{email}/{data}/")
+    Call<FdWebServiceResponse> dodajPaket(
+            @Path("email") String email,
+            @Path("data") String json );
 }

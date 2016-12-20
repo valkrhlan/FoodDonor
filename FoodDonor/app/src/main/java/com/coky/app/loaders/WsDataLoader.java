@@ -35,6 +35,10 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForVrsteJedinica();
     }
+    public  void dodajPaket(String email, String json,WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForDodajPaket(email,json);
+    }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
