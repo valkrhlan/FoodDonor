@@ -85,7 +85,7 @@ public class PopisPaketa extends AppCompatActivity {
         fragmentCreated = true;
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.activity_popis_paketa, fragment,tag);
+        fragmentTransaction.add(R.id.activity_popis_paketa, fragment, tag);
         fragmentTransaction.commit();
 
     }

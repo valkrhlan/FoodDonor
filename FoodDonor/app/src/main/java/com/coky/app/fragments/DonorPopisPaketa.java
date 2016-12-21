@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.coky.app.PopisPaketa;
 import com.coky.app.R;
@@ -35,6 +37,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     @BindView(R.id.btnNoviPaket)
     Button btnNoviPaket;
 
+    private String email;
+
     private ArrayList<Paket> paketi;
     private PaketAdapter paketAdapter;
 
@@ -54,10 +58,9 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onStart(){
         super.onStart();
-        String email=((PopisPaketa)getActivity()).getEmailKorisnika();
-        if(paketi == null){
-            wsDataLoader = new WsDataLoader();
-        }
+        email=((PopisPaketa)getActivity()).getEmailKorisnika();
+        paketi = null;
+        wsDataLoader = new WsDataLoader();
         wsDataLoader.preuzmiPakete(email, this);
     }
 
@@ -75,14 +78,17 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     }
 
     private void setPaketAdapter(){
-        if(paketAdapter != null){
-            paketAdapter.clear();
-        }
         //----------------- MOCK DATA --------------------------
         //mockPaketi();
         //------------------------------------------------------
         paketAdapter = new PaketAdapter(getActivity(), paketi);
         listView.setAdapter(paketAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(),"Kliknut paket - pozicija: " + i + ", row ID: " + l,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick(R.id.btnNoviPaket)
@@ -91,6 +97,12 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.activity_popis_paketa, noviPaket);
         transaction.addToBackStack(null);
+        /*fragmentManager.addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        wsDataLoader.preuzmiPakete(email, DonorPopisPaketa.this);
+                    }
+                });*/
         transaction.commit();
     }
 
@@ -102,4 +114,6 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         }
         setPaketAdapter();
     }
+
+
 }

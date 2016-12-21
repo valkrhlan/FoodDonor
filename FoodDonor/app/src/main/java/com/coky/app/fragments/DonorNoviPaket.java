@@ -77,24 +77,11 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* popisPaketa = getActivity().getSupportFragmentManager().findFragmentByTag("popisPaketa");
-                if(popisPaketa == null){
-                    popisPaketa = new DonorPopisPaketa();
-                }
-                ((PopisPaketa)getActivity()).postaviVidljivost();
                 fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.activity_popis_paketa, popisPaketa,"popisPaketa");
-                fragmentTransaction.commit();*/
-                getActivity().onBackPressed();
-              //------- Neuspjeli pokušaju handlanja s fragmentom. Bum ostavil valjda bude kaj trebalo da dalje
-                //fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                //fragmentTransaction.remove(getActivity().getSupportFragmentManager().findFragmentByTag("noviPaket"));
-                //getActivity().getSupportFragmentManager().popBackStack();
-                //fragmentTransaction.addToBackStack(null);
-                //fragmentTransaction.commit();
-                //getActivity().getSupportFragmentManager().popBackStack();
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_popis_paketa, getFragmentManager().findFragmentByTag("popisPaketa"), "popisPaketa");
-                //-------
+                fragmentTransaction.remove(DonorNoviPaket.this);
+                getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction.commit();
+                //getActivity().onBackPressed();
             }
 
         });
