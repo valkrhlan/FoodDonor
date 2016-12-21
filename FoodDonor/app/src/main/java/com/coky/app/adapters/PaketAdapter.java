@@ -1,6 +1,8 @@
 package com.coky.app.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +21,10 @@ import java.util.ArrayList;
 public class PaketAdapter extends ArrayAdapter<Paket> {
 
     public static class ViewHolder{
-        TextView paketBroj;
-        TextView paketDatum;
-        TextView paketStatus;
+        TextView paketId;
+        TextView paketVrijemeKreiranja;
+        TextView paketPreuzimanje;
+        TextView paketVrijemePreuzimanja;
     }
 
     public PaketAdapter(Context context, ArrayList<Paket> paketi){
@@ -35,18 +38,25 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.paket_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.paketBroj = (TextView) convertView.findViewById(R.id.paketBroj);
-            viewHolder.paketDatum = (TextView) convertView.findViewById(R.id.paketDatum);
-            viewHolder.paketStatus = (TextView) convertView.findViewById(R.id.paketStatus);
+            viewHolder.paketId = (TextView) convertView.findViewById(R.id.idPaket);
+            viewHolder.paketVrijemeKreiranja = (TextView) convertView.findViewById(R.id.v_kreiranjaPaket);
+            viewHolder.paketPreuzimanje = (TextView) convertView.findViewById(R.id.preuzimanjePaket);
+            viewHolder.paketVrijemePreuzimanja = (TextView) convertView.findViewById(R.id.v_preuzetoPaket);
             convertView.setTag(viewHolder);
         }
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.paketBroj.setText(Long.toString(paket.getBroj()));
-        viewHolder.paketDatum.setText(paket.getDatum());
-        viewHolder.paketStatus.setText(paket.getStatus());
-
+        viewHolder.paketId.setText(paket.getId());
+        viewHolder.paketVrijemeKreiranja.setText(paket.getV_kreiranja());
+        if(paket.getPreuzimanje() == "0"){
+            viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
+            viewHolder.paketVrijemePreuzimanja.setText("");
+        }else{
+            convertView.getBackground().setColorFilter(Color.parseColor("#42f471"), PorterDuff.Mode.MULTIPLY);
+            viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
+            viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());
+        }
         return convertView;
     }
 }

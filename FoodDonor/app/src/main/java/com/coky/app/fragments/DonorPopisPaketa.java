@@ -52,11 +52,11 @@ public class DonorPopisPaketa extends Fragment {
         setPaketAdapter();
     }
 
-    private void mockPaketi(){
+    /*private void mockPaketi(){
         addPaketToArray(new Paket(1,"1.12.2016","Dostupno"));
         addPaketToArray(new Paket(2,"29.11.2016","Preuzeto"));
         addPaketToArray(new Paket(1337, "11.9.2020.", "Dostupno"));
-    }
+    }*/
 
     private void addPaketToArray(Paket paket){
         if(paketi == null){
@@ -70,7 +70,7 @@ public class DonorPopisPaketa extends Fragment {
             paketAdapter.clear();
         }
         //----------------- MOCK DATA --------------------------
-        mockPaketi();
+        //mockPaketi();
         //------------------------------------------------------
         paketAdapter = new PaketAdapter(getActivity(), paketi);
         listView.setAdapter(paketAdapter);

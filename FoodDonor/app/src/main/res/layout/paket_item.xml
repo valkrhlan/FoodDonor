@@ -10,32 +10,42 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/paketBroj"
+        android:id="@+id/idPaket"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="35dp"
-        android:text="1"
+        android:text="id"
         android:textSize="56dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/paketDatum"
-        android:text="Datum izrade paketa"
+        android:id="@+id/v_kreiranjaPaket"
+        android:text="v_kreiranja"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/paketBroj"
+        android:layout_toEndOf="@+id/idPaket"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_marginBottom="2dp" />
+        android:layout_marginBottom="8dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/paketStatus"
-        android:layout_below="@+id/paketDatum"
-        android:layout_toEndOf="@+id/paketBroj"
+        android:id="@+id/preuzimanjePaket"
+        android:layout_below="@+id/v_kreiranjaPaket"
+        android:layout_toEndOf="@+id/idPaket"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="(ne)preuzeto"/>
+        android:text="preuzimanje"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/v_preuzetoPaket"
+        android:layout_below="@+id/preuzimanjePaket"
+        android:layout_toEndOf="@+id/idPaket"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="v_preuzeto"/>
+
 
 </RelativeLayout>
