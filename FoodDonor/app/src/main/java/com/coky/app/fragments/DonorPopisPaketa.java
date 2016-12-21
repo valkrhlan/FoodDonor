@@ -39,6 +39,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     private PaketAdapter paketAdapter;
 
     private FragmentManager fragmentManager;
+    private WsDataLoader wsDataLoader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +55,9 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     public void onStart(){
         super.onStart();
         String email=((PopisPaketa)getActivity()).getEmailKorisnika();
-        WsDataLoader wsDataLoader = new WsDataLoader();
+        if(paketi == null){
+            wsDataLoader = new WsDataLoader();
+        }
         wsDataLoader.preuzmiPakete(email, this);
     }
 
@@ -94,8 +97,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         List<Paket> paketi = (List<Paket>) message;
-        for(Object paket : paketi){
-            //TODO
+        for(Paket paket : paketi){
+            addPaketToArray(paket);
         }
         setPaketAdapter();
     }

@@ -3,6 +3,7 @@ package com.coky.app.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +50,15 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
         }
         viewHolder.paketId.setText(paket.getId());
         viewHolder.paketVrijemeKreiranja.setText(paket.getV_kreiranja());
-        if(paket.getPreuzimanje() == "0"){
-            viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
-            viewHolder.paketVrijemePreuzimanja.setText("");
-        }else{
-            convertView.getBackground().setColorFilter(Color.parseColor("#42f471"), PorterDuff.Mode.MULTIPLY);
+        if(paket.getPreuzimanje() != null && paket.getPreuzimanje().contains("1")){
+            convertView.setBackgroundColor(Color.parseColor("#42f462"));
             viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
             viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());
+
+        }else{
+            convertView.setBackgroundColor(Color.parseColor("#edb544"));
+            viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
+            viewHolder.paketVrijemePreuzimanja.setText("");
         }
         return convertView;
     }
