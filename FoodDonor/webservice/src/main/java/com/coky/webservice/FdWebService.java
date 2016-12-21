@@ -49,4 +49,8 @@ public interface FdWebService {
     Call<FdWebServiceResponse> dodajPaket(
             @Path("email") String email,
             @Path("data") String json );
+
+    @GET("paket/dohvati/{email}/")
+    Call<FdWebServiceResponse> dohvatiPakete(
+            @Path("email") String email);
 }

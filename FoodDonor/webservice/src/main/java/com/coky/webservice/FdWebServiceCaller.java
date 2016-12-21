@@ -1,11 +1,15 @@
 package com.coky.webservice;
 
 import com.coky.core.entities.Korisnik;
+import com.coky.core.entities.Paket;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.VrstaJedinica;
 import com.coky.webservice.responses.FdWebServiceResponse;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
+
+import java.util.Arrays;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -77,6 +81,11 @@ public class FdWebServiceCaller {
         call=fdWebService.dodajPaket(email,json);
         HandleResponseFromCall("dodajPaket");
     }
+    public void CallWsForPreuzmiPakete(String email){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.dohvatiPakete(email);
+        HandleResponseFromCall("dohvatiPakete");
+    }
 
     public void HandleResponseFromCall(final String method){
         if(call != null){
@@ -89,6 +98,8 @@ public class FdWebServiceCaller {
                                 if(method=="vrstaJedinica"){
                                     // fdWebServiceHandler.onDataArrived(response.body().getData(),response.body().getNbResults(),true);
                                     handleVstaJedinica(response);
+                                }else if(method=="dohvatiPakete"){
+                                    handlePreuzetiPaketi(response);
                                 }else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 
@@ -110,6 +121,16 @@ public class FdWebServiceCaller {
             Gson gson = new Gson();
             VrstaJedinica vrstaJedinicaItem=gson.fromJson(response.body().getData(),VrstaJedinica.class);
             fdWebServiceHandler.onDataArrived((Object)vrstaJedinicaItem,response.body().getNbResults());
+    }
+
+    private void handlePreuzetiPaketi(Response<FdWebServiceResponse> response) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd") // response JSON format
+                .create();
+        Paket[] paketi = gson.fromJson(response.body().getData(), Paket[].class);
+        if(fdWebServiceHandler != null){
+            fdWebServiceHandler.onDataArrived(Arrays.asList(paketi),response.body().getNbResults());
+        }
     }
 
 }

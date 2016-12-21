@@ -39,6 +39,10 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForDodajPaket(email,json);
     }
+    public  void preuzmiPakete(String email, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForPreuzmiPakete(email);
+    }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override

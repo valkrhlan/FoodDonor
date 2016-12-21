@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.coky.app.PopisPaketa;
 import com.coky.app.R;
 import com.coky.app.adapters.PaketAdapter;
+import com.coky.app.loaders.WsDataLoadedListener;
+import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.Paket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +27,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DonorPopisPaketa extends Fragment {
+public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
 
     private View fragmentView;
     private ListView listView;
@@ -49,7 +53,9 @@ public class DonorPopisPaketa extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        setPaketAdapter();
+        String email=((PopisPaketa)getActivity()).getEmailKorisnika();
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.preuzmiPakete(email, this);
     }
 
     /*private void mockPaketi(){
@@ -85,4 +91,12 @@ public class DonorPopisPaketa extends Fragment {
         transaction.commit();
     }
 
+    @Override
+    public void onWsDataLoaded(Object message, int tip) {
+        List<Paket> paketi = (List<Paket>) message;
+        for(Object paket : paketi){
+            //TODO
+        }
+        setPaketAdapter();
+    }
 }
