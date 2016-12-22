@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935016635969",
+    "firebase_url": "https://fooddonor-2037a.firebaseio.com",
+    "project_id": "fooddonor-2037a",
+    "storage_bucket": "fooddonor-2037a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935016635969:android:c779f703798ce33c",
+        "android_client_info": {
+          "package_name": "com.coky.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935016635969-8lluqgule6l3ibqgptapmlu7bb3tcdpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coky.app",
+            "certificate_hash": "AF5637CA7D6CD7F9FD04CEAC8F369F5C4FEF17A6"
+          }
+        },
+        {
+          "client_id": "935016635969-ii3avgpcaq97lqcegb5kqps12oa2ln0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6scwApkJE72TqtVfjnJmotMvlaPvUGgw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935016635969-ii3avgpcaq97lqcegb5kqps12oa2ln0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

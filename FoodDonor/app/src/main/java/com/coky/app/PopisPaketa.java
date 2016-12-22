@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.coky.app.firebase.SharedPrefManager;
 import com.coky.app.fragments.DonorPopisPaketa;
 
 
@@ -36,6 +37,13 @@ public class PopisPaketa extends AppCompatActivity {
         }
         if(fragmentCreated == false){
             chooseInitialFragment();
+        }
+
+        String token = SharedPrefManager.getInstance(this).getDeviceToken();
+        if(token!=null){
+            Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this,"Token nije generiran",Toast.LENGTH_SHORT).show();
         }
     }
 
