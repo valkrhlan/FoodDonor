@@ -83,15 +83,15 @@ public class PopisPaketa extends AppCompatActivity {
                 break;
             case 2: //POTREBITI
                 Toast.makeText(this,"Potrebiti korisnik u implementaciji!", Toast.LENGTH_LONG).show();
-                finish();
+                odjava();
                 break;
             case 3: //VOLONTER
                 Toast.makeText(this,"Volonter u implementaciji!", Toast.LENGTH_LONG).show();
-                finish();
+                odjava();
                 break;
             default:
                 Toast.makeText(this,"Desila se greška: tip korisnika je nula!", Toast.LENGTH_LONG).show();
-                finish();
+                odjava();
                 break;
         }
     }
@@ -134,13 +134,13 @@ public class PopisPaketa extends AppCompatActivity {
         this.tipKorisnika = tipKorisnika;
     }
 
-    private void isNetworkAvailable() {
+    public void isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
         if(connection == false){
-            AlertDialog alertDialog = new AlertDialog.Builder(getParent()).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(PopisPaketa.this).create();
             alertDialog.setTitle("Pogreška u internet vezi");
             alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste nastavili sa daljnjim radom u aplikaciji.");
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Odjavi me",

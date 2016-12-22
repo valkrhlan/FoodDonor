@@ -58,18 +58,12 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     private List<StavkaPaketa> stavke = new ArrayList<StavkaPaketa>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
         pomFragmentView=fragmentView;
-
         stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
         final ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
         list.setAdapter(stvakaPaketaListViewAdapter);
-
-
-
         dohvatiVrsteHraneJedinice();
         btnNatragNoviPaket = (Button) fragmentView.findViewById(R.id.btnNatragNoviPaket);
         btnNatragNoviPaket.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +73,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                 fragmentTransaction.remove(DonorNoviPaket.this);
                 getActivity().getSupportFragmentManager().popBackStack();
                 fragmentTransaction.commit();
-                //getActivity().onBackPressed();
             }
 
         });
@@ -99,7 +92,6 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                 }
             }
         });
-
         btnDodajPaket=(Button)fragmentView.findViewById(R.id.btnDodajPaketNP);
         btnDodajPaket.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -107,45 +99,35 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                 dodajNoviPaket();
             }
         });
-
         return  fragmentView;
     }
 
-
-
- public void dohvatiVrsteHraneJedinice(){
-    WsDataLoader wsDataLoader = new WsDataLoader();
-     wsDataLoader.dohvatiVrstaJedinica(this);
- }
+    public void dohvatiVrsteHraneJedinice(){
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.dohvatiVrstaJedinica(this);
+    }
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
-
         if(message instanceof VrstaJedinica){
             VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
             List<SpinnerElement> pom=vrstaJedinica.getVrsta();
-
             SpinnerElement[] vrstaSpinnerElement = new SpinnerElement[pom.size()];
             for (int i=0;i<pom.size();i++){
                 vrstaSpinnerElement[i]=pom.get(i);
             }
-
             vrstaHraneSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerNazivHraneNP, vrstaSpinnerElement);
             vrstaHraneSpinner = (Spinner)pomFragmentView.findViewById(R.id.spinnerNazivHraneNP);
             vrstaHraneSpinner.setAdapter(vrstaHraneSpinnerAdapter);
-
             List<SpinnerElement> pomJedinica=vrstaJedinica.getJedinica();
             SpinnerElement[] jedinicaSpinnerElement = new SpinnerElement[pomJedinica.size()];
             for (int i=0;i<pomJedinica.size();i++){
                 jedinicaSpinnerElement[i]=pomJedinica.get(i);
             }
-
             jedinicaSpinnerAdapter = new VrstaHraneSpinnerAdapter(getActivity().getBaseContext(),R.id.spinnerJedinicaKolicineNP,jedinicaSpinnerElement);
             jedinicaHraneSpinner=(Spinner)pomFragmentView.findViewById(R.id.spinnerJedinicaKolicineNP);
             jedinicaHraneSpinner.setAdapter(jedinicaSpinnerAdapter);
-        }
-        else{
-
+        }else{
            Toast.makeText(getActivity().getBaseContext(),message.toString(),Toast.LENGTH_SHORT).show();
            if(message.toString().startsWith("U")){
                WsDataLoader wsDataLoader = new WsDataLoader();
@@ -160,13 +142,10 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                wsDataLoader.posaljiNotif(email,titleNotif, messageNotif, this);
                stavke.clear();
                stvakaPaketaListViewAdapter.notifyDataSetChanged();
-
            }
         }
-
-
     }
-    private boolean  validacija() {
+    private boolean validacija() {
         String rez="";
         EditText nazivHrane=(EditText)pomFragmentView.findViewById(R.id.editNazivHraneNP);
         EditText kolicinaHrane=(EditText)pomFragmentView.findViewById(R.id.editKolicinaNP);
@@ -194,6 +173,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
      if(stavke.isEmpty()){
          Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stvaku!",Toast.LENGTH_SHORT).show();
      }else{
+         ((PopisPaketa)getActivity()).isNetworkAvailable();
          String json=new Gson().toJson(stavke);
          Log.d("json:",json);
          String email=((PopisPaketa)getActivity()).getEmailKorisnika();

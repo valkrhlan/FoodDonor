@@ -60,6 +60,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         super.onStart();
         email=((PopisPaketa)getActivity()).getEmailKorisnika();
         paketi = null;
+        ((PopisPaketa)getActivity()).isNetworkAvailable();
         wsDataLoader = new WsDataLoader();
         wsDataLoader.preuzmiPakete(email, this);
     }
