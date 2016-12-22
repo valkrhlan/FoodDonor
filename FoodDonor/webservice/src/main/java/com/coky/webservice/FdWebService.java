@@ -58,4 +58,12 @@ public interface FdWebService {
     Call<FdWebServiceResponse> spremiToken(
             @Path("email") String email,
             @Path("token") String token);
+
+
+    @GET("sendNotification/{email}/{title}/{message}/")
+    Call<FdWebServiceResponse> saljiNotif(
+            @Path("email") String email,
+            @Path("title") String naslov,
+            @Path("message") String poruka);
+
 }

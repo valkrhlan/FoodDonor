@@ -93,6 +93,11 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("spremiToken");
     }
 
+    public void CallWsForSaljiNotif(String email, String naslov, String poruka){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.saljiNotif(email, naslov, poruka);
+        HandleResponseFromCall("saljiNotif");
+    }
 
     public void HandleResponseFromCall(final String method){
         if(call != null){
@@ -107,6 +112,8 @@ public class FdWebServiceCaller {
                                     handleVstaJedinica(response);
                                 }else if(method=="dohvatiPakete"){
                                     handlePreuzetiPaketi(response);
+                                }else if(method=="saljiNotif"){
+                                    //DO NOTHING!!!
                                 }else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 

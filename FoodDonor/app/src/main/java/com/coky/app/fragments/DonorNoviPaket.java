@@ -150,6 +150,16 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
            Toast.makeText(getActivity().getBaseContext(),message.toString(),Toast.LENGTH_SHORT).show();
            if(message.toString().startsWith("U")){
+               WsDataLoader wsDataLoader = new WsDataLoader();
+               String email=((PopisPaketa)getActivity()).getEmailKorisnika();
+               String titleNotif = "Novi paket!";
+               String messageNotif = "";
+               for(StavkaPaketa stavka : stavke){
+                   messageNotif += stavka.getNaziv() + " (" + stavka.getVrsta().getNaziv() +"): " + stavka.getKolicina() + stavka.getJedinica().getNaziv() + "; ";
+               }
+               Log.d("paketNoviTitle", titleNotif);
+               Log.d("paketNoviMessage", messageNotif);
+               wsDataLoader.posaljiNotif(email,titleNotif, messageNotif, this);
                stavke.clear();
                stvakaPaketaListViewAdapter.notifyDataSetChanged();
 

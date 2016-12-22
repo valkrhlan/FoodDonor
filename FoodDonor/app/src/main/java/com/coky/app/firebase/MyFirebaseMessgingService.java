@@ -40,6 +40,7 @@ public class MyFirebaseMessgingService extends FirebaseMessagingService{
             MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             mNotificationManager.showSmallNotification(title, message, intent);
+
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {
