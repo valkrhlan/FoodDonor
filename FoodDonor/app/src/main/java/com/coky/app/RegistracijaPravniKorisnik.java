@@ -1,5 +1,10 @@
 package com.coky.app;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -114,9 +119,11 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
                     !editLozinka.getText().toString().matches(editPonovljena.getText().toString()))
                     Toast.makeText(this,"Jedan ili više unosa ne prati uzorak ili lozinke nisu iste!",Toast.LENGTH_LONG).show();
             else {
-                Toast.makeText(this,"Uspješan unos!",Toast.LENGTH_SHORT).show();
-                WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.registracijaPravna(korisnik, this);
+                if(isNetworkAvailable() == true){
+                    Toast.makeText(this,"Uspješan unos!",Toast.LENGTH_SHORT).show();
+                    WsDataLoader wsDataLoader = new WsDataLoader();
+                    wsDataLoader.registracijaPravna(korisnik, this);
+                }
             }
         }else {
                 Toast.makeText(this,"Popunite sva polja za unos!",Toast.LENGTH_LONG).show();
@@ -144,5 +151,25 @@ public class RegistracijaPravniKorisnik extends AppCompatActivity implements WsD
     public static boolean validate_letters(String letters) {
         Matcher matcher = letters_only_check.matcher(letters);
         return matcher.find();
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        if(connection == false){
+            AlertDialog alertDialog = new AlertDialog.Builder(RegistracijaPravniKorisnik.this).create();
+            alertDialog.setTitle("Pogreška u internet vezi");
+            alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste registrirali korisnika");
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        return connection;
     }
 }

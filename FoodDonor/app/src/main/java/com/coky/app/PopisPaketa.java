@@ -1,7 +1,12 @@
 package com.coky.app;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -52,10 +57,7 @@ public class PopisPaketa extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.odjava) {
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("brisi", emailKorisnika);
-            setResult(RESULT_OK,returnIntent);
-            finish();
+            odjava();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -65,6 +67,13 @@ public class PopisPaketa extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putBoolean("fragmentCreated", fragmentCreated);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 
     private void chooseInitialFragment(){
@@ -102,6 +111,13 @@ public class PopisPaketa extends AppCompatActivity {
         setTipKorisnika(prefs.getInt("tipKorisnika", 0));
     }
 
+    private void odjava(){
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("brisi", emailKorisnika);
+        setResult(RESULT_OK,returnIntent);
+        finish();
+    }
+
     public String getEmailKorisnika() {
         return emailKorisnika;
     }
@@ -118,10 +134,30 @@ public class PopisPaketa extends AppCompatActivity {
         this.tipKorisnika = tipKorisnika;
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent returnIntent = new Intent();
-        setResult(RESULT_CANCELED, returnIntent);
-        finish();
+    private void isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        if(connection == false){
+            AlertDialog alertDialog = new AlertDialog.Builder(getParent()).create();
+            alertDialog.setTitle("Pogreška u internet vezi");
+            alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste nastavili sa daljnjim radom u aplikaciji.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Odjavi me",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            odjava();
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Nastavi dalje",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            isNetworkAvailable();
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 }

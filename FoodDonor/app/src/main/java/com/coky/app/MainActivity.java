@@ -1,9 +1,12 @@
 package com.coky.app;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
             wsDataLoader.slanjeTokena(editEmail.getText().toString(), token, this);
         }
         else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
-            startNextActivity();
+                startNextActivity();
         }
         else{
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -90,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     public void prijavaBtnClick(View view){
         if(!editEmail.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()){
             if(validateMail(editEmail.getText().toString())){
-                RegistriraniKorisnik korisnik = new RegistriraniKorisnik(editEmail.getText().toString(), editPassword.getText().toString());
-                WsDataLoader wsDataLoader = new WsDataLoader();
-                wsDataLoader.prijava(korisnik, this);
+                if(isNetworkAvailable() == true) {
+                    RegistriraniKorisnik korisnik = new RegistriraniKorisnik(editEmail.getText().toString(), editPassword.getText().toString());
+                    WsDataLoader wsDataLoader = new WsDataLoader();
+                    wsDataLoader.prijava(korisnik, this);
+                }
             }
             else Toast.makeText(this,"Nije dobra struktura emaila!",Toast.LENGTH_SHORT).show();
         }
@@ -182,4 +187,26 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
         startActivityForResult(intent, 1);
     }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        if(connection == false){
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Pogreška u internet vezi");
+            alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste se prijavili u aplikaciju.");
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        return connection;
+    }
+
+
 }
