@@ -1,5 +1,6 @@
 package com.coky.app;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,9 @@ public class PopisPaketa extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.odjava) {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("brisi", emailKorisnika);
+            setResult(RESULT_OK,returnIntent);
             finish();
             return true;
         }
@@ -112,5 +116,12 @@ public class PopisPaketa extends AppCompatActivity {
 
     public void setTipKorisnika(int tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 }

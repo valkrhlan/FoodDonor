@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     private Pattern email_check =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+    private boolean prijavljen = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,33 +55,22 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         super.onStart();
         editPassword.setText("");
         editEmail.setText("");
+        if(checkLoginPersistence() == true) {
+            startNextActivity();
+        }
     }
 
     @Override
     public void onWsDataLoaded(Object message, final int tip) {
         if(tip != 0 && message.toString().startsWith("U")){
             String token = SharedPrefManager.getInstance(this).getDeviceToken();
-
-
-            /*AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("Rezultat prijave");
-            alertDialog.setMessage(token);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();*/
-            Log.d("token","token: "+ token);
-
+            //Log.d("token","token: "+ token);
             setSharedPrefs(tip, editEmail.getText().toString());
             WsDataLoader wsDataLoader = new WsDataLoader();
             wsDataLoader.slanjeTokena(editEmail.getText().toString(), token, this);
         }
         else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
-            Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
-            startActivity(intent);
+            startNextActivity();
         }
         else{
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -142,6 +133,21 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         alertDialog.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String email = data.getStringExtra("brisi");
+                //WsDataLoader wsDataLoader = new WsDataLoader();
+                //wsDataLoader.brisanjeTokena(email, this);
+                deleteSharedPrefs();
+            }
+            if (resultCode == RESULT_CANCELED) {
+                finish();
+            }
+        }
+    }
 
     private boolean validateMail(String emailStr) {
         Matcher matcher = email_check.matcher(emailStr);
@@ -153,6 +159,27 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("tipKorisnika", tip);
         editor.putString("emailKorisnika", email);
+        editor.putBoolean("prijavljen", true);
         editor.apply();
+    }
+
+    private void deleteSharedPrefs(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("prijavljen", false);
+        editor.remove("tipKorisnika");
+        editor.remove("emailKorisnika");
+        editor.apply();
+    }
+
+    private Boolean checkLoginPersistence(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        prijavljen = prefs.getBoolean("prijavljen",false);
+        return prijavljen;
+    }
+
+    private void startNextActivity(){
+        Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
+        startActivityForResult(intent, 1);
     }
 }
