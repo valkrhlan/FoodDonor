@@ -60,12 +60,10 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         final View fragmentView = inflater.inflate(R.layout.fragment_donor_novi_paket, container, false);
         pomFragmentView=fragmentView;
 
-        //final ArrayAdapter<StavkaPaketa> stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
         stvakaPaketaListViewAdapter=new StavkePaketaListAdapter(getActivity().getBaseContext(),R.id.stavkePaketaListViewNP,stavke);
         final ListView list=(ListView)pomFragmentView.findViewById(R.id.stavkePaketaListViewNP);
         list.setAdapter(stvakaPaketaListViewAdapter);
@@ -157,8 +155,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
                for(StavkaPaketa stavka : stavke){
                    messageNotif += stavka.getNaziv() + " (" + stavka.getVrsta().getNaziv() +"): " + stavka.getKolicina() + stavka.getJedinica().getNaziv() + "; ";
                }
-               Log.d("paketNoviTitle", titleNotif);
-               Log.d("paketNoviMessage", messageNotif);
+               //Log.d("paketNoviTitle", titleNotif);
+               //Log.d("paketNoviMessage", messageNotif);
                wsDataLoader.posaljiNotif(email,titleNotif, messageNotif, this);
                stavke.clear();
                stvakaPaketaListViewAdapter.notifyDataSetChanged();

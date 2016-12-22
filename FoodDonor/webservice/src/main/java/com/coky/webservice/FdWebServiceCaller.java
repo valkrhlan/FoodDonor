@@ -1,5 +1,7 @@
 package com.coky.webservice;
 
+import android.util.Log;
+
 import com.coky.core.entities.Korisnik;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.RegistriraniKorisnik;
@@ -95,6 +97,7 @@ public class FdWebServiceCaller {
 
     public void CallWsForSaljiNotif(String email, String naslov, String poruka){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
+        //Log.d("slanjee",baseUrl+"sendNotification/"+email+"/"+naslov+"/"+poruka+"/");
         call=fdWebService.saljiNotif(email, naslov, poruka);
         HandleResponseFromCall("saljiNotif");
     }

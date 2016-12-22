@@ -60,7 +60,7 @@ public interface FdWebService {
             @Path("token") String token);
 
 
-    @GET("sendNotification/{email}/{title}/{message}/")
+    @GET("sendNotifications/{email}/{title}/{message}/")
     Call<FdWebServiceResponse> saljiNotif(
             @Path("email") String email,
             @Path("title") String naslov,
