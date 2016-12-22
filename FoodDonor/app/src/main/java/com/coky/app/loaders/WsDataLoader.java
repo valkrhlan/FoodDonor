@@ -44,6 +44,11 @@ public class WsDataLoader {
         FdWs.CallWsForPreuzmiPakete(email);
     }
 
+    public  void slanjeTokena(String email, String token, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForSpremanjeTokena(email,token);
+    }
+
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
         public void onDataArrived(Object message, int status) {

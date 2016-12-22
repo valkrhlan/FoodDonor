@@ -7,11 +7,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.coky.app.firebase.SharedPrefManager;
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.RegistriraniKorisnik;
@@ -55,16 +57,34 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
 
     @Override
     public void onWsDataLoaded(Object message, final int tip) {
+        if(tip != 0 && message.toString().startsWith("U")){
+            String token = SharedPrefManager.getInstance(this).getDeviceToken();
 
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Rezultat prijave");
-        alertDialog.setMessage(message.toString());
-        if(tip != 0){
+
+            /*AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Rezultat prijave");
+            alertDialog.setMessage(token);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();*/
+            Log.d("token","token: "+ token);
+
             setSharedPrefs(tip, editEmail.getText().toString());
+            WsDataLoader wsDataLoader = new WsDataLoader();
+            wsDataLoader.slanjeTokena(editEmail.getText().toString(), token, this);
+        }
+        else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
             Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
             startActivity(intent);
         }
         else{
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Rezultat prijave");
+            alertDialog.setMessage(message.toString());
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

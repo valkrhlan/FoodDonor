@@ -87,6 +87,13 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("dohvatiPakete");
     }
 
+    public void CallWsForSpremanjeTokena(String email, String token){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.spremiToken(email,token);
+        HandleResponseFromCall("spremiToken");
+    }
+
+
     public void HandleResponseFromCall(final String method){
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {

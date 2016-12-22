@@ -53,4 +53,9 @@ public interface FdWebService {
     @GET("paket/dohvati/{email}/")
     Call<FdWebServiceResponse> dohvatiPakete(
             @Path("email") String email);
+
+    @GET("registerDevice/{email}/{token}/")
+    Call<FdWebServiceResponse> spremiToken(
+            @Path("email") String email,
+            @Path("token") String token);
 }
