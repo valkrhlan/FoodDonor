@@ -66,4 +66,9 @@ public interface FdWebService {
             @Path("title") String naslov,
             @Path("message") String poruka);
 
+
+    @GET("obrisiToken/{email}/")
+    Call<FdWebServiceResponse> brisiToken(
+            @Path("email") String email);
+
 }

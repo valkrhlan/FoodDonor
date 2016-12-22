@@ -78,11 +78,13 @@ public class FdWebServiceCaller {
         call = fdWebService.getVrstaJedinica();
         HandleResponseFromCall("vrstaJedinica");
     }
+
     public void CallWsForDodajPaket(String email, String json){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
         call=fdWebService.dodajPaket(email,json);
         HandleResponseFromCall("dodajPaket");
     }
+
     public void CallWsForPreuzmiPakete(String email){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
         call=fdWebService.dohvatiPakete(email);
@@ -102,6 +104,13 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("saljiNotif");
     }
 
+    public void CallWsForBrisanjeTokena(String email){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.brisiToken(email);
+        HandleResponseFromCall("brisiToken");
+    }
+
+
     public void HandleResponseFromCall(final String method){
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {
@@ -115,7 +124,7 @@ public class FdWebServiceCaller {
                                     handleVstaJedinica(response);
                                 }else if(method=="dohvatiPakete"){
                                     handlePreuzetiPaketi(response);
-                                }else if(method=="saljiNotif"){
+                                }else if(method=="saljiNotif" || method=="brisiToken"){
                                     //DO NOTHING!!!
                                 }else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());

@@ -139,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
                 String email = data.getStringExtra("brisi");
-                //WsDataLoader wsDataLoader = new WsDataLoader();
-                //wsDataLoader.brisanjeTokena(email, this);
+                WsDataLoader wsDataLoader = new WsDataLoader();
+                wsDataLoader.brisanjeTokena(email, this);
                 deleteSharedPrefs();
             }
             if (resultCode == RESULT_CANCELED) {

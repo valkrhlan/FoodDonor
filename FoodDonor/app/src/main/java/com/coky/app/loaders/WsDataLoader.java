@@ -54,6 +54,11 @@ public class WsDataLoader {
         FdWs.CallWsForSaljiNotif(email,naslov,poruka);
     }
 
+    public  void brisanjeTokena(String email, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForBrisanjeTokena(email);
+    }
+
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
         public void onDataArrived(Object message, int status) {
