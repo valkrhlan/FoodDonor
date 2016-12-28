@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.coky.app.MainActivity;
@@ -171,13 +172,22 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
  private void dodajNoviPaket(){
      if(stavke.isEmpty()){
-         Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stvaku!",Toast.LENGTH_SHORT).show();
+         Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stavku!",Toast.LENGTH_SHORT).show();
      }else{
          ((PopisPaketa)getActivity()).isNetworkAvailable();
+         Switch vlastitiPrijevozSwitch=(Switch)pomFragmentView.findViewById(R.id.switchVlastitiPrijevozNP);
+         Integer prijevoz;
+         if(vlastitiPrijevozSwitch.isChecked()){
+             prijevoz=1;
+         }else{
+             prijevoz=0;
+         }
+
          String json=new Gson().toJson(stavke);
          Log.d("json:",json);
          String email=((PopisPaketa)getActivity()).getEmailKorisnika();
          WsDataLoader wsDataLoader = new WsDataLoader();
+         //wsDataLoader.dodajPaket(email,json,prijevoz,this); ->sredit treba to na ws-u
          wsDataLoader.dodajPaket(email,json,this);
          }
   }
