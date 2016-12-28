@@ -6,32 +6,39 @@ package com.coky.core.entities;
 
 public class Paket {
 
+
     private String id;
     private String preuzimanje;
     private String hitno;
     private String id_volonter;
+    private String naziv_volonter;
     private String id_donor;
+    private String naziv_donor;
     private String id_potrebitog;
-    private String krivo1; //preuzimanje
+    private String naziv_potrebitog;
+    //private String krivo1; //preuzimanje
     private String v_kreiranja;
     private String v_naruceno;
-    private String krivo2; //v_naruceno
+    //private String krivo2; //v_naruceno
     private String v_preuzeto;
     private String v_slanja;
     private String v_pristiglo;
     private Object stavke;
 
-    public Paket(String id, String preuzimanje, String hitno, String id_volonter, String id_donor, String id_potrebitog, String krivo1, String v_kreiranja, String v_naruceno, String krivo2, String v_preuzeto, String v_slanja, String v_pristiglo, Object stavke) {
+    public Paket(String id, String preuzimanje, String hitno, String id_volonter,String naziv_volonter, String id_donor,String naziv_donor, String id_potrebitog, String naziv_potrebitog, String v_kreiranja, String v_naruceno, String v_preuzeto, String v_slanja, String v_pristiglo, Object stavke) {
         this.id = id;
         this.preuzimanje = preuzimanje;
         this.hitno = hitno;
         this.id_volonter = id_volonter;
+        this.naziv_volonter=naziv_volonter;
         this.id_donor = id_donor;
+        this.naziv_donor=naziv_donor;
         this.id_potrebitog = id_potrebitog;
-        this.krivo1 = krivo1;
+        this.naziv_potrebitog=naziv_potrebitog;
+       // this.krivo1 = krivo1;
         this.v_kreiranja = v_kreiranja;
         this.v_naruceno = v_naruceno;
-        this.krivo2 = krivo2;
+       // this.krivo2 = krivo2;
         this.v_preuzeto = v_preuzeto;
         this.v_slanja = v_slanja;
         this.v_pristiglo = v_pristiglo;
@@ -86,13 +93,6 @@ public class Paket {
         this.id_potrebitog = id_potrebitog;
     }
 
-    public String getKrivo1() {
-        return krivo1;
-    }
-
-    public void setKrivo1(String krivo1) {
-        this.krivo1 = krivo1;
-    }
 
     public String getV_kreiranja() {
         return v_kreiranja;
@@ -110,13 +110,6 @@ public class Paket {
         this.v_naruceno = v_naruceno;
     }
 
-    public String getKrivo2() {
-        return krivo2;
-    }
-
-    public void setKrivo2(String krivo2) {
-        this.krivo2 = krivo2;
-    }
 
     public String getV_preuzeto() {
         return v_preuzeto;
@@ -148,5 +141,29 @@ public class Paket {
 
     public void setStavke(Object stavke) {
         this.stavke = stavke;
+    }
+
+    public String getNaziv_volonter() {
+        return naziv_volonter;
+    }
+
+    public void setNaziv_volonter(String naziv_volonter) {
+        this.naziv_volonter = naziv_volonter;
+    }
+
+    public String getNaziv_donor() {
+        return naziv_donor;
+    }
+
+    public void setNaziv_donor(String naziv_donor) {
+        this.naziv_donor = naziv_donor;
+    }
+
+    public String getNaziv_potrebitog() {
+        return naziv_potrebitog;
+    }
+
+    public void setNaziv_potrebitog(String naziv_potrebitog) {
+        this.naziv_potrebitog = naziv_potrebitog;
     }
 }
