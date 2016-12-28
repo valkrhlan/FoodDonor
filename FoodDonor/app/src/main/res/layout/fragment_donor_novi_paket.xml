@@ -7,11 +7,30 @@
   >
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/vlastitiPrijevozTxtView"
+        android:layout_alignParentStart="true"
+        android:text="Vlastiti prijevoz?"
+        android:textColor="@android:color/holo_orange_dark"
+        android:layout_marginBottom="50dp"/>
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchVlastitiPrijevozNP"
+        android:ems="15"
+        android:textOn="Da"
+        android:textOff="Ne"
+
+         />
+    <TextView
         android:text="Vrsta hrane:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:id="@+id/nazivHraneNP"
+        android:layout_alignBaseline="@+id/spinnerNazivHraneNP"
         android:layout_alignBottom="@+id/spinnerNazivHraneNP"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/holo_orange_dark"
@@ -23,9 +42,11 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/editNazivHraneNP"
+        android:layout_below="@+id/vlastitiPrijevozTxtView"
+        android:layout_marginEnd="26dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="25dp"
 
         />
 
@@ -47,10 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:id="@+id/vrstaNP"
+        android:layout_below="@id/vlastitiPrijevozTxtView"
+        android:textColor="@android:color/holo_orange_dark"
         android:layout_alignBaseline="@+id/editNazivHraneNP"
         android:layout_alignBottom="@+id/editNazivHraneNP"
         android:layout_alignParentStart="true"
-        android:textColor="@android:color/holo_orange_dark"
         />
 
     <EditText
@@ -79,10 +101,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:ems="10"
+        android:ems="15"
         android:id="@+id/spinnerJedinicaKolicineNP"
         android:layout_below="@+id/editKolicinaNP"
         android:layout_alignStart="@+id/editKolicinaNP"
+
         />
 
 
