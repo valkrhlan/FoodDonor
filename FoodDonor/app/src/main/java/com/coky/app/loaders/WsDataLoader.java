@@ -35,9 +35,9 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForVrsteJedinica();
     }
-    public  void dodajPaket(String email, String json,WsDataLoadedListener wsDataLoadedListener){
+    public  void dodajPaket(String email, String json,Integer prijevoz,WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener=wsDataLoadedListener;
-        FdWs.CallWsForDodajPaket(email,json);
+        FdWs.CallWsForDodajPaket(email,json,prijevoz);
     }
     public  void preuzmiPakete(String email, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener=wsDataLoadedListener;

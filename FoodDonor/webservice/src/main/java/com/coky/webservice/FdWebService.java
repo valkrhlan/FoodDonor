@@ -45,10 +45,11 @@ public interface FdWebService {
     @GET("vrstaJedinica/all/")
     Call<FdWebServiceResponse> getVrstaJedinica();
 
-    @GET("paket/novi/{email}/{data}/")
+    @GET("paket/novi/{email}/{data}/{prijevoz}/")
     Call<FdWebServiceResponse> dodajPaket(
             @Path("email") String email,
-            @Path("data") String json );
+            @Path("data") String json,
+            @Path("prijevoz") Integer prijevoz);
 
     @GET("paket/dohvati/{email}/")
     Call<FdWebServiceResponse> dohvatiPakete(
