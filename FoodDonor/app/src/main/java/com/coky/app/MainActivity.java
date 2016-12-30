@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         }
         else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
                     //maknuti ovaj alarm van kad se sredi interface
-                       Alarm alarm=new Alarm();
-                       alarm.setAlarm(this);
+                    //  Alarm alarm=new Alarm();
+                   //  alarm.setAlarm(this);
 
                     startNextActivity();
         }

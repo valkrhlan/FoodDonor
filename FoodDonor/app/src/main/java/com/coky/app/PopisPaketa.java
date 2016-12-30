@@ -59,6 +59,11 @@ public class PopisPaketa extends AppCompatActivity {
         if (id == R.id.odjava) {
             odjava();
             return true;
+        }else{
+            if(id==R.id.notifikacije){
+                opcije();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -118,6 +123,12 @@ public class PopisPaketa extends AppCompatActivity {
         finish();
     }
 
+    private void opcije(){
+        Intent intent = new Intent(PopisPaketa.this,NotifikacijeOpcije.class);
+        startActivityForResult(intent, 2);
+
+    }
+
     public String getEmailKorisnika() {
         return emailKorisnika;
     }
@@ -160,4 +171,6 @@ public class PopisPaketa extends AppCompatActivity {
             alertDialog.show();
         }
     }
+
+
 }
