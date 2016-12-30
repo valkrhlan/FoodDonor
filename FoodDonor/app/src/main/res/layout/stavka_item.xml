@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nazivHraneSI"
-        android:textStyle="bold"
         android:text="naziv"
         android:paddingLeft="10dp"
-        />
+        android:fontFamily="sans-serif"
+        android:textSize="18sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,10 +46,9 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_menu_delete"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="13dp"
-        android:id="@+id/btnObisiStavkuSI" />
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:id="@+id/btnObisiStavkuSI"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="irmail">Unesite email</string>
+    <string name="irloz">Unesite lozinku</string>
+    <string name="irloz2">Ponovite lozinku</string>
+    <string name="iroib">Unesite OIB poduzeća</string>
+    <string name="irgrad">Unesite grad</string>
+    <string name="iradresa">Unesite adresu</string>
+    <string name="irkontakt">Unesite kontakt</string>
+    <string name="irnaziv">Unesite naziv poduzeća</string>
+    <string name="irime">Unesite svoje ime</string>
+    <string name="irprezime">Unesite svoje prezime</string>
 </resources>

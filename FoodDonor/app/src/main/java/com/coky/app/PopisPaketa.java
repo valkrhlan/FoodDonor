@@ -141,7 +141,7 @@ public class PopisPaketa extends AppCompatActivity {
         Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
         if(connection == false){
             AlertDialog alertDialog = new AlertDialog.Builder(PopisPaketa.this).create();
-            alertDialog.setTitle("Pogreška u internet vezi");
+            alertDialog.setTitle("Pogreška u internetskoj vezi");
             alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste nastavili sa daljnjim radom u aplikaciji.");
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Odjavi me",
                     new DialogInterface.OnClickListener() {
