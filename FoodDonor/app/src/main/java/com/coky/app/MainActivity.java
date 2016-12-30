@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.coky.app.firebase.SharedPrefManager;
+import com.coky.app.konfigurabilno.Alarm;
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.RegistriraniKorisnik;
@@ -73,7 +74,11 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
             wsDataLoader.slanjeTokena(editEmail.getText().toString(), token, this);
         }
         else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
-                startNextActivity();
+                    //maknuti ovaj alarm van kad se sredi interface
+                       Alarm alarm=new Alarm();
+                       alarm.setAlarm(this);
+
+                    startNextActivity();
         }
         else{
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
