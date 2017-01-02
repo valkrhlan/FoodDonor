@@ -74,11 +74,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
             wsDataLoader.slanjeTokena(editEmail.getText().toString(), token, this);
         }
         else if(message.toString().startsWith("D") || message.toString().startsWith("I")){
-                    //maknuti ovaj alarm van kad se sredi interface
-                    //  Alarm alarm=new Alarm();
-                   //  alarm.setAlarm(this);
-
-                    startNextActivity();
+                     startNextActivity();
         }
         else{
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();

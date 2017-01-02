@@ -1,6 +1,8 @@
 package com.coky.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,8 +34,18 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         if(idNotif==-1){
             Toast.makeText(this,"Odaberite neku od mogućnosti!",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this,"Ok je!",Toast.LENGTH_SHORT).show();
-
+           // Toast.makeText(this,"Ok je!",Toast.LENGTH_SHORT).show();
+            RadioButton btnOpcija=(RadioButton)findViewById(idNotif);
+            if(btnOpcija.getText().toString().equals("Firebase")){
+              setSharedPrefs("Firebase",0);
+            }else{
+               int idRadioGroupInterval =radioGroupInterval.getCheckedRadioButtonId();
+                if (idRadioGroupInterval==-1){
+                    Toast.makeText(this,"Odaberite neki od intervala!",Toast.LENGTH_SHORT).show();
+                }else{
+                    spremiInterval(idRadioGroupInterval);
+                }
+            }
         }
       }
 
@@ -71,4 +83,28 @@ public class NotifikacijeOpcije extends AppCompatActivity {
           }
           */
      }
+
+
+        private void setSharedPrefs(String notifikacije, int interval){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("notifikacije", notifikacije);
+            editor.putInt("emailKorisnika", interval);
+            editor.apply();
+        }
+    private void spremiInterval(int idintervala){
+          String interval = ((RadioButton)findViewById(idintervala)).getText().toString();
+         switch (interval){
+             case "30 sekundi":
+                 setSharedPrefs("Konfigurabilno",30);
+                 break;
+             case "1 minuta":
+                 setSharedPrefs("Konfigurabilno",60);
+                 break;
+             case "5 minuta":
+                 setSharedPrefs("Konfigurabilno",5*60);
+                 break;
+         }
+    }
+
 }
