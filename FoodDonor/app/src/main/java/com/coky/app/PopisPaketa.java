@@ -88,7 +88,8 @@ public class PopisPaketa extends AppCompatActivity {
                 break;
             case 2: //POTREBITI
                 Toast.makeText(this,"Potrebiti korisnik u implementaciji!", Toast.LENGTH_LONG).show();
-                odjava();
+                //odjava();
+                createInitialFragment(new DonorPopisPaketa(),"popisPaketa");
                 break;
             case 3: //VOLONTER
                 Toast.makeText(this,"Volonter u implementaciji!", Toast.LENGTH_LONG).show();

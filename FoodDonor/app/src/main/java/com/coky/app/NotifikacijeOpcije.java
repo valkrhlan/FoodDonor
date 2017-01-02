@@ -96,6 +96,8 @@ private void oznaciRadioButtone(){
                 ((RadioButton) notifOption.getChildAt(i)).setChecked(true);
             }
         }
+    }else{
+        ( (RadioButton)notifOption.getChildAt(0)).setChecked(true);
     }
     final int interval=prefs.getInt("interval",-1);
     if(interval!=-1){
