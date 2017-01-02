@@ -57,9 +57,6 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         ButterKnife.bind(this);
         final RadioButton konfOption = (RadioButton)findViewById(R.id.konfigurabilniOption);
         radioGroupInterval = (RadioGroup)findViewById(R.id.radioGroupKonfigurabilnoIntervalNO);
-        if(konfOption.isChecked()){
-            radioGroupInterval.setVisibility(View.VISIBLE);
-        }
         notifOption = (RadioGroup)findViewById(R.id.radioGroupNotifikacijeNO);
         notifOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -72,6 +69,11 @@ public class NotifikacijeOpcije extends AppCompatActivity {
             }
         });
 
+        if(konfOption.isChecked()){
+            radioGroupInterval.setVisibility(View.VISIBLE);
+        }
+        oznaciRadioButtone();
+
         //mozda bude kasnije trebalo - >ak nebude treblo obrisala budem klase viška to su Notifikacija Moguće Opcije i itemNnotifikacije Ocije
        /*  radioGroup=(RadioGroup)findViewById(R.id.radioGroupNotifikacijeNO);
         RadioButton radioButton;
@@ -83,9 +85,36 @@ public class NotifikacijeOpcije extends AppCompatActivity {
           }
           */
      }
+private void oznaciRadioButtone(){
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final String notifikacije=prefs.getString("notifikacije",null);
+    if(notifikacije!=null) {
+        for(int i=0;i<notifOption.getChildCount();i++){
+            RadioButton child=(RadioButton)notifOption.getChildAt(i);
+            String pom=child.getText().toString();
+            if(pom.equals(notifikacije)){
+                ((RadioButton) notifOption.getChildAt(i)).setChecked(true);
+            }
+        }
+    }
+    final int interval=prefs.getInt("interval",-1);
+    if(interval!=-1){
+        switch (interval){
+            case 0: break;
+            case 30:
+                ((RadioButton)radioGroupInterval.getChildAt(0)).setChecked(true);
+                break;
+            case 60:
+                ((RadioButton)radioGroupInterval.getChildAt(1)).setChecked(true);
+                break;
+            case 300:
+                ((RadioButton)radioGroupInterval.getChildAt(2)).setChecked(true);
+                break;
+        }
+    }
+}
 
-
-        private void setSharedPrefs(String notifikacije, int interval){
+    private void setSharedPrefs(String notifikacije, int interval){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("notifikacije", notifikacije);
