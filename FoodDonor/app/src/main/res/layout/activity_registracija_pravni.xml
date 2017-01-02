@@ -91,7 +91,7 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/editMailRP"
-            android:hint="@string/irgrad"
+            android:hint="@string/irmail"
             android:fontFamily="sans-serif"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
