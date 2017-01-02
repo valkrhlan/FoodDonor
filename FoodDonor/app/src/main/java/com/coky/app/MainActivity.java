@@ -175,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         editor.putBoolean("prijavljen", false);
         editor.remove("tipKorisnika");
         editor.remove("emailKorisnika");
+        editor.remove("notifikacije");
+        editor.remove("interval");
         editor.apply();
     }
 

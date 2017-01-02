@@ -31,6 +31,11 @@ public class PopisPaketa extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        getSharedPrefs();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +91,15 @@ public class PopisPaketa extends AppCompatActivity {
             case 1: //DONOR
                 createInitialFragment(new DonorPopisPaketa(),"popisPaketa");
                 break;
-            case 2: //POTREBITI
-                Toast.makeText(this,"Potrebiti korisnik u implementaciji!", Toast.LENGTH_LONG).show();
+            case 2: //VOLONTER
+                Toast.makeText(this,"Volonter korisnik u implementaciji!", Toast.LENGTH_LONG).show();
+                odjava();
+               break;
+            case 3: //POTREBITI
+                Toast.makeText(this,"Potrebiti u implementaciji!", Toast.LENGTH_LONG).show();
                 //odjava();
                 createInitialFragment(new DonorPopisPaketa(),"popisPaketa");
-                break;
-            case 3: //VOLONTER
-                Toast.makeText(this,"Volonter u implementaciji!", Toast.LENGTH_LONG).show();
-                odjava();
+
                 break;
             default:
                 Toast.makeText(this,"Desila se greška: tip korisnika je nula!", Toast.LENGTH_LONG).show();

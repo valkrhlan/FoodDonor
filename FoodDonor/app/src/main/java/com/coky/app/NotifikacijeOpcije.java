@@ -38,15 +38,20 @@ public class NotifikacijeOpcije extends AppCompatActivity {
             RadioButton btnOpcija=(RadioButton)findViewById(idNotif);
             if(btnOpcija.getText().toString().equals("Firebase")){
               setSharedPrefs("Firebase",0);
+              Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
+
             }else{
                int idRadioGroupInterval =radioGroupInterval.getCheckedRadioButtonId();
                 if (idRadioGroupInterval==-1){
                     Toast.makeText(this,"Odaberite neki od intervala!",Toast.LENGTH_SHORT).show();
                 }else{
                     spremiInterval(idRadioGroupInterval);
+                    Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
+
+
                 }
             }
-        }
+           }
       }
 
 
@@ -74,17 +79,8 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         }
         oznaciRadioButtone();
 
-        //mozda bude kasnije trebalo - >ak nebude treblo obrisala budem klase viška to su Notifikacija Moguće Opcije i itemNnotifikacije Ocije
-       /*  radioGroup=(RadioGroup)findViewById(R.id.radioGroupNotifikacijeNO);
-        RadioButton radioButton;
-        NotifikacijaMoguceOpcije notifikacijaMoguceOpcije=new NotifikacijaMoguceOpcije();
-       for(int i=0;i<notifikacijaMoguceOpcije.size();i++){
-            radioButton=new RadioButton(this);
-            radioButton.setText(notifikacijaMoguceOpcije.moguceOpcije.get(i).getTitle());
-            radioGroup.addView(radioButton);
-          }
-          */
      }
+
 private void oznaciRadioButtone(){
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     final String notifikacije=prefs.getString("notifikacije",null);
