@@ -89,7 +89,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("notifikacije", notifikacije);
-            editor.putInt("emailKorisnika", interval);
+            editor.putInt("interval", interval);
             editor.apply();
         }
     private void spremiInterval(int idintervala){
