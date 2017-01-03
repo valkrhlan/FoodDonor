@@ -59,6 +59,7 @@ public class WsDataLoader {
         FdWs.CallWsForBrisanjeTokena(email);
     }
 
+
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
         public void onDataArrived(Object message, int status) {

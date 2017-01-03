@@ -72,4 +72,9 @@ public interface FdWebService {
     Call<FdWebServiceResponse> brisiToken(
             @Path("email") String email);
 
+
+    @GET("getNotifications/{email}/{timestamp}")
+    Call<FdWebServiceResponse>dohvatiNotifikacije(
+            @Path("email") String email,
+            @Path("timestamp") long timestamp);
 }

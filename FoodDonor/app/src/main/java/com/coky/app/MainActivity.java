@@ -161,11 +161,13 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     private void setSharedPrefs(int tip, String email){
+        long ts=System.currentTimeMillis()/1000;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("tipKorisnika", tip);
         editor.putString("emailKorisnika", email);
         editor.putBoolean("prijavljen", true);
+        editor.putLong("timestamp",ts);
         editor.apply();
     }
 
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         editor.remove("emailKorisnika");
         editor.remove("notifikacije");
         editor.remove("interval");
+        editor.remove("timestamp");
         editor.apply();
     }
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.coky.app.R;
 import com.coky.app.klase.ItemNotifikacijaMoguceOpcije;
 import com.coky.app.klase.NotifikacijaMoguceOpcije;
+import com.coky.app.konfigurabilno.Alarm;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,9 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                     Toast.makeText(this,"Odaberite neki od intervala!",Toast.LENGTH_SHORT).show();
                 }else{
                     spremiInterval(idRadioGroupInterval);
+                    //to tu nesme biti
+                   // Alarm alarm=new Alarm();
+                   // alarm.setAlarm(this);
                     Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
 
 

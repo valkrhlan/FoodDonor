@@ -5,7 +5,9 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 /**
@@ -13,6 +15,7 @@ import android.widget.Toast;
  */
 
 public class Alarm extends BroadcastReceiver {
+    Context mCtx;
     @Override
     public void onReceive(Context context, Intent intent) {
         PowerManager pm =(PowerManager)context.getSystemService(Context.POWER_SERVICE);
@@ -20,7 +23,18 @@ public class Alarm extends BroadcastReceiver {
         wl.acquire();
 
         //Put here YOUR code
-        Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
+        mCtx=context;
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
+        String notifikacije=preferences.getString("notifikacije",null);
+        if(notifikacije!=null && notifikacije.equals("Konfigurabilno")){
+            int interval=preferences.getInt("interval",-1);
+            if(interval!=-1){
+                Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            cancelAlarm(context);
+        }
         wl.release();
     }
 
@@ -28,7 +42,18 @@ public class Alarm extends BroadcastReceiver {
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i =new Intent(context,Alarm.class);
         PendingIntent pi=PendingIntent.getBroadcast(context,0,i,0);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*60,pi);//millisec*sec*minute
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
+        String notifikacije=preferences.getString("notifikacije",null);
+        if(notifikacije!=null && notifikacije.equals("Konfigurabilno")){
+            int interval=preferences.getInt("interval",-1);
+            if(interval!=-1){
+                am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*120,pi);//millisec*sec*minute
+            }
+        }
+        else {
+            cancelAlarm(context);
+        }
+
     }
 
     public void cancelAlarm(Context context){

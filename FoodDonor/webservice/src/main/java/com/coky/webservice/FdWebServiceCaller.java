@@ -3,6 +3,7 @@ package com.coky.webservice;
 import android.util.Log;
 
 import com.coky.core.entities.Korisnik;
+import com.coky.core.entities.Notifikacija;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.core.entities.VrstaJedinica;
@@ -109,6 +110,11 @@ public class FdWebServiceCaller {
         call=fdWebService.brisiToken(email);
         HandleResponseFromCall("brisiToken");
     }
+    public void CallWsForGetNotifications(String email, long timestamp){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.dohvatiNotifikacije(email,timestamp);
+        HandleResponseFromCall("dohvatiNotifikacije");
+    }
 
 
     public void HandleResponseFromCall(final String method){
@@ -126,6 +132,8 @@ public class FdWebServiceCaller {
                                     handlePreuzetiPaketi(response);
                                 }else if(method=="saljiNotif" || method=="brisiToken"){
                                     //DO NOTHING!!!
+                                }else if (method=="dohvatiNotifikacije"){
+                                    handleDohvatiNotifikacije(response);
                                 }else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 
@@ -156,6 +164,13 @@ public class FdWebServiceCaller {
         Paket[] paketi = gson.fromJson(response.body().getData(), Paket[].class);
         if(fdWebServiceHandler != null){
             fdWebServiceHandler.onDataArrived(Arrays.asList(paketi),response.body().getNbResults());
+        }
+    }
+    private void handleDohvatiNotifikacije(Response<FdWebServiceResponse> response){
+        Gson gson=new Gson();
+        Notifikacija[] notifikacije=gson.fromJson(response.body().getData(),Notifikacija[].class);
+        if(fdWebServiceHandler!=null){
+            fdWebServiceHandler.onDataArrived(Arrays.asList(notifikacije),response.body().getNbResults());
         }
     }
 
