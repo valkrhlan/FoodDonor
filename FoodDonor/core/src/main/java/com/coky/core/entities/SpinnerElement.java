@@ -5,6 +5,10 @@ package com.coky.core.entities;
  */
 
 public class SpinnerElement {
+
+    /*
+      klasa koja sluzi za popunjavanje spinnera na fragmentu novi_paket,objedinjuje drop down izbornik za prkaz naziva jedinica i vrsta hrane
+     */
     private String id;
     private String naziv;
 

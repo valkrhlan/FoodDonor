@@ -22,7 +22,7 @@ public class Alarm extends BroadcastReceiver {
         PowerManager.WakeLock wl=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My Tag");
         wl.acquire();
 
-        //Put here YOUR code
+
         mCtx=context;
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
         String notifikacije=preferences.getString("notifikacije",null);

@@ -8,6 +8,11 @@ import java.util.List;
  */
 
 public class NotifikacijaMoguceOpcije {
+    /*
+    klasa koja će nakom implementacije ofigurabilnog načina slanja obavijesti
+    definirati izgled mogućih načina odabira priakza notifikacija, bilo konfigurabilo, pomoću firebae ili nešto treće
+     */
+
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
 
 

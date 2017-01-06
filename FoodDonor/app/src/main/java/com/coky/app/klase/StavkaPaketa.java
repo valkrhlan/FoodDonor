@@ -7,6 +7,9 @@ import com.coky.core.entities.SpinnerElement;
  */
 
 public class StavkaPaketa {
+    /*
+        klasa kojapredstavlja jednu stavku paketa kreiranog u frage+menut noviPaket
+    */
     String naziv;
     SpinnerElement vrsta;
     String kolicina;
