@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         alertDialog.show();
     }
 
+    /*Nakon korisnikove odjave, briše se njegov firebase token u našem web servisu, a ujedno se brišu i podaci o korisniku*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -183,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         editor.apply();
     }
 
+    /*Provjera je li korisnik pritisnuo 'natrag' ili odabrao opciju 'odjava'*/
     private Boolean checkLoginPersistence(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         prijavljen = prefs.getBoolean("prijavljen",false);
