@@ -5,6 +5,10 @@ package com.coky.app.klase;
  */
 
 public class ItemNotifikacijaMoguceOpcije {
+    /*
+    klasa koja predstavlja pojedinu mogućnost u listi svih mogućnosti u klasi NotifikacijaMOgućeOpcije
+     */
+
     public String title;
     public String id;
 

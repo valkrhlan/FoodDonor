@@ -110,6 +110,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
+        //prikaz vrste hrane i jedinica hrane koji su uspjesno dohvaceni s web servisa
         if(message instanceof VrstaJedinica){
             VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
             List<SpinnerElement> pom=vrstaJedinica.getVrsta();
@@ -146,6 +147,8 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
            }
         }
     }
+
+    //provjera kroisnickog unosa,prije dodavanja nove stavke
     private boolean validacija() {
         String rez="";
         EditText nazivHrane=(EditText)pomFragmentView.findViewById(R.id.editNazivHraneNP);

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
  */
 
 public class MyAlarmService extends Service {
+    //klasa za postavljanje alarma prilikom rebootanja uređaja
 
     Alarm alarm=new Alarm();
 

@@ -64,6 +64,8 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikacije_opcije);
         ButterKnife.bind(this);
+
+
         final RadioButton konfOption = (RadioButton)findViewById(R.id.konfigurabilniOption);
         radioGroupInterval = (RadioGroup)findViewById(R.id.radioGroupKonfigurabilnoIntervalNO);
         notifOption = (RadioGroup)findViewById(R.id.radioGroupNotifikacijeNO);
@@ -85,6 +87,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
 
      }
 
+    //postavljanje već ranije spremljenih vrijednosti u shared preferences
 private void oznaciRadioButtone(){
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     final String notifikacije=prefs.getString("notifikacije",null);

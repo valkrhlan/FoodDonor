@@ -13,6 +13,10 @@ import com.coky.app.loaders.NotifikacijaLoadedListener;
  */
 
 public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
+
+    /*
+      klasa u kojoj se definira izgled notifikacije koja se prikazue korisniku
+     */
     public static final int ID_SMALL_NOTIFICATION = 235;
 
     @Override

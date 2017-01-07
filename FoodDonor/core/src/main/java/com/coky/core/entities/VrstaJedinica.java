@@ -9,7 +9,6 @@ import java.util.List;
 
 public class VrstaJedinica {
 
-
     private List<SpinnerElement> vrsta;
     private List<SpinnerElement> jedinica;
 

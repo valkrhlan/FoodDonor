@@ -50,6 +50,7 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
         TextView jedinica = (TextView)itemView.findViewById(R.id.jedinicaHraneSI);
         final ImageButton btn = (ImageButton)itemView.findViewById(R.id.btnObisiStavkuSI);
         btn.setTag(position);
+        //listener za brisanje stavke iz liste
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
