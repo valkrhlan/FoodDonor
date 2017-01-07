@@ -6,7 +6,9 @@
     android:id="@+id/activity_registracija_pravni"
     android:fillViewport = "true"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+
+    >
 
     <RelativeLayout
 
@@ -61,6 +63,8 @@
 
 
         <EditText
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingBottom="18dp"
             android:ellipsize="start"
             android:gravity="center_horizontal"
