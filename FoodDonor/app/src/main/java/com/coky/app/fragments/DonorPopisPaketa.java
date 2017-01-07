@@ -1,6 +1,7 @@
 package com.coky.app.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,8 +35,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     private View fragmentView;
     private ListView listView;
 
-    @BindView(R.id.btnNoviPaket)
-    Button btnNoviPaket;
+    @BindView(R.id.btnNoviPakett)
+    FloatingActionButton btnNoviPakett;
 
     private String email;
 
@@ -49,7 +50,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
         listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
-        btnNoviPaket = (Button) fragmentView.findViewById(R.id.btnNoviPaket);
+
         ButterKnife.bind(this, fragmentView);
         fragmentManager = getActivity().getSupportFragmentManager();
         return fragmentView;
@@ -92,8 +93,9 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         });
     }
 
-    @OnClick(R.id.btnNoviPaket)
-    public void btnNoviPaketClick(){
+
+    @OnClick(R.id.btnNoviPakett)
+    public void btnNoviPakettClick(){
         Fragment noviPaket = new DonorNoviPaket();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.activity_popis_paketa, noviPaket);

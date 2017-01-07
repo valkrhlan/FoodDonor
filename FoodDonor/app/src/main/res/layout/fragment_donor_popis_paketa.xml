@@ -12,21 +12,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/popisPaketa"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/btnNoviPaket">
+        >
 
     </ListView>
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnNoviPaket"
-        android:src="@drawable/ic_action_compose"
+        android:id="@+id/btnNoviPakett"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_myfab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:elevation="4dp"
         app:backgroundTint="#FF0000"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="62dp"
+        android:layout_marginStart="290dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="40dp" />
+         />
 
 </RelativeLayout>
