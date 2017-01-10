@@ -31,10 +31,10 @@ public class DonorDetaljiPaketa extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        testni = (TextView) getView().findViewById(R.id.testni);
+        /*testni = (TextView) getView().findViewById(R.id.testni);
         Bundle data = getArguments();
         Paket paket = (Paket) data.getParcelable("paket");
-        testni.setText(paket.getNaziv_donor());
+        testni.setText(paket.getNaziv_donor());*/
     }
 
 }
