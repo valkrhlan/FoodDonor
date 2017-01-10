@@ -60,8 +60,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     public void onStart(){
         super.onStart();
         email=((PopisPaketa)getActivity()).getEmailKorisnika();
-        paketi = null;
         ((PopisPaketa)getActivity()).isNetworkAvailable();
+        paketi = null;
         wsDataLoader = new WsDataLoader();
         wsDataLoader.preuzmiPakete(email, this);
     }
@@ -88,7 +88,15 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"Kliknut paket - pozicija: " + i + ", row ID: " + l,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"Kliknut paket - pozicija: " + i + ", row ID: " + l,Toast.LENGTH_SHORT).show();
+                Fragment noviPaket = new DonorDetaljiPaketa();
+                Bundle args = new Bundle();
+                args.putParcelable("paket",paketi.get(i));
+                noviPaket.setArguments(args);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.activity_popis_paketa, noviPaket);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
     }

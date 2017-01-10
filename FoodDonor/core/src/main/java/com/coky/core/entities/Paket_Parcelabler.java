@@ -4,10 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Čoky on 1.12.2016..
+ * Created by Čoky on 10.1.2017..
  */
 
-public class Paket implements Parcelable {
+public class Paket_Parcelabler implements Parcelable {
 
 
     private String id;
@@ -26,7 +26,7 @@ public class Paket implements Parcelable {
     private String v_pristiglo;
     private Object stavke;
 
-    public Paket(String id, String preuzimanje, String hitno, String id_volonter,String naziv_volonter, String id_donor,String naziv_donor, String id_potrebitog, String naziv_potrebitog, String v_kreiranja, String v_naruceno, String v_preuzeto, String v_slanja, String v_pristiglo, Object stavke) {
+    public Paket_Parcelabler(String id, String preuzimanje, String hitno, String id_volonter,String naziv_volonter, String id_donor,String naziv_donor, String id_potrebitog, String naziv_potrebitog, String v_kreiranja, String v_naruceno, String v_preuzeto, String v_slanja, String v_pristiglo, Object stavke) {
         this.id = id;
         this.preuzimanje = preuzimanje;
         this.hitno = hitno;
@@ -164,7 +164,7 @@ public class Paket implements Parcelable {
         this.naziv_potrebitog = naziv_potrebitog;
     }
 
-    protected Paket(Parcel in) {
+    protected Paket_Parcelabler(Parcel in) {
         id = in.readString();
         preuzimanje = in.readString();
         hitno = in.readString();
@@ -188,7 +188,7 @@ public class Paket implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int i) {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(preuzimanje);
         dest.writeString(hitno);
@@ -207,15 +207,15 @@ public class Paket implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Paket> CREATOR = new Parcelable.Creator<Paket>() {
+    public static final Parcelable.Creator<Paket_Parcelabler> CREATOR = new Parcelable.Creator<Paket_Parcelabler>() {
         @Override
-        public Paket createFromParcel(Parcel in) {
-            return new Paket(in);
+        public Paket_Parcelabler createFromParcel(Parcel in) {
+            return new Paket_Parcelabler(in);
         }
 
         @Override
-        public Paket[] newArray(int size) {
-            return new Paket[size];
+        public Paket_Parcelabler[] newArray(int size) {
+            return new Paket_Parcelabler[size];
         }
     };
 }
