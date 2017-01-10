@@ -2,6 +2,7 @@ package com.coky.app.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,9 @@ public class StavkePaketaListAdapter extends ArrayAdapter<StavkaPaketa> {
         if(convertView==null){
              itemView = LayoutInflater.from(getContext()).inflate(R.layout.stavka_item, parent, false);
         }
-
+        //-------------------
+        Log.d("stavka",parent.toString());
+        //-------------------
         StavkaPaketa trenutnaSavka=stavkePaketaList.get(position);
         TextView naslov=(TextView) itemView.findViewById(R.id.nazivHraneSI);
         TextView vrsta=(TextView)itemView.findViewById(R.id.vrstaHraneSI);

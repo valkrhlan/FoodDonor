@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         List<Paket> paketi = (List<Paket>) message;
+        Log.d("paketi", paketi.toString());
+        Log.d("paketi", message.toString());
         for(Paket paket : paketi){
             addPaketToArray(paket);
         }

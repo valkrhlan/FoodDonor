@@ -35,6 +35,7 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         Paket paket = getItem(position);
+        Log.d("paket",paket.toString());
         ViewHolder viewHolder;
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.paket_item, parent, false);
