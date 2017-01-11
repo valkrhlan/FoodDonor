@@ -53,7 +53,6 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
         listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
         ButterKnife.bind(this, fragmentView);
-        setFloatingButtonIcons();
         fragmentManager = getActivity().getSupportFragmentManager();
         return fragmentView;
     }
@@ -61,6 +60,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onStart(){
         super.onStart();
+        setFloatingButtonIcons();
         email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
         tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
@@ -72,10 +72,13 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     private void setFloatingButtonIcons(){
         if(tipKorisnika == 1){   //DONOR
             btnLijevo.setVisibility(View.GONE);
-            btnDesno.setImageResource(R.drawable.ic_action_myfab2);
+            btnDesno.setImageResource(R.drawable.ic_action_paket);
+            btnDesno.setVisibility(View.VISIBLE);
         }else if(tipKorisnika == 3){   //POTREBITI
-            btnDesno.setVisibility(View.GONE);
-            btnLijevo.setImageResource(R.drawable.ic_action_myfab2);
+            btnDesno.setImageResource(R.drawable.ic_action_odabrani);
+            btnLijevo.setImageResource(R.drawable.ic_action_hitno);
+            btnDesno.setVisibility(View.VISIBLE);
+            btnLijevo.setVisibility(View.VISIBLE);
         }
     }
 
@@ -87,6 +90,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     }
 
     private void setPaketAdapter(){
+        setFloatingButtonIcons();
         paketAdapter = new PaketAdapter(getActivity(), paketi);
         listView.setAdapter(paketAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){

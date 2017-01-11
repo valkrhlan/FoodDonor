@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
 import com.coky.app.adapters.StavkeDetaljiListAdapter;
 import com.coky.core.entities.Paket;
@@ -50,12 +51,16 @@ public class DetaljiPaketa extends Fragment {
     @BindView(R.id.DD_natrag)
     TextView btnNatrag;
 
+    @BindView(R.id.DD_odaberi)
+    TextView btnOdaberi;
+
     private ArrayAdapter<Stavka> stavkeDetaljiListAdapter;
     private List<Stavka> stavke = new ArrayList<Stavka>();
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
+    private int tipKorisnika;
     private Paket paket;
 
     public DetaljiPaketa() {
@@ -67,6 +72,8 @@ public class DetaljiPaketa extends Fragment {
         View fragmentView = inflater.inflate(R.layout.fragment_donor_detalji_paketa, container, false);
         ButterKnife.bind(this, fragmentView);
         fragmentManager = getActivity().getSupportFragmentManager();
+        tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
+        setButtonVisibility();
         return fragmentView;
     }
 
@@ -76,6 +83,14 @@ public class DetaljiPaketa extends Fragment {
         addStavkeToArray();
         setStavkeDetaljiListAdapter();
         setTextViews();
+    }
+
+    private void setButtonVisibility(){
+        if(tipKorisnika == 1){
+            btnOdaberi.setVisibility(View.GONE);
+        }else{
+            btnOdaberi.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addStavkeToArray(){
@@ -100,6 +115,15 @@ public class DetaljiPaketa extends Fragment {
 
     @OnClick(R.id.DD_natrag)
     public void btnNatragOnClick(){
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(DetaljiPaketa.this);
+        fragmentManager.popBackStack();
+        fragmentTransaction.commit();
+    }
+
+    @OnClick(R.id.DD_odaberi)
+    public void btnOdaberiOnClick(){
+        //TODO odaberi paket
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(DetaljiPaketa.this);
         fragmentManager.popBackStack();

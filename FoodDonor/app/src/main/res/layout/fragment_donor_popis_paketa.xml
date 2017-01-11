@@ -20,7 +20,7 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnLijevo"
         android:scaleType="center"
-        android:src="@drawable/ic_action_myfab2"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:elevation="4dp"
@@ -33,9 +33,9 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnDesno"
         android:scaleType="center"
-        android:src="@drawable/ic_action_myfab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:elevation="4dp"
         app:backgroundTint="#FF0000"
         android:layout_marginBottom="60dp"
