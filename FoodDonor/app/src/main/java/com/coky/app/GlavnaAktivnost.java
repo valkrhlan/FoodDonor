@@ -5,12 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.util.Calendar;
-import android.icu.util.TimeUnit;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,14 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.coky.app.firebase.SharedPrefManager;
-import com.coky.app.fragments.DonorPopisPaketa;
-
-import java.security.Timestamp;
-import java.sql.Time;
+import com.coky.app.fragments.PopisPaketa;
 
 
-public class PopisPaketa extends AppCompatActivity {
+public class GlavnaAktivnost extends AppCompatActivity {
     
     public Boolean fragmentCreated = false;
 
@@ -99,16 +92,14 @@ public class PopisPaketa extends AppCompatActivity {
     private void chooseInitialFragment(){
         switch(getTipKorisnika()){
             case 1: //DONOR
-                createInitialFragment(new DonorPopisPaketa(),"popisPaketa");
+                createInitialFragment(new PopisPaketa(),"popisPaketa");
                 break;
             case 2: //VOLONTER
                 Toast.makeText(this,"Volonter korisnik u implementaciji!", Toast.LENGTH_LONG).show();
                 odjava();
                break;
             case 3: //POTREBITI
-                Toast.makeText(this,"Potrebiti u implementaciji!", Toast.LENGTH_LONG).show();
-                //odjava();
-                createInitialFragment(new DonorPopisPaketa(),"popisPaketa");
+                createInitialFragment(new PopisPaketa(),"popisPaketa");
 
                 break;
             default:
@@ -141,7 +132,7 @@ public class PopisPaketa extends AppCompatActivity {
     }
 
     private void opcije(){
-        Intent intent = new Intent(PopisPaketa.this,NotifikacijeOpcije.class);
+        Intent intent = new Intent(GlavnaAktivnost.this,NotifikacijeOpcije.class);
         startActivityForResult(intent, 2); //Ovo naredbom se "čeka" na dva podatka iz aktivnosti NotifikacijeOpcije. Ako nije potrebno preuzeti nikakve podake, nek se ova naredba promjeni u startActivity(intent);
 
     }
@@ -168,7 +159,7 @@ public class PopisPaketa extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
         if(connection == false){
-            AlertDialog alertDialog = new AlertDialog.Builder(PopisPaketa.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(GlavnaAktivnost.this).create();
             alertDialog.setTitle("Pogreška u internetskoj vezi");
             alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste nastavili sa daljnjim radom u aplikaciji.");
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Odjavi me",

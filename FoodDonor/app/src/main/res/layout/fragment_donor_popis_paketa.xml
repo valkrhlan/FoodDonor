@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragmentPopisPaketa"
-    tools:context="com.coky.app.fragments.DonorPopisPaketa">
+    tools:context="com.coky.app.fragments.PopisPaketa">
 
     <ListView
         android:layout_width="wrap_content"
@@ -18,16 +18,29 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnNoviPakett"
+        android:id="@+id/btnLijevo"
         android:scaleType="center"
         android:src="@drawable/ic_action_myfab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:elevation="4dp"
         app:backgroundTint="#FF0000"
-        android:layout_marginBottom="62dp"
-        android:layout_marginStart="290dp"
-        android:layout_alignParentBottom="true"
-         />
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"  />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnDesno"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_myfab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="4dp"
+        app:backgroundTint="#FF0000"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

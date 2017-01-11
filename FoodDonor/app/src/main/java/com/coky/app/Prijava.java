@@ -10,19 +10,16 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.coky.app.firebase.SharedPrefManager;
-import com.coky.app.konfigurabilno.Alarm;
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.RegistriraniKorisnik;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements WsDataLoadedListener {
+public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
 
     @BindView(R.id.prijavaBtn)
     Button btnPrijava;
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
                      startNextActivity();
         }
         else{
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Prijava.this).create();
             alertDialog.setTitle("Rezultat prijave");
             alertDialog.setMessage(message.toString());
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -111,13 +108,13 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
 
     @OnClick(R.id.registracijaBtn)
     public void registracijaBtnClick(View view){
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(Prijava.this).create();
         alertDialog.setTitle("Način registracije");
         alertDialog.setMessage("Odaberite način registracije");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Pravna osoba",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this, RegistracijaPravniKorisnik.class);
+                        Intent intent = new Intent(Prijava.this, RegistracijaPravniKorisnik.class);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -125,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Fizička osoba",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this, RegistracijaFizickiKorisnik.class);
+                        Intent intent = new Intent(Prijava.this, RegistracijaFizickiKorisnik.class);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -192,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
     }
 
     private void startNextActivity(){
-        Intent intent = new Intent(MainActivity.this, PopisPaketa.class);
+        Intent intent = new Intent(Prijava.this, GlavnaAktivnost.class);
         startActivityForResult(intent, 1);
     }
 
@@ -202,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements WsDataLoadedListe
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         Boolean connection = activeNetworkInfo != null && activeNetworkInfo.isConnected();
         if(connection == false){
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(Prijava.this).create();
             alertDialog.setTitle("Pogreška u internet vezi");
             alertDialog.setMessage("Molimo Vas, omogućite internetsku vezu kako bi ste se prijavili u aplikaciju.");
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",

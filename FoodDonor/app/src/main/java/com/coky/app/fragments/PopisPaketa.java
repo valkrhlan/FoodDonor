@@ -5,16 +5,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.coky.app.PopisPaketa;
+import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
 import com.coky.app.adapters.PaketAdapter;
 import com.coky.app.loaders.WsDataLoadedListener;
@@ -31,15 +28,19 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
+public class PopisPaketa extends Fragment implements WsDataLoadedListener {
 
     private View fragmentView;
     private ListView listView;
 
-    @BindView(R.id.btnNoviPakett)
-    FloatingActionButton btnNoviPakett;
+    @BindView(R.id.btnLijevo)
+    FloatingActionButton btnLijevo;
+
+    @BindView(R.id.btnDesno)
+    FloatingActionButton btnDesno;
 
     private String email;
+    private int tipKorisnika;
 
     private ArrayList<Paket> paketi = new ArrayList<Paket>();
     private PaketAdapter paketAdapter;
@@ -52,6 +53,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
         listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
         ButterKnife.bind(this, fragmentView);
+        setFloatingButtonIcons();
         fragmentManager = getActivity().getSupportFragmentManager();
         return fragmentView;
     }
@@ -59,18 +61,23 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onStart(){
         super.onStart();
-        email=((PopisPaketa)getActivity()).getEmailKorisnika();
-        ((PopisPaketa)getActivity()).isNetworkAvailable();
+        email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
+        tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
+        ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         paketi.clear();
         wsDataLoader = new WsDataLoader();
         wsDataLoader.preuzmiPakete(email, this);
     }
 
-    /*private void mockPaketi(){
-        addPaketToArray(new Paket(1,"1.12.2016","Dostupno"));
-        addPaketToArray(new Paket(2,"29.11.2016","Preuzeto"));
-        addPaketToArray(new Paket(1337, "11.9.2020.", "Dostupno"));
-    }*/
+    private void setFloatingButtonIcons(){
+        if(tipKorisnika == 1){   //DONOR
+            btnLijevo.setVisibility(View.GONE);
+            btnDesno.setImageResource(R.drawable.ic_action_myfab2);
+        }else if(tipKorisnika == 3){   //POTREBITI
+            btnDesno.setVisibility(View.GONE);
+            btnLijevo.setImageResource(R.drawable.ic_action_myfab2);
+        }
+    }
 
     private void addPaketToArray(Paket paket){
         if(paketi == null){
@@ -80,16 +87,12 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     }
 
     private void setPaketAdapter(){
-        //----------------- MOCK DATA --------------------------
-        //mockPaketi();
-        //------------------------------------------------------
         paketAdapter = new PaketAdapter(getActivity(), paketi);
         listView.setAdapter(paketAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getActivity(),"Kliknut paket - pozicija: " + i + ", row ID: " + l,Toast.LENGTH_SHORT).show();
-                Fragment noviPaket = new DonorDetaljiPaketa();
+                Fragment noviPaket = new DetaljiPaketa();
                 Bundle args = new Bundle();
                 args.putParcelable("paket",paketi.get(i));
                 noviPaket.setArguments(args);
@@ -101,20 +104,24 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         });
     }
 
+    @OnClick(R.id.btnLijevo)
+    public void btnLijevoOnClick(){
+        if(tipKorisnika == 3){  //POTREBITI
+            //TODO hitni signal
+        }
+    }
 
-    @OnClick(R.id.btnNoviPakett)
-    public void btnNoviPakettClick(){
-        Fragment noviPaket = new DonorNoviPaket();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.activity_popis_paketa, noviPaket);
-        transaction.addToBackStack(null);
-        /*fragmentManager.addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-                    public void onBackStackChanged() {
-                        wsDataLoader.preuzmiPakete(email, DonorPopisPaketa.this);
-                    }
-                });*/
-        transaction.commit();
+    @OnClick(R.id.btnDesno)
+    public void btnDesnoOnClick(){
+        if(tipKorisnika == 1){  //DONOR
+            Fragment noviPaket = new DonorNoviPaket();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.activity_popis_paketa, noviPaket);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }else if(tipKorisnika == 3) {  //POTREBITI
+            //TODO odabrani paketi
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.coky.app.fragments;
 
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +16,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.coky.app.MainActivity;
-import com.coky.app.PopisPaketa;
+import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
 import com.coky.app.adapters.StavkePaketaListAdapter;
 import com.coky.app.adapters.VrstaHraneSpinnerAdapter;
@@ -32,9 +29,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 
 /**
@@ -133,7 +127,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
            Toast.makeText(getActivity().getBaseContext(),message.toString(),Toast.LENGTH_SHORT).show();
            if(message.toString().startsWith("U")){
                WsDataLoader wsDataLoader = new WsDataLoader();
-               String email=((PopisPaketa)getActivity()).getEmailKorisnika();
+               String email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
                String titleNotif = "Novi paket!";
                String messageNotif = "";
                for(StavkaPaketa stavka : stavke){
@@ -177,7 +171,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
      if(stavke.isEmpty()){
          Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stavku!",Toast.LENGTH_SHORT).show();
      }else{
-         ((PopisPaketa)getActivity()).isNetworkAvailable();
+         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
          Switch vlastitiPrijevozSwitch=(Switch)pomFragmentView.findViewById(R.id.switchVlastitiPrijevozNP);
          Integer prijevoz;
          if(vlastitiPrijevozSwitch.isChecked()){
@@ -188,7 +182,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
          String json=new Gson().toJson(stavke);
          Log.d("json:",json);
-         String email=((PopisPaketa)getActivity()).getEmailKorisnika();
+         String email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
          WsDataLoader wsDataLoader = new WsDataLoader();
          wsDataLoader.dodajPaket(email,json,prijevoz,this); //->sredit treba to na ws-u
          //wsDataLoader.dodajPaket(email,json,this);

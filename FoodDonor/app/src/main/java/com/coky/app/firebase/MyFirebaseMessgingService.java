@@ -3,7 +3,7 @@ package com.coky.app.firebase;
 import android.content.Intent;
 import android.util.Log;
 
-import com.coky.app.MainActivity;
+import com.coky.app.Prijava;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -38,7 +38,7 @@ public class MyFirebaseMessgingService extends FirebaseMessagingService{
             String message = data.getString("message");
             String imageUrl = data.getString("image");
             MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), Prijava.class);
             mNotificationManager.showSmallNotification(title, message, intent);
 
         } catch (JSONException e) {

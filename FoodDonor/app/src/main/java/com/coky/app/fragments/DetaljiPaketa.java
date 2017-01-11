@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 
 import com.coky.app.R;
 import com.coky.app.adapters.StavkeDetaljiListAdapter;
-import com.coky.app.adapters.StavkePaketaListAdapter;
-import com.coky.app.klase.StavkaPaketa;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.Stavka;
 import com.google.gson.Gson;
@@ -33,7 +30,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DonorDetaljiPaketa extends Fragment {
+public class DetaljiPaketa extends Fragment {
 
     @BindView(R.id.DD_naziv_donor)
     TextView nazivDonor;
@@ -61,7 +58,7 @@ public class DonorDetaljiPaketa extends Fragment {
 
     private Paket paket;
 
-    public DonorDetaljiPaketa() {
+    public DetaljiPaketa() {
     }
 
     @Override
@@ -85,7 +82,7 @@ public class DonorDetaljiPaketa extends Fragment {
         Bundle data = getArguments();
         paket = (Paket) data.getParcelable("paket");
         Gson gson = new Gson();
-        Type ListaStavkiJSON = new TypeToken<ArrayList<Stavka>>(){}.getType(); //ovo je drugi način dekomponiranja JSON formata i punjena liste koja je custom tipa (prvi se nalazi u fragmentu DonorPopisPaketa)
+        Type ListaStavkiJSON = new TypeToken<ArrayList<Stavka>>(){}.getType(); //ovo je drugi način dekomponiranja JSON formata i punjena liste koja je custom tipa (prvi se nalazi u fragmentu PopisPaketa)
         stavke = gson.fromJson(paket.getStavke().toString(), ListaStavkiJSON);
     }
 
@@ -104,7 +101,7 @@ public class DonorDetaljiPaketa extends Fragment {
     @OnClick(R.id.DD_natrag)
     public void btnNatragOnClick(){
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(DonorDetaljiPaketa.this);
+        fragmentTransaction.remove(DetaljiPaketa.this);
         fragmentManager.popBackStack();
         fragmentTransaction.commit();
     }
