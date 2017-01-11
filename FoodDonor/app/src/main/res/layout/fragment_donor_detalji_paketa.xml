@@ -38,15 +38,25 @@
         android:id="@+id/DD_v_preuzeto" />
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/DD_stavke" />
 
-    <Button
-        android:text="Natrag"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"/>
+        android:layout_gravity="center">
+
+        <Button
+            android:text="Natrag"
+            android:id="@+id/DD_natrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
 
 </LinearLayout>

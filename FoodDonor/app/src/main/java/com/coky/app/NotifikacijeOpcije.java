@@ -55,7 +55,8 @@ public class NotifikacijeOpcije extends AppCompatActivity {
 
                 }
             }
-           }
+        }
+        finish();
       }
 
 
@@ -141,4 +142,9 @@ private void oznaciRadioButtone(){
          }
     }
 
+
+    @Override
+    public void onBackPressed(){
+        finish();
+    }
 }

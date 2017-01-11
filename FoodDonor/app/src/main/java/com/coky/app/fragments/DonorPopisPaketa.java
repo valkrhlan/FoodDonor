@@ -41,7 +41,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
 
     private String email;
 
-    private ArrayList<Paket> paketi;
+    private ArrayList<Paket> paketi = new ArrayList<Paket>();
     private PaketAdapter paketAdapter;
 
     private FragmentManager fragmentManager;
@@ -51,7 +51,6 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.fragment_donor_popis_paketa, container, false);
         listView = (ListView) fragmentView.findViewById(R.id.popisPaketa);
-
         ButterKnife.bind(this, fragmentView);
         fragmentManager = getActivity().getSupportFragmentManager();
         return fragmentView;
@@ -62,7 +61,7 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
         super.onStart();
         email=((PopisPaketa)getActivity()).getEmailKorisnika();
         ((PopisPaketa)getActivity()).isNetworkAvailable();
-        paketi = null;
+        paketi.clear();
         wsDataLoader = new WsDataLoader();
         wsDataLoader.preuzmiPakete(email, this);
     }
@@ -120,10 +119,8 @@ public class DonorPopisPaketa extends Fragment implements WsDataLoadedListener {
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
-        List<Paket> paketi = (List<Paket>) message;
-        Log.d("paketi", paketi.toString());
-        Log.d("paketi", message.toString());
-        for(Paket paket : paketi){
+        List<Paket> paketiPomocnaLista = (List<Paket>) message;
+        for(Paket paket : paketiPomocnaLista){
             addPaketToArray(paket);
         }
         setPaketAdapter();

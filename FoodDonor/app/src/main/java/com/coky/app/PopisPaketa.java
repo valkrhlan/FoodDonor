@@ -142,7 +142,7 @@ public class PopisPaketa extends AppCompatActivity {
 
     private void opcije(){
         Intent intent = new Intent(PopisPaketa.this,NotifikacijeOpcije.class);
-        startActivityForResult(intent, 2);
+        startActivityForResult(intent, 2); //Ovo naredbom se "čeka" na dva podatka iz aktivnosti NotifikacijeOpcije. Ako nije potrebno preuzeti nikakve podake, nek se ova naredba promjeni u startActivity(intent);
 
     }
 
