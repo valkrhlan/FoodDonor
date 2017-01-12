@@ -78,4 +78,9 @@ public interface FdWebService {
     Call<FdWebServiceResponse>dohvatiNotifikacije(
             @Path("email") String email,
             @Path("timestamp") long timestamp);
+
+    @GET("odaberiPaketPotrebiti/{email}/{idPaketa}/")
+    Call<FdWebServiceResponse>odaberiPaketPotrebiti(
+            @Path("email") String email,
+            @Path("idPaketa") String idPaketa);
 }

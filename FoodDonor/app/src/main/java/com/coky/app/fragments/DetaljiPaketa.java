@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
 import com.coky.app.adapters.StavkeDetaljiListAdapter;
+import com.coky.app.loaders.WsDataLoadedListener;
+import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.Stavka;
 import com.google.gson.Gson;
@@ -31,7 +34,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetaljiPaketa extends Fragment {
+public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
 
     @BindView(R.id.DD_naziv_donor)
     TextView nazivDonor;
@@ -61,6 +64,7 @@ public class DetaljiPaketa extends Fragment {
     private FragmentTransaction fragmentTransaction;
 
     private int tipKorisnika;
+    private String email;
     private Paket paket;
 
     public DetaljiPaketa() {
@@ -73,6 +77,7 @@ public class DetaljiPaketa extends Fragment {
         ButterKnife.bind(this, fragmentView);
         fragmentManager = getActivity().getSupportFragmentManager();
         tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
+        email = ((GlavnaAktivnost)getActivity()).getEmailKorisnika();
         setButtonVisibility();
         return fragmentView;
     }
@@ -124,10 +129,16 @@ public class DetaljiPaketa extends Fragment {
     @OnClick(R.id.DD_odaberi)
     public void btnOdaberiOnClick(){
         //TODO odaberi paket
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.odaberiPaketPotrebiti(email,paket.getId(),this);
+    }
+
+    @Override
+    public void onWsDataLoaded(Object message, int tip) {
+        Toast.makeText(getActivity().getBaseContext(),"Paket odabran!",Toast.LENGTH_SHORT).show();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(DetaljiPaketa.this);
         fragmentManager.popBackStack();
         fragmentTransaction.commit();
     }
-
 }
