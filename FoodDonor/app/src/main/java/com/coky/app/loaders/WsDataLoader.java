@@ -39,9 +39,9 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForDodajPaket(email,json,prijevoz);
     }
-    public  void preuzmiPakete(String email, WsDataLoadedListener wsDataLoadedListener){
+    public  void preuzmiPakete(String email, String odabrani, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener=wsDataLoadedListener;
-        FdWs.CallWsForPreuzmiPakete(email);
+        FdWs.CallWsForPreuzmiPakete(email, odabrani);
     }
 
     public  void slanjeTokena(String email, String token, WsDataLoadedListener wsDataLoadedListener){

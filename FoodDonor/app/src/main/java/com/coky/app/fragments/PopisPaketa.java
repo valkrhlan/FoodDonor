@@ -66,7 +66,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         paketi.clear();
         wsDataLoader = new WsDataLoader();
-        wsDataLoader.preuzmiPakete(email, this);
+        wsDataLoader.preuzmiPakete(email, "ne", this);
     }
 
     private void setFloatingButtonIcons(){
@@ -124,7 +124,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
             transaction.addToBackStack(null);
             transaction.commit();
         }else if(tipKorisnika == 3) {  //POTREBITI
-            //TODO odabrani paketi
+            Fragment odabraniPaketi = new PotrebitiOdabraniPaketi();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.activity_popis_paketa, odabraniPaketi);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 

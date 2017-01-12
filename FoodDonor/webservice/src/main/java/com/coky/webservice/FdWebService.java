@@ -51,9 +51,10 @@ public interface FdWebService {
             @Path("data") String json,
             @Path("prijevoz") Integer prijevoz);
 
-    @GET("paket/dohvati/{email}/")
+    @GET("paket/dohvati/{email}/{odabrani}/")
     Call<FdWebServiceResponse> dohvatiPakete(
-            @Path("email") String email);
+            @Path("email") String email,
+            @Path("odabrani") String odabrani);
 
     @GET("registerDevice/{email}/{token}/")
     Call<FdWebServiceResponse> spremiToken(
@@ -73,7 +74,7 @@ public interface FdWebService {
             @Path("email") String email);
 
 
-    @GET("getNotifications/{email}/{timestamp}")
+    @GET("getNotifications/{email}/{timestamp}/")
     Call<FdWebServiceResponse>dohvatiNotifikacije(
             @Path("email") String email,
             @Path("timestamp") long timestamp);

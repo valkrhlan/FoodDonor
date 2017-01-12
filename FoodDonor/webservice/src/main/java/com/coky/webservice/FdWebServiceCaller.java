@@ -86,9 +86,9 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("dodajPaket");
     }
 
-    public void CallWsForPreuzmiPakete(String email){
+    public void CallWsForPreuzmiPakete(String email, String odabrani){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
-        call=fdWebService.dohvatiPakete(email);
+        call=fdWebService.dohvatiPakete(email, odabrani);
         HandleResponseFromCall("dohvatiPakete");
     }
 
