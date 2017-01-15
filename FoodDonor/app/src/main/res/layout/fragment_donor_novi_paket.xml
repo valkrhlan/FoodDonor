@@ -9,46 +9,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:id="@+id/vlastitiPrijevozTxtView"
         android:layout_alignParentStart="true"
         android:text="Vlastiti prijevoz?"
-        android:textColor="@android:color/holo_orange_dark"
-        android:layout_marginBottom="50dp"/>
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/switchVlastitiPrijevozNP"
-        android:ems="15"
-        android:textOn="Da"
-        android:textOff="Ne"
-
-         />
-    <TextView
-        android:text="Vrsta hrane:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/nazivHraneNP"
-        android:layout_alignBaseline="@+id/spinnerNazivHraneNP"
-        android:layout_alignBottom="@+id/spinnerNazivHraneNP"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/holo_orange_dark"
-        />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/editNazivHraneNP"
-        android:layout_below="@+id/vlastitiPrijevozTxtView"
-        android:layout_marginEnd="26dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="25dp"
-
-        />
+        android:textSize="15dp"
+        android:textColor="#565656"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignBottom="@+id/switchVlastitiPrijevozNP" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -59,21 +28,24 @@
         android:layout_below="@+id/editNazivHraneNP"
         android:layout_alignStart="@+id/editNazivHraneNP"
 
-        />
+        android:layout_toStartOf="@+id/btnDodajPaketNP"
+        android:layout_alignEnd="@+id/btnDodajStavkuNP" />
 
 
     <TextView
+    android:paddingTop="10dp"
+        android:textSize="15dp"
         android:text="Naziv hrane:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:id="@+id/vrstaNP"
-        android:layout_below="@id/vlastitiPrijevozTxtView"
-        android:textColor="@android:color/holo_orange_dark"
-        android:layout_alignBaseline="@+id/editNazivHraneNP"
+        android:textColor="#565656"
         android:layout_alignBottom="@+id/editNazivHraneNP"
         android:layout_alignParentStart="true"
-        />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/switchVlastitiPrijevozNP" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -83,42 +55,6 @@
         android:id="@+id/editKolicinaNP"
         android:layout_below="@+id/spinnerNazivHraneNP"
         android:layout_alignStart="@+id/spinnerNazivHraneNP"
-        />
-
-
-    <TextView
-        android:text="Količina:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/kolicinaNP"
-        android:layout_alignBaseline="@+id/editKolicinaNP"
-        android:layout_alignBottom="@+id/editKolicinaNP"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/holo_orange_dark"
-        />
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="15"
-        android:id="@+id/spinnerJedinicaKolicineNP"
-        android:layout_below="@+id/editKolicinaNP"
-        android:layout_alignStart="@+id/editKolicinaNP"
-
-        />
-
-
-    <TextView
-        android:text="Jedinica količine:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/jedinicaKolicinaNP"
-        android:layout_alignBaseline="@+id/spinnerJedinicaKolicineNP"
-        android:layout_alignBottom="@+id/spinnerJedinicaKolicineNP"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/holo_orange_dark"
         />
 
 
@@ -161,6 +97,78 @@
         android:layout_toEndOf="@+id/btnNatragNoviPaket"
         />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editNazivHraneNP"
+
+        android:layout_below="@+id/vlastitiPrijevozTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:textSize="15dp"
+        android:text="Jedinica količine:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jedinicaKolicinaNP"
+        android:textColor="#565656"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/editKolicinaNP"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/spinnerJedinicaKolicineNP" />
+
+    <Switch
+
+        android:paddingTop="7dp"
+        android:paddingEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchVlastitiPrijevozNP"
+        android:ems="15"
+        android:textOn="Da"
+        android:textOff="Ne"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:paddingTop="10dp"
+        android:textSize="15dp"
+        android:text="Količina:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/kolicinaNP"
+        android:textColor="#565656"
+        android:layout_above="@+id/jedinicaKolicinaNP"
+        android:layout_alignStart="@+id/jedinicaKolicinaNP"
+        android:layout_below="@+id/spinnerNazivHraneNP"
+        android:layout_alignEnd="@+id/jedinicaKolicinaNP" />
+
+    <TextView
+        android:textSize="15dp"
+        android:text="Vrsta hrane:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nazivHraneNP"
+        android:textColor="#565656"
+        android:layout_alignStart="@+id/vrstaNP"
+        android:layout_above="@+id/kolicinaNP"
+        android:layout_below="@+id/vrstaNP"
+        android:layout_alignEnd="@+id/vlastitiPrijevozTxtView" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="15"
+        android:id="@+id/spinnerJedinicaKolicineNP"
+
+        android:layout_below="@+id/editKolicinaNP"
+        android:layout_alignEnd="@+id/btnDodajStavkuNP"
+        android:layout_alignStart="@+id/editKolicinaNP" />
 
 
 </RelativeLayout>
