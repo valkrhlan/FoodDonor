@@ -1,8 +1,10 @@
 package com.coky.app.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,18 +51,43 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         viewHolder.paketId.setText(paket.getId());
         viewHolder.paketVrijemeKreiranja.setText(paket.getV_kreiranja());
-        if(paket.getPreuzimanje() != null && paket.getPreuzimanje().contains("1")){
-            convertView.setBackgroundColor(Color.parseColor("#42f462"));
-            viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
-            viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());
 
-        }else{
-            convertView.setBackgroundColor(Color.parseColor("#edb544"));
-            viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
-            viewHolder.paketVrijemePreuzimanja.setText("");
-        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String email = prefs.getString("emailKorisnika","test@test.test");
+        int tipK = prefs.getInt("tipKorisnika", 0);
+
+
+            if(paket.getPreuzimanje() != null && paket.getPreuzimanje().contains("1")){
+                convertView.setBackgroundColor(Color.parseColor("#42f462"));
+                viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
+                viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());
+                if(tipK==2){
+                    viewHolder.paketPreuzimanje.setText("Ime donora: " + paket.getNaziv_donor());
+                    viewHolder.paketVrijemePreuzimanja.setText("Ime potrebitog: " + paket.getNaziv_potrebitog());
+                }else{
+                    viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
+                    viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());
+                };
+
+            }else {
+                convertView.setBackgroundColor(Color.parseColor("#edb544"));
+                viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
+                viewHolder.paketVrijemePreuzimanja.setText("");
+
+                if(tipK==2){
+                    viewHolder.paketPreuzimanje.setText("Ime donora: " + paket.getNaziv_donor());
+                    viewHolder.paketVrijemePreuzimanja.setText("Ime potrebitog: " + paket.getNaziv_potrebitog());
+                }else{
+                    viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
+                    viewHolder.paketVrijemePreuzimanja.setText("");
+                };
+            }
+
+
+
         return convertView;
     }
 }

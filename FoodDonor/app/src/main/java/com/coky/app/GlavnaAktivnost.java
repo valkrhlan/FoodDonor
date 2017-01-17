@@ -84,7 +84,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
             fragmentManager.popBackStack();
         } else {
             Intent returnIntent = new Intent();
-            setResult(RESULT_CANCELED, returnIntent);
+            setResult(RESULT_CANCELED,returnIntent);
             finish();
         }
     }
@@ -95,8 +95,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
                 createInitialFragment(new PopisPaketa(),"popisPaketa");
                 break;
             case 2: //VOLONTER
-                Toast.makeText(this,"Volonter korisnik u implementaciji!", Toast.LENGTH_LONG).show();
-                odjava();
+                createInitialFragment(new PopisPaketa(),"popisPaketa");
                break;
             case 3: //POTREBITI
                 createInitialFragment(new PopisPaketa(),"popisPaketa");

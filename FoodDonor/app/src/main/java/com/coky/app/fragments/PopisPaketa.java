@@ -72,11 +72,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     private void setFloatingButtonIcons(){
         if(tipKorisnika == 1){   //DONOR
             btnLijevo.setVisibility(View.GONE);
-            btnDesno.setImageResource(R.drawable.ic_action_paket);
+            btnDesno.setImageResource(R.drawable.ic_action_adding);
             btnDesno.setVisibility(View.VISIBLE);
         }else if(tipKorisnika == 3){   //POTREBITI
             btnDesno.setImageResource(R.drawable.ic_action_odabrani);
-            btnLijevo.setImageResource(R.drawable.ic_action_hitno);
+            btnLijevo.setImageResource(R.drawable.ic_action_itno);
             btnDesno.setVisibility(View.VISIBLE);
             btnLijevo.setVisibility(View.VISIBLE);
         }
