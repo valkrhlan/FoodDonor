@@ -135,7 +135,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         List<Paket> paketiPomocnaLista = (List<Paket>) message;
+        int brojPaketa = 0;
+
         for(Paket paket : paketiPomocnaLista){
+            //paket.getId() = Integer.toString(++brojPaketa);
+            paket.setId(Integer.toString(++brojPaketa));
             addPaketToArray(paket);
         }
         setPaketAdapter();
