@@ -59,9 +59,9 @@ public class WsDataLoader {
         FdWs.CallWsForBrisanjeTokena(email);
     }
 
-    public void odaberiPaketPotrebiti(String email, String idPaketa, WsDataLoadedListener wsDataLoadedListener){
+    public void odaberiPaketPotrebiti(String email, String hitno, String idPaketa, WsDataLoadedListener wsDataLoadedListener){
         this.wsDataLoadedListener=wsDataLoadedListener;
-        FdWs.CallWsForOdaberiPaketPotrebiti(email,idPaketa);
+        FdWs.CallWsForOdaberiPaketPotrebiti(email,hitno,idPaketa);
     }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {

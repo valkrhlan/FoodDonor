@@ -79,8 +79,10 @@ public interface FdWebService {
             @Path("email") String email,
             @Path("timestamp") long timestamp);
 
-    @GET("odaberiPaketPotrebiti/{email}/{idPaketa}/")
+    @GET("odaberiPaketPotrebiti/{email}/{hitno}/{idPaketa}/")
     Call<FdWebServiceResponse>odaberiPaketPotrebiti(
             @Path("email") String email,
+            @Path("hitno") String hitno,
             @Path("idPaketa") String idPaketa);
+
 }

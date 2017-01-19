@@ -116,12 +116,11 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("dohvatiNotifikacije");
     }
 
-    public void CallWsForOdaberiPaketPotrebiti(String email, String idPaketa){
+    public void CallWsForOdaberiPaketPotrebiti(String email, String hitno, String idPaketa){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
-        call=fdWebService.odaberiPaketPotrebiti(email,idPaketa);
+        call=fdWebService.odaberiPaketPotrebiti(email,hitno,idPaketa);
         HandleResponseFromCall("odaberiPaketPotrebiti");
     }
-
 
     public void HandleResponseFromCall(final String method){
         if(call != null){

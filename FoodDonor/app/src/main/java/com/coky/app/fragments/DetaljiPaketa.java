@@ -2,6 +2,7 @@ package com.coky.app.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -57,6 +58,9 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     @BindView(R.id.DD_odaberi)
     TextView btnOdaberi;
 
+    @BindView(R.id.btnLijevo)
+    FloatingActionButton btnLijevo;
+
     private ArrayAdapter<Stavka> stavkeDetaljiListAdapter;
     private List<Stavka> stavke = new ArrayList<Stavka>();
 
@@ -66,6 +70,7 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     private int tipKorisnika;
     private String email;
     private Paket paket;
+    private Bundle data;
 
     public DetaljiPaketa() {
     }
@@ -78,6 +83,7 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         fragmentManager = getActivity().getSupportFragmentManager();
         tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
         email = ((GlavnaAktivnost)getActivity()).getEmailKorisnika();
+        data = getArguments();
         setButtonVisibility();
         return fragmentView;
     }
@@ -91,15 +97,20 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     }
 
     private void setButtonVisibility(){
-        if(tipKorisnika == 1){
+        btnLijevo.setVisibility(View.GONE);
+        if(tipKorisnika == 1 || data.getBoolean("pogledIzListeOdabranih") == true){
             btnOdaberi.setVisibility(View.GONE);
         }else{
             btnOdaberi.setVisibility(View.VISIBLE);
         }
+        if(tipKorisnika == 3){
+            btnLijevo.setImageResource(R.drawable.ic_action_itno);
+            btnLijevo.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addStavkeToArray(){
-        Bundle data = getArguments();
+
         paket = (Paket) data.getParcelable("paket");
         Gson gson = new Gson();
         Type ListaStavkiJSON = new TypeToken<ArrayList<Stavka>>(){}.getType(); //ovo je drugi način dekomponiranja JSON formata i punjena liste koja je custom tipa (prvi se nalazi u fragmentu PopisPaketa)
@@ -128,14 +139,23 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
 
     @OnClick(R.id.DD_odaberi)
     public void btnOdaberiOnClick(){
-        //TODO odaberi paket
+        ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         WsDataLoader wsDataLoader = new WsDataLoader();
-        wsDataLoader.odaberiPaketPotrebiti(email,paket.getId(),this);
+        wsDataLoader.odaberiPaketPotrebiti(email,"ne",paket.getId(),this);
+    }
+
+    @OnClick(R.id.btnLijevo)
+    public void btnLijevoOnClick(){
+        if(paket.getHitno() == null){
+            ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
+            WsDataLoader wsDataLoader = new WsDataLoader();
+            wsDataLoader.odaberiPaketPotrebiti(email,"da",paket.getId(),this);
+        }
     }
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
-        Toast.makeText(getActivity().getBaseContext(),"Paket odabran!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getBaseContext(), message.toString(), Toast.LENGTH_SHORT).show();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(DetaljiPaketa.this);
         fragmentManager.popBackStack();

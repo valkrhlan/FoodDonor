@@ -1,5 +1,6 @@
 package com.coky.app.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -32,9 +33,6 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
 
     private View fragmentView;
     private ListView listView;
-
-    @BindView(R.id.btnLijevo)
-    FloatingActionButton btnLijevo;
 
     @BindView(R.id.btnDesno)
     FloatingActionButton btnDesno;
@@ -71,14 +69,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
 
     private void setFloatingButtonIcons(){
         if(tipKorisnika == 1){   //DONOR
-            btnLijevo.setVisibility(View.GONE);
             btnDesno.setImageResource(R.drawable.ic_action_adding);
             btnDesno.setVisibility(View.VISIBLE);
         }else if(tipKorisnika == 3){   //POTREBITI
             btnDesno.setImageResource(R.drawable.ic_action_odabrani);
-            btnLijevo.setImageResource(R.drawable.ic_action_itno);
             btnDesno.setVisibility(View.VISIBLE);
-            btnLijevo.setVisibility(View.VISIBLE);
         }
     }
 
@@ -89,9 +84,9 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         paketi.add(paket);
     }
 
-    private void setPaketAdapter(){
+    private void setPaketAdapter(ArrayList<Integer> brojPaketa){
         setFloatingButtonIcons();
-        paketAdapter = new PaketAdapter(getActivity(), paketi);
+        paketAdapter = new PaketAdapter(getActivity(), paketi, brojPaketa);
         listView.setAdapter(paketAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -99,6 +94,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
                 Fragment noviPaket = new DetaljiPaketa();
                 Bundle args = new Bundle();
                 args.putParcelable("paket",paketi.get(i));
+                args.putBoolean("pogledIzListeOdabranih", false);
                 noviPaket.setArguments(args);
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.activity_popis_paketa, noviPaket);
@@ -106,13 +102,6 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
                 transaction.commit();
             }
         });
-    }
-
-    @OnClick(R.id.btnLijevo)
-    public void btnLijevoOnClick(){
-        if(tipKorisnika == 3){  //POTREBITI
-            //TODO hitni signal
-        }
     }
 
     @OnClick(R.id.btnDesno)
@@ -135,14 +124,14 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         List<Paket> paketiPomocnaLista = (List<Paket>) message;
-        int brojPaketa = 0;
-
+        ArrayList<Integer> brojPaketa = new ArrayList<Integer>();
+        int trenutni = 0;
         for(Paket paket : paketiPomocnaLista){
-            //paket.getId() = Integer.toString(++brojPaketa);
-            paket.setId(Integer.toString(++brojPaketa));
+            brojPaketa.add(++trenutni);
+            //paket.setId(Integer.toString(++brojPaketa));
             addPaketToArray(paket);
         }
-        setPaketAdapter();
+        setPaketAdapter(brojPaketa);
     }
 
 

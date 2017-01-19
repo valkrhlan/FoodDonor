@@ -1,6 +1,7 @@
 package com.coky.app.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class PaketAdapter extends ArrayAdapter<Paket> {
 
+    private ArrayList<Integer> brojPaketa;
     public static class ViewHolder{
         TextView paketId;
         TextView paketVrijemeKreiranja;
@@ -30,8 +32,9 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
         TextView paketVrijemePreuzimanja;
     }
 
-    public PaketAdapter(Context context, ArrayList<Paket> paketi){
+    public PaketAdapter(Context context, ArrayList<Paket> paketi, ArrayList<Integer> brojPaketa){
         super(context, 0, paketi);
+        this.brojPaketa = brojPaketa;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.paketId.setText(paket.getId());
+        viewHolder.paketId.setText(brojPaketa.get(position).toString());
         viewHolder.paketVrijemeKreiranja.setText(paket.getV_kreiranja());
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -73,7 +76,12 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
                 };
 
             }else {
-                convertView.setBackgroundColor(Color.parseColor("#edb544"));
+                if(paket.getHitno() != null && paket.getHitno().contains("1")){
+                    convertView.setBackgroundColor(Color.parseColor("#fc5f77"));
+                }else{
+                    convertView.setBackgroundColor(Color.parseColor("#edb544"));
+                }
+
                 viewHolder.paketPreuzimanje.setText("Čeka preuzimanje.");
                 viewHolder.paketVrijemePreuzimanja.setText("");
 

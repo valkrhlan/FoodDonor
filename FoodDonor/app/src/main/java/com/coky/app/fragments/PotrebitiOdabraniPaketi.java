@@ -76,9 +76,23 @@ public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedLis
         paketi.add(paket);
     }
 
-    private void setPaketAdapter(){
-        paketAdapter = new PaketAdapter(getActivity(), paketi);
+    private void setPaketAdapter(ArrayList<Integer> brojPaketa){
+        paketAdapter = new PaketAdapter(getActivity(), paketi, brojPaketa);
         listView.setAdapter(paketAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Fragment noviPaket = new DetaljiPaketa();
+                Bundle args = new Bundle();
+                args.putParcelable("paket",paketi.get(i));
+                args.putBoolean("pogledIzListeOdabranih", true);
+                noviPaket.setArguments(args);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.activity_popis_paketa, noviPaket);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 
     @OnClick(R.id.POP_natrag)
@@ -92,13 +106,13 @@ public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedLis
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         List<Paket> paketiPomocnaLista = (List<Paket>) message;
-        int brojPaketa = 0;
-
+        ArrayList<Integer> brojPaketa = new ArrayList<Integer>();
+        int trenutni = 0;
         for(Paket paket : paketiPomocnaLista){
-            //paket.getId() = Integer.toString(++brojPaketa);
-            paket.setId(Integer.toString(++brojPaketa));
+            brojPaketa.add(++trenutni);
+            //paket.setId(Integer.toString(++brojPaketa));
             addPaketToArray(paket);
         }
-        setPaketAdapter();
+        setPaketAdapter(brojPaketa);
     }
 }
