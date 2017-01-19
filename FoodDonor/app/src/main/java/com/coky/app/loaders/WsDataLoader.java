@@ -64,6 +64,11 @@ public class WsDataLoader {
         FdWs.CallWsForOdaberiPaketPotrebiti(email,hitno,idPaketa);
     }
 
+    public void odaberiGrad(WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForGradovi();
+    }
+
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
         public void onDataArrived(Object message, int status) {

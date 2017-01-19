@@ -122,6 +122,14 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("odaberiPaketPotrebiti");
     }
 
+    public void CallWsForGradovi(){
+        FdWebService fdWebService = retrofit.create(FdWebService.class);
+        call = fdWebService.getGradovi();
+        HandleResponseFromCall("getGradovi");
+    }
+
+
+
     public void HandleResponseFromCall(final String method){
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {

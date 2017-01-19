@@ -85,4 +85,6 @@ public interface FdWebService {
             @Path("hitno") String hitno,
             @Path("idPaketa") String idPaketa);
 
+    @GET("grad/all/")
+    Call<FdWebServiceResponse> getGradovi();
 }
