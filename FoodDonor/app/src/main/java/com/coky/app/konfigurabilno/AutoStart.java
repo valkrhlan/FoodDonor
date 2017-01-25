@@ -17,7 +17,7 @@ public class AutoStart extends BroadcastReceiver {
 
             //to do -> setiraj samo kad je odabrnao u izborniku
 
-            alarm.setAlarm(context);
+            //alarm.setAlarm(context);
         }
     }
 }

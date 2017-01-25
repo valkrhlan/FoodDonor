@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 /**
  * Created by Valentina on 30.12.2016..
@@ -21,6 +22,8 @@ public class MyAlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+       // Toast.makeText(this,"Alarm u MyAlarmService!!!!!!!",Toast.LENGTH_SHORT).show();
+
         alarm.setAlarm(this);
         return START_STICKY;
     }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.coky.app.R;
 import com.coky.app.klase.ItemNotifikacijaMoguceOpcije;
 import com.coky.app.klase.NotifikacijaMoguceOpcije;
+import com.coky.app.klase.UpraviteljNotifikacija;
 import com.coky.app.konfigurabilno.Alarm;
 
 import butterknife.BindView;
@@ -35,11 +36,14 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         if(idNotif==-1){
             Toast.makeText(this,"Odaberite neku od mogućnosti!",Toast.LENGTH_SHORT).show();
         }else{
+            UpraviteljNotifikacija un=new UpraviteljNotifikacija();
            // Toast.makeText(this,"Ok je!",Toast.LENGTH_SHORT).show();
             RadioButton btnOpcija=(RadioButton)findViewById(idNotif);
             if(btnOpcija.getText().toString().equals("Firebase")){
-              setSharedPrefs("Firebase",0);
-              Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
+                un.pohraniPromjene(this.getApplicationContext(),"Firebase",0);
+                setSharedPrefs("Firebase",0);
+                Toast.makeText(this,"Firebase je",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
 
             }else{
                int idRadioGroupInterval =radioGroupInterval.getCheckedRadioButtonId();
@@ -47,10 +51,9 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                     Toast.makeText(this,"Odaberite neki od intervala!",Toast.LENGTH_SHORT).show();
                 }else{
                     spremiInterval(idRadioGroupInterval);
-                    //to tu nesme biti
-                   // Alarm alarm=new Alarm();
-                   // alarm.setAlarm(this);
-                    Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
+                   // UpraviteljNotifikacija un=new UpraviteljNotifikacija();
+                    un.pohraniPromjene(this,"Konfigurabilno",10);
+                    Toast.makeText(this.getApplicationContext(),"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
 
 
                 }
