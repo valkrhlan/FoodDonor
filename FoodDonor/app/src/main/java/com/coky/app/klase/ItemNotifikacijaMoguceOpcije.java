@@ -1,5 +1,7 @@
 package com.coky.app.klase;
 
+import java.util.List;
+
 /**
  * Created by Valentina on 30.12.2016..
  */
@@ -9,27 +11,39 @@ public class ItemNotifikacijaMoguceOpcije {
     klasa koja predstavlja pojedinu mogućnost u listi svih mogućnosti u klasi NotifikacijaMOgućeOpcije
      */
 
-    public String title;
-    public String id;
+    public String opcija;
+    public List<Integer> intervali;
+   // public Object listener;
 
-    public ItemNotifikacijaMoguceOpcije(String title, String id) {
-        this.title = title;
-        this.id = id;
+    public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali ) {
+        this.opcija = opcija;
+        this.intervali = intervali;
+        //this.listener = listener;
     }
 
-    public String getTitle() {
-        return title;
+
+    public String getOpcija() {
+        return opcija;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setOpcija(String opcija) {
+        this.opcija = opcija;
     }
 
-    public String getId() {
-        return id;
+    public List<Integer> getIntervali() {
+        return intervali;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIntervali(List<Integer> intervali) {
+        this.intervali = intervali;
     }
+
+   /* public Object getListener() {
+        return listener;
+    }
+
+    public void setListener(Object listener) {
+        this.listener = listener;
+    }
+    */
 }

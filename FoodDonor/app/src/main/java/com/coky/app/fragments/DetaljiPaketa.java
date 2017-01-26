@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,6 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     }
 
     private void addStavkeToArray(){
-
         paket = (Paket) data.getParcelable("paket");
         Gson gson = new Gson();
         Type ListaStavkiJSON = new TypeToken<ArrayList<Stavka>>(){}.getType(); //ovo je drugi način dekomponiranja JSON formata i punjena liste koja je custom tipa (prvi se nalazi u fragmentu PopisPaketa)
@@ -155,10 +155,25 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        String email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
+        String titleNotif = "";
+        if(paket.getHitno() != "1" || paket.getHitno() != "true"){
+            titleNotif = "Novi paket spreman za prijevoz!";
+        }else{
+            titleNotif = "HITNO! Novi paket spreman za prijevoz!";
+        }
+        String messageNotif = "";
+        messageNotif += "Naziv donora: " + paket.getNaziv_donor() + ", Naziv potrebitog: " + paket.getNaziv_potrebitog(); //nebu išlo
+        Log.d("paketNoviTitle", titleNotif);
+        Log.d("paketNoviMessage", messageNotif);
+        wsDataLoader.posaljiNotif(email,titleNotif, messageNotif, this);
+        //if(message.toString().startsWith("Nije") || message.toString().startsWith("Poslane")){
         Toast.makeText(getActivity().getBaseContext(), message.toString(), Toast.LENGTH_SHORT).show();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(DetaljiPaketa.this);
         fragmentManager.popBackStack();
         fragmentTransaction.commit();
+
     }
 }

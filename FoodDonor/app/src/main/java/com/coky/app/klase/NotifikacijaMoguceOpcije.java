@@ -1,6 +1,12 @@
 package com.coky.app.klase;
 
+import android.content.Context;
+
+import com.coky.app.konfigurabilno.Alarm;
+
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,22 +20,56 @@ public class NotifikacijaMoguceOpcije {
      */
 
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
-
+   // public Context mContext;
 
 
     public NotifikacijaMoguceOpcije() {
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase","firebaseOption"));
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno","konfigurabilnoOption"));
+       // this.mContext=mContext;
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0))); //new Object zamijeniti sa stvarnom vrijednosti
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30)));
+
     }
 
-    public int size(){
+    public Integer size(){
         return moguceOpcije.size();
     }
-    public void setMoguceOpcije(ArrayList<ItemNotifikacijaMoguceOpcije> moguceOpcije) {
-        this.moguceOpcije = moguceOpcije;
+
+
+    public String getOpcija(Integer i){
+
+        return moguceOpcije.get(i).opcija;
     }
+
+    public List<Integer> getInterval(Integer i){
+        return moguceOpcije.get(i).intervali;
+    }
+    public List<Integer> getInterval(String option){
+        int i=0;
+        boolean nadjen=false;
+        while (nadjen==false){
+            if(moguceOpcije.get(i).opcija.equals(option)){
+                nadjen=true;
+
+            }
+        }
+        return moguceOpcije.get(i).intervali;
+    }
+
 
     public List<ItemNotifikacijaMoguceOpcije> getMoguceOpcije() {
         return moguceOpcije;
     }
+
+    public void setMoguceOpcije(List<ItemNotifikacijaMoguceOpcije> moguceOpcije) {
+        this.moguceOpcije = moguceOpcije;
+    }
+
+   /* public Context getmContext() {
+        return mContext;
+    }
+
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
+    */
 }
