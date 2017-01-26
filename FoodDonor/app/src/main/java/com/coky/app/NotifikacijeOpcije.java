@@ -29,6 +29,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
     private RadioGroup radioGroupOpcije;
     private RadioGroup radioGroupIntervali;
     private boolean postaviIntervalIzsSheredPrefs=false;
+    private int brojac;
 
 
     @BindView(R.id.btnPohraniPromjeneNO)
@@ -49,6 +50,11 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 String pom=odabraniInterval.getText().toString();
                 int interval=Integer.parseInt(pom);
                 setSharedPrefs(opcija,interval);
+                Toast.makeText(this.getApplicationContext(),"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
+                UpraviteljNotifikacija un=new UpraviteljNotifikacija();
+                un.pohraniPromjene(this.getApplicationContext(),opcija,interval);
+
+                finish();
             }
         }
        /* int idNotif=notifOption.getCheckedRadioButtonId();
@@ -78,7 +84,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 }
             }
         }*/
-        finish();
+
       }
 
 
@@ -109,7 +115,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 postaviIntervale(moguceOpcije);
             }
         });
-
+        brojac=moguceOpcije.size()+1;
         postaviOpcije();
         //postaviIntervale(moguceOpcije);
 
@@ -179,20 +185,6 @@ private void oznaciRadioButtone(){
             editor.putInt("interval", interval);
             editor.apply();
         }
-    private void spremiInterval(int idintervala){
-          String interval = ((RadioButton)findViewById(idintervala)).getText().toString();
-         switch (interval){
-             case "30 sekundi":
-                 setSharedPrefs("Konfigurabilno",30);
-                 break;
-             case "1 minuta":
-                 setSharedPrefs("Konfigurabilno",60);
-                 break;
-             case "5 minuta":
-                 setSharedPrefs("Konfigurabilno",5*60);
-                 break;
-         }
-    }
 
     private void postaviOpcije() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -215,7 +207,6 @@ private void oznaciRadioButtone(){
         }
     }
     private void postaviIntervale(NotifikacijaMoguceOpcije moguceOpcije){
-        //Toast.makeText(getApplicationContext(),String.valueOf(radioGroupIntervali.getChildCount()),Toast.LENGTH_SHORT).show();
         if(radioGroupIntervali.getChildCount()>0){
             radioGroupIntervali.removeAllViews();
         }
@@ -225,8 +216,9 @@ private void oznaciRadioButtone(){
             RadioButton radioButton=new RadioButton(this);
             String tekst=String.valueOf(listaIntervala.get(i));
             radioButton.setText(tekst);
-            radioButton.setId(moguceOpcije.size()+i+1);
+            radioButton.setId(brojac);
             radioGroupIntervali.addView(radioButton);
+            brojac++;
         }
         if(postaviIntervalIzsSheredPrefs){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -236,7 +228,6 @@ private void oznaciRadioButtone(){
                 rb.setChecked(true);
             }
             else{
-
                 int i=0;
                 boolean pronaden=false;
                 while(pronaden==false){
@@ -252,9 +243,9 @@ private void oznaciRadioButtone(){
             }
 
         }else{
+
             RadioButton rb=(RadioButton)radioGroupIntervali.getChildAt(0);
             rb.setChecked(true);
-            //((RadioButton)radioGroupIntervali.getChildAt(0)).setChecked(true);
         }
         postaviIntervalIzsSheredPrefs=false;
 
