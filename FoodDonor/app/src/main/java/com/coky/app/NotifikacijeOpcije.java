@@ -18,21 +18,40 @@ import com.coky.app.klase.NotifikacijaMoguceOpcije;
 import com.coky.app.klase.UpraviteljNotifikacija;
 import com.coky.app.konfigurabilno.Alarm;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class NotifikacijeOpcije extends AppCompatActivity {
 
-    private RadioGroup radioGroupInterval;
-    private RadioGroup notifOption;
+    private RadioGroup radioGroupOpcije;
+    private RadioGroup radioGroupIntervali;
+    private boolean postaviIntervalIzsSheredPrefs=false;
+
 
     @BindView(R.id.btnPohraniPromjeneNO)
     Button btnPohraniPromijene;
 
     @OnClick(R.id.btnPohraniPromjeneNO)
     public void btnPohraniPromijeneNOClick(View view){
-        int idNotif=notifOption.getCheckedRadioButtonId();
+        if(radioGroupOpcije.getCheckedRadioButtonId()==-1){
+            Toast.makeText(this,"Odaberite opciju!",Toast.LENGTH_SHORT).show();
+
+        }else{
+            if (radioGroupIntervali.getCheckedRadioButtonId()==-1){
+                Toast.makeText(this,"Odaberite interval!",Toast.LENGTH_SHORT).show();
+            }else{
+                RadioButton odabranaOpcija=(RadioButton)findViewById(radioGroupOpcije.getCheckedRadioButtonId());
+                RadioButton odabraniInterval=(RadioButton)findViewById(radioGroupIntervali.getCheckedRadioButtonId());
+                String opcija =odabranaOpcija.getText().toString();
+                String pom=odabraniInterval.getText().toString();
+                int interval=Integer.parseInt(pom);
+                setSharedPrefs(opcija,interval);
+            }
+        }
+       /* int idNotif=notifOption.getCheckedRadioButtonId();
         if(idNotif==-1){
             Toast.makeText(this,"Odaberite neku od mogućnosti!",Toast.LENGTH_SHORT).show();
         }else{
@@ -58,7 +77,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
 
                 }
             }
-        }
+        }*/
         finish();
       }
 
@@ -68,6 +87,35 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikacije_opcije);
         ButterKnife.bind(this);
+
+        /*
+        *dinamičko popunjavanje mogućih opcija
+         */
+
+        radioGroupOpcije= (RadioGroup)findViewById(R.id.radioGroupOpcijeNO);
+        radioGroupIntervali=(RadioGroup)findViewById(R.id.radioGroupIntervalNO);
+        final NotifikacijaMoguceOpcije moguceOpcije=new NotifikacijaMoguceOpcije();
+        int size=moguceOpcije.size();
+        for (int i=0; i<size;i++){
+                RadioButton radioButton=new RadioButton(this);
+                String tekst=moguceOpcije.getOpcija(i);
+                radioButton.setText(tekst);
+                radioButton.setId(i+1);
+                radioGroupOpcije.addView(radioButton);
+        }
+        radioGroupOpcije.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                postaviIntervale(moguceOpcije);
+            }
+        });
+
+        postaviOpcije();
+        //postaviIntervale(moguceOpcije);
+
+
+        //kako obrisati sve elemente djece,jednostano-> rg.removeAllViews();
+/*
 
 
         final RadioButton konfOption = (RadioButton)findViewById(R.id.konfigurabilniOption);
@@ -121,6 +169,7 @@ private void oznaciRadioButtone(){
                 break;
         }
     }
+    */
 }
 
     private void setSharedPrefs(String notifikacije, int interval){
@@ -145,6 +194,71 @@ private void oznaciRadioButtone(){
          }
     }
 
+    private void postaviOpcije() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final String notifikacije = prefs.getString("notifikacije", null);
+        if (notifikacije == null) {
+            ((RadioButton)radioGroupOpcije.getChildAt(0)).setChecked(true);
+            postaviIntervalIzsSheredPrefs=false;
+        }else{
+            int i=0;
+            boolean pronaden=false;
+            while(pronaden==false){
+                RadioButton rb=(RadioButton)radioGroupOpcije.getChildAt(i);
+                if(rb.getText().equals(notifikacije)){
+                    pronaden=true;
+                    postaviIntervalIzsSheredPrefs=true;
+                    rb.setChecked(true);
+                }
+                i++;
+            }
+        }
+    }
+    private void postaviIntervale(NotifikacijaMoguceOpcije moguceOpcije){
+        //Toast.makeText(getApplicationContext(),String.valueOf(radioGroupIntervali.getChildCount()),Toast.LENGTH_SHORT).show();
+        if(radioGroupIntervali.getChildCount()>0){
+            radioGroupIntervali.removeAllViews();
+        }
+
+        List<Integer> listaIntervala=moguceOpcije.getInterval(radioGroupOpcije.getCheckedRadioButtonId()-1);
+        for (int i=0; i<listaIntervala.size();i++){
+            RadioButton radioButton=new RadioButton(this);
+            String tekst=String.valueOf(listaIntervala.get(i));
+            radioButton.setText(tekst);
+            radioButton.setId(moguceOpcije.size()+i+1);
+            radioGroupIntervali.addView(radioButton);
+        }
+        if(postaviIntervalIzsSheredPrefs){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            int interval=prefs.getInt("interval",-1);
+            if (interval==-1 ){
+                RadioButton rb=(RadioButton)radioGroupIntervali.getChildAt(0);
+                rb.setChecked(true);
+            }
+            else{
+
+                int i=0;
+                boolean pronaden=false;
+                while(pronaden==false){
+                    RadioButton rb=(RadioButton)radioGroupIntervali.getChildAt(i);
+                    int rbInterval=Integer.parseInt(rb.getText().toString());
+                    if(rbInterval==interval){
+                        rb.setChecked(true);
+                        pronaden=true;
+                    }
+                    i++;
+                }
+
+            }
+
+        }else{
+            RadioButton rb=(RadioButton)radioGroupIntervali.getChildAt(0);
+            rb.setChecked(true);
+            //((RadioButton)radioGroupIntervali.getChildAt(0)).setChecked(true);
+        }
+        postaviIntervalIzsSheredPrefs=false;
+
+    }
 
     @Override
     public void onBackPressed(){
