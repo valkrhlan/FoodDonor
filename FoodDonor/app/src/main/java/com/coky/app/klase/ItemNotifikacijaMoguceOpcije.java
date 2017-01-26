@@ -21,6 +21,7 @@ public class ItemNotifikacijaMoguceOpcije {
         //this.listener = listener;
     }
 
+
     public String getOpcija() {
         return opcija;
     }

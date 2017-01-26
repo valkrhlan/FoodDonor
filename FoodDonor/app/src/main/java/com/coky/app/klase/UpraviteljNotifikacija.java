@@ -47,7 +47,7 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
        notificationManager.notify(ID_SMALL_NOTIFICATION,notification);
     }
     public  void pohraniPromjene(Context mContex, String opcija, Integer interval){
-        NotifikacijaMoguceOpcije notifikacijaMoguceOpcije= new NotifikacijaMoguceOpcije(mContex);
+        NotifikacijaMoguceOpcije notifikacijaMoguceOpcije= new NotifikacijaMoguceOpcije();
 
         for (int i=0; i<notifikacijaMoguceOpcije.size();i++){
             if(notifikacijaMoguceOpcije.getOpcija(i).equals("Konfigurabilno")){

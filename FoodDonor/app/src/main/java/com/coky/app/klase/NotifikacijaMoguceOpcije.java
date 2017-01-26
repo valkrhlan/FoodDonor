@@ -20,16 +20,11 @@ public class NotifikacijaMoguceOpcije {
      */
 
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
-    public Context mContext;
+   // public Context mContext;
 
 
-    public NotifikacijaMoguceOpcije(Context mContext) {
-        this.mContext=mContext;
-       // Alarm alarm=new Alarm();
-
-      //  moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0),new Object())); //new Object zamijeniti sa stvarnom vrijednosti
-      //  moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30),alarm));
-
+    public NotifikacijaMoguceOpcije() {
+       // this.mContext=mContext;
         moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0))); //new Object zamijeniti sa stvarnom vrijednosti
         moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30)));
 
@@ -38,12 +33,28 @@ public class NotifikacijaMoguceOpcije {
     public Integer size(){
         return moguceOpcije.size();
     }
+
+
     public String getOpcija(Integer i){
+
         return moguceOpcije.get(i).opcija;
     }
-    /*public Object getListener(Integer i){
-        return moguceOpcije.get(i).getListener();
-    }*/
+
+    public List<Integer> getInterval(Integer i){
+        return moguceOpcije.get(i).intervali;
+    }
+    public List<Integer> getInterval(String option){
+        int i=0;
+        boolean nadjen=false;
+        while (nadjen==false){
+            if(moguceOpcije.get(i).opcija.equals(option)){
+                nadjen=true;
+
+            }
+        }
+        return moguceOpcije.get(i).intervali;
+    }
+
 
     public List<ItemNotifikacijaMoguceOpcije> getMoguceOpcije() {
         return moguceOpcije;
@@ -53,11 +64,12 @@ public class NotifikacijaMoguceOpcije {
         this.moguceOpcije = moguceOpcije;
     }
 
-    public Context getmContext() {
+   /* public Context getmContext() {
         return mContext;
     }
 
     public void setmContext(Context mContext) {
         this.mContext = mContext;
     }
+    */
 }

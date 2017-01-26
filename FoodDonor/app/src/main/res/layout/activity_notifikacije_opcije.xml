@@ -10,50 +10,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.coky.app.NotifikacijeOpcije">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewOpcijeNO"
+        android:text="Način dobivanja notifikacija:"
+        android:layout_alignParentStart="true"
+
+        />
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroupNotifikacijeNO"
-        android:layout_alignParentStart="true"
+        android:id="@+id/radioGroupOpcijeNO"
+        android:layout_below="@id/textViewOpcijeNO"
         >
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/firebaseOption"
-            android:text="Firebase"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/konfigurabilniOption"
-            android:text="Konfigurabilno"
-            />
 
     </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewIntervalNO"
+        android:text="Interval dobivanja notifikacija u sekundama:"
+        android:layout_below="@+id/radioGroupOpcijeNO"
+        android:layout_marginTop="15dp"
+
+        />
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroupKonfigurabilnoIntervalNO"
-        android:visibility="gone"
-        android:layout_below="@+id/radioGroupNotifikacijeNO"
-        android:layout_marginLeft="20dp"
-        >
+        android:id="@+id/radioGroupIntervalNO"
+        android:layout_below="@+id/textViewIntervalNO"
+         >
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/interval10secNO"
-            android:text="30 sekundi"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/interval1minNO"
-            android:text="1 minuta"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/interval5minNO"
-            android:text="5 minuta"/>
     </RadioGroup>
 
 
@@ -63,6 +52,6 @@
         android:id="@+id/btnPohraniPromjeneNO"
         android:text="Pohrani promijene"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/radioGroupKonfigurabilnoIntervalNO"/>
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
