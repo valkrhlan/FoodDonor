@@ -63,11 +63,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     @Override
     public void onStart(){
         super.onStart();
-        setFloatingButtonIcons();
-        setTextViewVisibility();
         email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
         tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
         grad = ((GlavnaAktivnost)getActivity()).getGrad();
+        setFloatingButtonIcons();
+        setTextViewVisibility();
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         paketi.clear();
         wsDataLoader = new WsDataLoader();

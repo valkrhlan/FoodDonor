@@ -104,6 +104,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setEmailKorisnika(prefs.getString("emailKorisnika","test@test.test"));
         setTipKorisnika(prefs.getInt("tipKorisnika", 0));
+        setGrad(prefs.getString("grad","Zagreb"));
     }
 
     private void odjava(){
