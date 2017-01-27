@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
@@ -37,7 +38,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     @BindView(R.id.btnDesno)
     FloatingActionButton btnDesno;
 
+    @BindView(R.id.textGradVolonter)
+    TextView textViewGrad;
+
     private String email;
+    private String grad;
     private int tipKorisnika;
 
     private ArrayList<Paket> paketi = new ArrayList<Paket>();
@@ -59,8 +64,10 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
     public void onStart(){
         super.onStart();
         setFloatingButtonIcons();
+        setTextViewVisibility();
         email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
         tipKorisnika = ((GlavnaAktivnost)getActivity()).getTipKorisnika();
+        grad = ((GlavnaAktivnost)getActivity()).getGrad();
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         paketi.clear();
         wsDataLoader = new WsDataLoader();
@@ -74,6 +81,14 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         }else{
             btnDesno.setImageResource(R.drawable.ic_action_odabrani);
             btnDesno.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setTextViewVisibility(){
+        if(tipKorisnika != 2){
+            textViewGrad.setVisibility(View.GONE);
+        }else{
+            textViewGrad.setText("Paketi na području grada: " + grad);
         }
     }
 

@@ -26,6 +26,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
 
     private int tipKorisnika;
     private String emailKorisnika;
+    private String grad;
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -132,6 +133,14 @@ public class GlavnaAktivnost extends AppCompatActivity {
 
     public void setTipKorisnika(int tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
+    }
+
+    public String getGrad() {
+        return grad;
+    }
+
+    public void setGrad(String grad) {
+        this.grad = grad;
     }
 
     public void isNetworkAvailable() {

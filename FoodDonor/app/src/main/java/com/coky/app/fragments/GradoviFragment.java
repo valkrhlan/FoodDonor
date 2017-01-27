@@ -58,6 +58,7 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
 
     private void getGradovi(){
         WsDataLoader wdl = new WsDataLoader();
+        wdl.odaberiGrad(this);
 
     }
 
