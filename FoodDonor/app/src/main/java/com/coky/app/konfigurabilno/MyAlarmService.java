@@ -30,6 +30,7 @@ public class MyAlarmService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
+
         alarm.setAlarm(this);
     }
 

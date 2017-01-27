@@ -12,12 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.coky.app.R;
-import com.coky.app.klase.ItemNotifikacijaMoguceOpcije;
 import com.coky.app.klase.NotifikacijaMoguceOpcije;
 import com.coky.app.klase.UpraviteljNotifikacija;
-import com.coky.app.konfigurabilno.Alarm;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,47 +53,23 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 finish();
             }
         }
-       /* int idNotif=notifOption.getCheckedRadioButtonId();
-        if(idNotif==-1){
-            Toast.makeText(this,"Odaberite neku od mogućnosti!",Toast.LENGTH_SHORT).show();
-        }else{
-            UpraviteljNotifikacija un=new UpraviteljNotifikacija();
-           // Toast.makeText(this,"Ok je!",Toast.LENGTH_SHORT).show();
-            RadioButton btnOpcija=(RadioButton)findViewById(idNotif);
-            if(btnOpcija.getText().toString().equals("Firebase")){
-                un.pohraniPromjene(this.getApplicationContext(),"Firebase",0);
-                setSharedPrefs("Firebase",0);
-                Toast.makeText(this,"Firebase je",Toast.LENGTH_SHORT).show();
-                Toast.makeText(this,"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
-
-            }else{
-               int idRadioGroupInterval =radioGroupInterval.getCheckedRadioButtonId();
-                if (idRadioGroupInterval==-1){
-                    Toast.makeText(this,"Odaberite neki od intervala!",Toast.LENGTH_SHORT).show();
-                }else{
-                    spremiInterval(idRadioGroupInterval);
-                   // UpraviteljNotifikacija un=new UpraviteljNotifikacija();
-                    un.pohraniPromjene(this,"Konfigurabilno",10);
-                    Toast.makeText(this.getApplicationContext(),"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
-
-
-                }
-            }
-        }*/
 
       }
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikacije_opcije);
         ButterKnife.bind(this);
 
-        /*
-        *dinamičko popunjavanje mogućih opcija
+        /**
+         * dinamičko popunjavanje mogućih opcija
          */
-
         radioGroupOpcije= (RadioGroup)findViewById(R.id.radioGroupOpcijeNO);
         radioGroupIntervali=(RadioGroup)findViewById(R.id.radioGroupIntervalNO);
         final NotifikacijaMoguceOpcije moguceOpcije=new NotifikacijaMoguceOpcije();
@@ -117,66 +89,8 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         });
         brojac=moguceOpcije.size()+1;
         postaviOpcije();
-        //postaviIntervale(moguceOpcije);
 
-
-        //kako obrisati sve elemente djece,jednostano-> rg.removeAllViews();
-/*
-
-
-        final RadioButton konfOption = (RadioButton)findViewById(R.id.konfigurabilniOption);
-        radioGroupInterval = (RadioGroup)findViewById(R.id.radioGroupKonfigurabilnoIntervalNO);
-        notifOption = (RadioGroup)findViewById(R.id.radioGroupNotifikacijeNO);
-        notifOption.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(konfOption.isChecked()){
-                    radioGroupInterval.setVisibility(View.VISIBLE);
-                }else{
-                    radioGroupInterval.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        if(konfOption.isChecked()){
-            radioGroupInterval.setVisibility(View.VISIBLE);
-        }
-        oznaciRadioButtone();
-
-     }
-
-    //postavljanje već ranije spremljenih vrijednosti u shared preferences
-private void oznaciRadioButtone(){
-    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    final String notifikacije=prefs.getString("notifikacije",null);
-    if(notifikacije!=null) {
-        for(int i=0;i<notifOption.getChildCount();i++){
-            RadioButton child=(RadioButton)notifOption.getChildAt(i);
-            String pom=child.getText().toString();
-            if(pom.equals(notifikacije)){
-                ((RadioButton) notifOption.getChildAt(i)).setChecked(true);
-            }
-        }
-    }else{
-        ( (RadioButton)notifOption.getChildAt(0)).setChecked(true);
     }
-    final int interval=prefs.getInt("interval",-1);
-    if(interval!=-1){
-        switch (interval){
-            case 0: break;
-            case 30:
-                ((RadioButton)radioGroupInterval.getChildAt(0)).setChecked(true);
-                break;
-            case 60:
-                ((RadioButton)radioGroupInterval.getChildAt(1)).setChecked(true);
-                break;
-            case 300:
-                ((RadioButton)radioGroupInterval.getChildAt(2)).setChecked(true);
-                break;
-        }
-    }
-    */
-}
 
     private void setSharedPrefs(String notifikacije, int interval){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -212,6 +126,7 @@ private void oznaciRadioButtone(){
         }
 
         List<Integer> listaIntervala=moguceOpcije.getInterval(radioGroupOpcije.getCheckedRadioButtonId()-1);
+
         for (int i=0; i<listaIntervala.size();i++){
             RadioButton radioButton=new RadioButton(this);
             String tekst=String.valueOf(listaIntervala.get(i));
@@ -220,6 +135,7 @@ private void oznaciRadioButtone(){
             radioGroupIntervali.addView(radioButton);
             brojac++;
         }
+
         if(postaviIntervalIzsSheredPrefs){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             int interval=prefs.getInt("interval",-1);
@@ -239,7 +155,6 @@ private void oznaciRadioButtone(){
                     }
                     i++;
                 }
-
             }
 
         }else{

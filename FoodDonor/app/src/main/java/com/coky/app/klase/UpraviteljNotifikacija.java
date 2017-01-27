@@ -1,5 +1,6 @@
 package com.coky.app.klase;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,8 +8,11 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import com.coky.app.Prijava;
 import com.coky.app.konfigurabilno.Alarm;
+import com.coky.app.konfigurabilno.KonfigurabilnoListener;
 import com.coky.app.loaders.NotifikacijaLoadedListener;
+import com.coky.app.loaders.SlanjePodatakaModulima;
 
 import java.util.List;
 
@@ -25,10 +29,14 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
 
     @Override
     public void onNotifikacijaLoaded(String title, String message, int ikona, Intent intent,Context mCtx) {
-        PendingIntent resultPendingIntent= PendingIntent.getActivity(
+        ContextProvider cp=new ContextProvider();
+        mCtx=cp.dohvatiContext();
+        Intent intent2 = new Intent(mCtx, Prijava.class);
+        mCtx=cp.dohvatiContext();
+          PendingIntent resultPendingIntent= PendingIntent.getActivity(
                 mCtx,
                 ID_SMALL_NOTIFICATION,
-                intent,
+                intent2,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
 
@@ -38,7 +46,7 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent)
                 .setContentTitle(title)
-                .setSmallIcon(ikona) //               .setSmallIcon() //
+                .setSmallIcon(ikona) //
                 .setContentText(message)
                 .build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -51,8 +59,8 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
 
         for (int i=0; i<notifikacijaMoguceOpcije.size();i++){
             if(notifikacijaMoguceOpcije.getOpcija(i).equals("Konfigurabilno")){
-                Alarm alarm=new Alarm();
-                alarm.onPromjenaLoaded(mContex,opcija,10);
+                SlanjePodatakaModulima konfigurabilnoListener=new KonfigurabilnoListener(mContex,this);
+                konfigurabilnoListener.obradiPromjenu(mContex,opcija,10);
 
             }
         }
