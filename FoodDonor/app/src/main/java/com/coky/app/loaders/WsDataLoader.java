@@ -69,6 +69,16 @@ public class WsDataLoader {
         FdWs.CallWsForGradovi();
     }
 
+    public void odaberiPaketVolonter(String email, String idPaketa, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForOdaberiPaketVolonter(email,idPaketa);
+    }
+
+    public void evidentirajDolazak(String idPaketa, WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForEvidentirajDolazak(idPaketa);
+    }
+
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
         public void onDataArrived(Object message, int status) {

@@ -71,7 +71,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         if(tipKorisnika == 1){   //DONOR
             btnDesno.setImageResource(R.drawable.ic_action_adding);
             btnDesno.setVisibility(View.VISIBLE);
-        }else if(tipKorisnika == 3){   //POTREBITI
+        }else{
             btnDesno.setImageResource(R.drawable.ic_action_odabrani);
             btnDesno.setVisibility(View.VISIBLE);
         }
@@ -112,7 +112,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
             transaction.replace(R.id.activity_popis_paketa, noviPaket);
             transaction.addToBackStack(null);
             transaction.commit();
-        }else if(tipKorisnika == 3) {  //POTREBITI
+        }else {
             Fragment odabraniPaketi = new PotrebitiOdabraniPaketi();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.activity_popis_paketa, odabraniPaketi);

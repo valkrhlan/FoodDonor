@@ -46,7 +46,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
             fragmentCreated = savedInstanceState.getBoolean("fragmentCreated", false);
         }
         if(fragmentCreated == false){
-            chooseInitialFragment();
+            createInitialFragment(new PopisPaketa(),"popisPaketa");
         }
 
     }
@@ -89,24 +89,6 @@ public class GlavnaAktivnost extends AppCompatActivity {
         }
     }
 
-    private void chooseInitialFragment(){
-        switch(getTipKorisnika()){
-            case 1: //DONOR
-                createInitialFragment(new PopisPaketa(),"popisPaketa");
-                break;
-            case 2: //VOLONTER
-                createInitialFragment(new PopisPaketa(),"popisPaketa");
-               break;
-            case 3: //POTREBITI
-                createInitialFragment(new PopisPaketa(),"popisPaketa");
-
-                break;
-            default:
-                Toast.makeText(this,"Desila se greška: tip korisnika je nula!", Toast.LENGTH_LONG).show();
-                odjava();
-                break;
-        }
-    }
 
     private void createInitialFragment(Fragment fragment, String tag){
         fragmentCreated = true;
