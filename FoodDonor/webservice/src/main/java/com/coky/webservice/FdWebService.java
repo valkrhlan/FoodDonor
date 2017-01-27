@@ -92,4 +92,8 @@ public interface FdWebService {
     Call<FdWebServiceResponse>odaberiPaketVolonter(
             @Path("email") String email,
             @Path("idPaketa") String idPaketa);
+
+    @GET("evidentirajDolazak/{idPaketa}/")
+    Call<FdWebServiceResponse>evidentirajDolazak(
+            @Path("idPaketa") String idPaketa);
 }

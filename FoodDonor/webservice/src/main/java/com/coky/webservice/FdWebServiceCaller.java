@@ -134,6 +134,12 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("odaberiPaketVolonter");
     }
 
+    public void CallWsForEvidentirajDolazak(String idPaketa){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.evidentirajDolazak(idPaketa);
+        HandleResponseFromCall("evidentirajDolazak");
+    }
+
 
     public void HandleResponseFromCall(final String method){
         if(call != null){
