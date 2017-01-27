@@ -128,6 +128,11 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("getGradovi");
     }
 
+    public void CallWsForOdaberiPaketVolonter(String email, String idPaketa){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.odaberiPaketVolonter(email,idPaketa);
+        HandleResponseFromCall("odaberiPaketVolonter");
+    }
 
 
     public void HandleResponseFromCall(final String method){

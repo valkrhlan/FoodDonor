@@ -112,7 +112,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
             transaction.replace(R.id.activity_popis_paketa, noviPaket);
             transaction.addToBackStack(null);
             transaction.commit();
-        }else if(tipKorisnika == 3) {  //POTREBITI
+        }else if(tipKorisnika == 3 ) {  //POTREBITI
             Fragment odabraniPaketi = new PotrebitiOdabraniPaketi();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.activity_popis_paketa, odabraniPaketi);

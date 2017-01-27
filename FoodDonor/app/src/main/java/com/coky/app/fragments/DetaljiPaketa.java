@@ -140,8 +140,14 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     @OnClick(R.id.DD_odaberi)
     public void btnOdaberiOnClick(){
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
-        WsDataLoader wsDataLoader = new WsDataLoader();
-        wsDataLoader.odaberiPaketPotrebiti(email,"ne",paket.getId(),this);
+        if(tipKorisnika == 2){
+            WsDataLoader wsDataLoader = new WsDataLoader();
+            wsDataLoader.odaberiPaketVolonter(email,paket.getId(),this);
+        }else{
+            WsDataLoader wsDataLoader = new WsDataLoader();
+            wsDataLoader.odaberiPaketPotrebiti(email,"ne",paket.getId(),this);
+        }
+
     }
 
     @OnClick(R.id.btnLijevo)
@@ -163,8 +169,7 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         }else{
             titleNotif = "HITNO! Novi paket spreman za prijevoz!";
         }
-        String messageNotif = "";
-        messageNotif += "Naziv donora: " + paket.getNaziv_donor() + ", Naziv potrebitog: " + paket.getNaziv_potrebitog(); //nebu išlo
+        String messageNotif = "Naziv donora: " + paket.getNaziv_donor();
         Log.d("paketNoviTitle", titleNotif);
         Log.d("paketNoviMessage", messageNotif);
         wsDataLoader.posaljiNotif(email,titleNotif, messageNotif, this);
