@@ -12,16 +12,23 @@ import android.support.v4.content.ContextCompat;
 
 import com.coky.app.R;
 import com.coky.app.klase.UpraviteljNotifikacija;
+import com.coky.app.loaders.NotifikacijaLoadedListener;
+import com.coky.app.loaders.SlanjePodatakaModulima;
 
 /**
  * Created by Valentina on 22.12.2016..
  */
 
-public class MyNotificationManager {
-    public static final int ID_SMALL_NOTIFICATION = 235;
+public class MyNotificationManager implements SlanjePodatakaModulima{
     private Context mCtx;
-    public MyNotificationManager(Context mCtx) {
+    NotifikacijaLoadedListener notifikacijaLoadedListener;
 
+    public MyNotificationManager(Context mCtx, NotifikacijaLoadedListener notifikacijaLoadedListener) {
+        this.mCtx = mCtx;
+        this.notifikacijaLoadedListener = notifikacijaLoadedListener;
+    }
+
+    public MyNotificationManager(Context mCtx) {
         this.mCtx = mCtx;
     }
 
@@ -35,4 +42,13 @@ public class MyNotificationManager {
 
     }
 
+    @Override
+    public void obradiPromjenu(Context mContex, String opcija, int interval) {
+
+    }
+
+    @Override
+    public void dostaviPodatkeWS(Object data) {
+
+    }
 }

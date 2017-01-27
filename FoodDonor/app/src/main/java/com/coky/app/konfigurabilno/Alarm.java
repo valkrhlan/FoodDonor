@@ -13,46 +13,33 @@ import android.widget.Toast;
 
 import com.coky.app.NotifikacijeOpcije;
 import com.coky.app.R;
+import com.coky.app.klase.UpraviteljNotifikacija;
+import com.coky.app.loaders.NotifikacijaLoadedListener;
 
 /**
  * Created by Valentina on 30.12.2016..
  */
 
-public class Alarm extends BroadcastReceiver implements KonfigurabilnoPromjernaOpcijaLoadedListener{
-    Context mCtx;
-    Intent intent;
+public class Alarm extends BroadcastReceiver{
+    private Context mCtx;
+    private Intent intent;
     private static boolean postavljenAlarm=false;
 
-    /*
-    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener(){
 
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            Toast.makeText(mCtx,"Promjena shared prefs!!!!!!!",Toast.LENGTH_SHORT).show();
-
-        }
-    };
-  */
     @Override
     public void onReceive(Context context, Intent intent) {
         PowerManager pm =(PowerManager)context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My Tag");
         wl.acquire();
-
-
         mCtx=context;
-     /*   SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
         String notifikacije=preferences.getString("notifikacije",null);
-        if(notifikacije!=null && notifikacije.equals("Konfigurabilno")){
-            int interval=preferences.getInt("interval",-1);
-            if(interval!=-1){
-                Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
-            }
-        }
-        else {
+        if(notifikacije!="Konfigurabilno"){
             cancelAlarm(context);
+        }else{
+            //reci ovom konfigurabilnom da pozove ws i da mu se vrate notifikacije
         }
-        */
+
         Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
         wl.release();
     }
@@ -90,27 +77,5 @@ public class Alarm extends BroadcastReceiver implements KonfigurabilnoPromjernaO
 
     }
 
-    @Override
-    public void onPromjenaLoaded(Context mContex, String opcija, int interval) {
-        //Toast.makeText(mContex,"onPromjenaLoaded",Toast.LENGTH_SHORT).show();
-        SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(mContex);
-
-        Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
-        if (opcija.equals("Konfigurabilno")){
-          if(ukljucen==-1 || ukljucen==0){
-              SharedPreferences.Editor editor = preferences.edit();
-              editor.putInt("alarm_ukljucen", 1);
-              editor.apply();
-              setAlarm(mContex);
-
-          }
-        }else{
-            if(ukljucen==1){
-                Toast.makeText(mContex,"cancel alarm",Toast.LENGTH_SHORT).show();
-                cancelAlarm(mContex);
-
-            }
-        }
-    }
 
 }
