@@ -66,7 +66,7 @@ public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedLis
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
         paketi.clear();
         wsDataLoader = new WsDataLoader();
-        wsDataLoader.preuzmiPakete(email, "da", this);
+        wsDataLoader.preuzmiPakete(email, "da", "grad", this);
     }
 
     private void addPaketToArray(Paket paket){

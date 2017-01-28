@@ -51,10 +51,11 @@ public interface FdWebService {
             @Path("data") String json,
             @Path("prijevoz") Integer prijevoz);
 
-    @GET("paket/dohvati/{email}/{odabrani}/")
+    @GET("paket/dohvati/{email}/{odabrani}/{grad}/")
     Call<FdWebServiceResponse> dohvatiPakete(
             @Path("email") String email,
-            @Path("odabrani") String odabrani);
+            @Path("odabrani") String odabrani,
+            @Path("grad") String grad);
 
     @GET("registerDevice/{email}/{token}/")
     Call<FdWebServiceResponse> spremiToken(

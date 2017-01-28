@@ -87,10 +87,10 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("dodajPaket");
     }
 
-    public void CallWsForPreuzmiPakete(String email, String odabrani){
+    public void CallWsForPreuzmiPakete(String email, String odabrani, String grad){
         Log.d("paketi","1c. metoda preuzmi pakete (WScaller)");
         FdWebService fdWebService=retrofit.create(FdWebService.class);
-        call=fdWebService.dohvatiPakete(email, odabrani);
+        call=fdWebService.dohvatiPakete(email, odabrani, grad);
         HandleResponseFromCall("dohvatiPakete");
     }
 

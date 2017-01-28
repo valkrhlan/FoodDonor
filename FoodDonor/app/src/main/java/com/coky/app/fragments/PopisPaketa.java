@@ -78,7 +78,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         if(wsDataLoader == null) {
             wsDataLoader = new WsDataLoader();
         }
-        wsDataLoader.preuzmiPakete(email, "ne", this);
+        wsDataLoader.preuzmiPakete(email, "ne", grad, this);
     }
 
     private void setFloatingButtonIcons(){
