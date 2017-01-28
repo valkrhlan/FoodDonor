@@ -44,6 +44,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 String opcija =odabranaOpcija.getText().toString();
                 String pom=odabraniInterval.getText().toString();
                 int interval=Integer.parseInt(pom);
+
                 String prethodnaOpcija=getSherPrefNotifikacije();
                 setSharedPrefs(opcija,interval);
                 un.pohraniPromjene(getApplicationContext(),opcija,prethodnaOpcija, interval);
@@ -94,7 +95,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
 
     private String getSherPrefNotifikacije(){
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String prethodniOdabir=preferences.getString("notifikacije",null);
+        String prethodniOdabir=preferences.getString("notifikacije","prazno");
         return prethodniOdabir;
     }
     private void setSharedPrefs(String notifikacije, int interval){

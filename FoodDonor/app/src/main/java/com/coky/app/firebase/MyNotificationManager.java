@@ -47,9 +47,9 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
     public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
 
         //to do: obrisi ili postavi token
-        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
-        Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
-        String prethodniOdabir=preferences.getString("notifikacije",null);
+      //  SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
+        //Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
+      //  String prethodniOdabir=preferences.getString("notifikacije","prazno");
 
 
         Toast.makeText(mContex,"Firebase obradi promjenu",Toast.LENGTH_SHORT).show();

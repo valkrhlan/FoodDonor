@@ -23,28 +23,32 @@ import com.coky.app.loaders.NotifikacijaLoadedListener;
 public class Alarm extends BroadcastReceiver{
     private Context mCtx;
     private Intent intent;
-    private static boolean postavljenAlarm=false;
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
+
         PowerManager pm =(PowerManager)context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My Tag");
         wl.acquire();
+
         mCtx=context;
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
-        String notifikacije=preferences.getString("notifikacije",null);
-        if(notifikacije!="Konfigurabilno"){
-            cancelAlarm(context);
-        }else{
-            //reci ovom konfigurabilnom da pozove ws i da mu se vrate notifikacije
+        String notifikacije=preferences.getString("notifikacije","prazno");
+       // Toast.makeText(context,"Alarm u OnReceivu!!!!!!!"+notifikacije,Toast.LENGTH_SHORT).show();
+
+        if(notifikacije.equals("Konfigurabilno")){
+            SharedPreferences preferences2= PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+            String notifikacije2=preferences2.getString("emailKorisnika","prazno");
+
+            Toast.makeText(context,"Alarm u equals Konfigurabilno!!!!!!!"+notifikacije2,Toast.LENGTH_SHORT).show();
+            //to do for ws
         }
+        else {
+           // Toast.makeText(context,"Cancel Alarm u OnReceivu!!!!!!!",Toast.LENGTH_SHORT).show();
+            cancelAlarm(context);
+        }
+            wl.release();
 
-        //to do: pozovi ws->dohvati podatke
-
-
-        wl.release();
     }
 
     public void setAlarm(Context context){
@@ -60,7 +64,7 @@ public class Alarm extends BroadcastReceiver{
         if(notifikacije!=null && notifikacije.equals("Konfigurabilno")){
             int interval=preferences.getInt("interval",-1);
             if(interval!=-1){
-                am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*10,pi);//millisec*sec*minute //sredi da budi pravi interval
+                am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*interval,pi);//millisec*sec*minute //sredi da budi pravi interval
             }
         }
         else {

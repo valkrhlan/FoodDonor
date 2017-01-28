@@ -45,10 +45,13 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
             editor.apply();
 
         }else{
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("alarm_ukljucen",0);
-            editor.apply();
-            alarm.cancelAlarm(mContex);
+            if(prethodnaOpcija.equals("Konfigurabilno")){
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("alarm_ukljucen",0);
+                editor.apply();
+                alarm.cancelAlarm(mContex);
+            }
+
         }
     }
 

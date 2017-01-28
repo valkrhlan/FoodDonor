@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.coky.app.Prijava;
+import com.coky.app.firebase.MyNotificationManager;
 import com.coky.app.konfigurabilno.Alarm;
 import com.coky.app.konfigurabilno.KonfigurabilnoListener;
 import com.coky.app.loaders.NotifikacijaLoadedListener;
@@ -57,12 +58,10 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
     public  void pohraniPromjene(Context mContex, String opcija,String prethodnaOpcija, Integer interval){
         NotifikacijaMoguceOpcije notifikacijaMoguceOpcije= new NotifikacijaMoguceOpcije();
 
-        for (int i=0; i<notifikacijaMoguceOpcije.size();i++){
-            if(notifikacijaMoguceOpcije.getOpcija(i).equals("Konfigurabilno")){
-                SlanjePodatakaModulima konfigurabilnoListener=new KonfigurabilnoListener(mContex,this);
-                konfigurabilnoListener.obradiPromjenu(mContex,opcija,prethodnaOpcija,10);
+        SlanjePodatakaModulima firebase=new MyNotificationManager(mContex,this);
+        firebase.obradiPromjenu(mContex,opcija,prethodnaOpcija,interval);
+        SlanjePodatakaModulima konfigurabilnoListener=new KonfigurabilnoListener(mContex,this);
+        konfigurabilnoListener.obradiPromjenu(mContex,opcija,prethodnaOpcija,interval);
 
-            }
-        }
     }
 }
