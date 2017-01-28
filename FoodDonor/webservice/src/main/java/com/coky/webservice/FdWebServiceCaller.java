@@ -2,6 +2,7 @@ package com.coky.webservice;
 
 import android.util.Log;
 
+import com.coky.core.entities.Gradovi;
 import com.coky.core.entities.Korisnik;
 import com.coky.core.entities.Notifikacija;
 import com.coky.core.entities.Paket;
@@ -87,6 +88,7 @@ public class FdWebServiceCaller {
     }
 
     public void CallWsForPreuzmiPakete(String email, String odabrani){
+        Log.d("paketi","1c. metoda preuzmi pakete (WScaller)");
         FdWebService fdWebService=retrofit.create(FdWebService.class);
         call=fdWebService.dohvatiPakete(email, odabrani);
         HandleResponseFromCall("dohvatiPakete");
@@ -123,6 +125,7 @@ public class FdWebServiceCaller {
     }
 
     public void CallWsForGradovi(){
+        Log.d("grad", "2c. caller");
         FdWebService fdWebService = retrofit.create(FdWebService.class);
         call = fdWebService.getGradovi();
         HandleResponseFromCall("getGradovi");
@@ -158,6 +161,8 @@ public class FdWebServiceCaller {
                                     //DO NOTHING!!!
                                 }else if (method=="dohvatiNotifikacije"){
                                     handleDohvatiNotifikacije(response);
+                                }else if(method=="getGradovi"){
+                                    handleDohvatiGradove(response);
                                 }else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 
@@ -195,6 +200,13 @@ public class FdWebServiceCaller {
         Notifikacija[] notifikacije=gson.fromJson(response.body().getData(),Notifikacija[].class);
         if(fdWebServiceHandler!=null){
             fdWebServiceHandler.onDataArrived(Arrays.asList(notifikacije),response.body().getNbResults());
+        }
+    }
+    private void handleDohvatiGradove(Response<FdWebServiceResponse> response){
+        Gson gson=new Gson();
+        Gradovi[] gradovi=gson.fromJson(response.body().getData(),Gradovi[].class);
+        if(fdWebServiceHandler!=null){
+            fdWebServiceHandler.onDataArrived(Arrays.asList(gradovi),response.body().getNbResults());
         }
     }
 

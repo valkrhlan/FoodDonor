@@ -26,6 +26,18 @@
         android:textSize="20sp"
         android:padding="8dp"
         android:gravity="center"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnLijevo"
+        android:scaleType="center"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="4dp"
+        app:backgroundTint="#FF0000"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"  />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnDesno"
