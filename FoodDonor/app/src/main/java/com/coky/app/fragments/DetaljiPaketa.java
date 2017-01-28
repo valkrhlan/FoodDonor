@@ -170,11 +170,9 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
 
     @OnClick(R.id.btnDesno)
     public void btnDesnoOnClick(){
-        if(paket.getHitno() == null){
-            ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
-            WsDataLoader wsDataLoader = new WsDataLoader();
-            wsDataLoader.evidentirajDolazak(paket.getId(),this);
-        }
+        ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.evidentirajDolazak(paket.getId(),this);
     }
 
     @Override
