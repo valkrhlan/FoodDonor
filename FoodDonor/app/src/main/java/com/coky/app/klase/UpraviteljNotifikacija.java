@@ -28,15 +28,15 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
     public static final int ID_SMALL_NOTIFICATION = 235;
 
     @Override
-    public void onNotifikacijaLoaded(String title, String message, int ikona, Intent intent,Context mCtx) {
+    public void onNotifikacijaLoaded(String title, String message, int ikona) {
         ContextProvider cp=new ContextProvider();
-        mCtx=cp.dohvatiContext();
-        Intent intent2 = new Intent(mCtx, Prijava.class);
+        Context mCtx=cp.dohvatiContext();
+        Intent intent = new Intent(mCtx, Prijava.class);
         mCtx=cp.dohvatiContext();
           PendingIntent resultPendingIntent= PendingIntent.getActivity(
                 mCtx,
                 ID_SMALL_NOTIFICATION,
-                intent2,
+                intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
 
@@ -54,13 +54,13 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener {
        android.app.NotificationManager notificationManager = (android.app.NotificationManager)mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
        notificationManager.notify(ID_SMALL_NOTIFICATION,notification);
     }
-    public  void pohraniPromjene(Context mContex, String opcija, Integer interval){
+    public  void pohraniPromjene(Context mContex, String opcija,String prethodnaOpcija, Integer interval){
         NotifikacijaMoguceOpcije notifikacijaMoguceOpcije= new NotifikacijaMoguceOpcije();
 
         for (int i=0; i<notifikacijaMoguceOpcije.size();i++){
             if(notifikacijaMoguceOpcije.getOpcija(i).equals("Konfigurabilno")){
                 SlanjePodatakaModulima konfigurabilnoListener=new KonfigurabilnoListener(mContex,this);
-                konfigurabilnoListener.obradiPromjenu(mContex,opcija,10);
+                konfigurabilnoListener.obradiPromjenu(mContex,opcija,prethodnaOpcija,10);
 
             }
         }

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.coky.app.R;
 import com.coky.app.klase.UpraviteljNotifikacija;
@@ -35,15 +36,23 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
     public void showSmallNotification(String title, String message, Intent intent){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mCtx);
         String notifikacije=prefs.getString("notifikacije",null);
-        if(notifikacije==null || notifikacije.equals("Firebase")) { //po defaultu nek bude firebase
+        if(notifikacije==null || notifikacije.equals("Firebase")) {
             UpraviteljNotifikacija upraviteljNotifikacija = new UpraviteljNotifikacija();
-            upraviteljNotifikacija.onNotifikacijaLoaded(title, message, android.R.drawable.ic_menu_delete, intent, mCtx);
+            upraviteljNotifikacija.onNotifikacijaLoaded(title, message, android.R.drawable.ic_menu_delete);
         }
 
     }
 
     @Override
-    public void obradiPromjenu(Context mContex, String opcija, int interval) {
+    public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
+
+        //to do: obrisi ili postavi token
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
+        Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
+        String prethodniOdabir=preferences.getString("notifikacije",null);
+
+
+        Toast.makeText(mContex,"Firebase obradi promjenu",Toast.LENGTH_SHORT).show();
 
     }
 

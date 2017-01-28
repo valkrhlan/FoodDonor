@@ -24,14 +24,14 @@ public class MyAlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
        // Toast.makeText(this,"Alarm u MyAlarmService!!!!!!!",Toast.LENGTH_SHORT).show();
 
-        alarm.setAlarm(this);
+        alarm.setAlarm(this.getApplicationContext());
         return START_STICKY;
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
 
-        alarm.setAlarm(this);
+        alarm.setAlarm(this.getApplicationContext());
     }
 
     @Nullable

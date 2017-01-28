@@ -28,6 +28,7 @@ public class Alarm extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
         PowerManager pm =(PowerManager)context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl=pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"My Tag");
         wl.acquire();
@@ -40,19 +41,22 @@ public class Alarm extends BroadcastReceiver{
             //reci ovom konfigurabilnom da pozove ws i da mu se vrate notifikacije
         }
 
-        Toast.makeText(context,"Alarm!!!!!!!",Toast.LENGTH_SHORT).show();
+        //to do: pozovi ws->dohvati podatke
+
+
         wl.release();
     }
 
     public void setAlarm(Context context){
         mCtx=context;
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent i =new Intent(context,Alarm.class);
+        Intent i = new Intent(context,Alarm.class);
         intent=i;
-        postavljenAlarm=true;
-        PendingIntent pi=PendingIntent.getBroadcast(context,0,intent,0);
+
+        PendingIntent pi=PendingIntent.getBroadcast(context,0,i,0);
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
         String notifikacije=preferences.getString("notifikacije",null);
+
         if(notifikacije!=null && notifikacije.equals("Konfigurabilno")){
             int interval=preferences.getInt("interval",-1);
             if(interval!=-1){
@@ -74,7 +78,6 @@ public class Alarm extends BroadcastReceiver{
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("alarm_ukljucen", 0);
         editor.apply();
-
     }
 
 

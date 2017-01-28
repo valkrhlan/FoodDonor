@@ -3,7 +3,6 @@ package com.coky.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +25,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
     private RadioGroup radioGroupIntervali;
     private boolean postaviIntervalIzsSheredPrefs=false;
     private int brojac;
-
+    UpraviteljNotifikacija un;
 
     @BindView(R.id.btnPohraniPromjeneNO)
     Button btnPohraniPromijene;
@@ -45,10 +44,10 @@ public class NotifikacijeOpcije extends AppCompatActivity {
                 String opcija =odabranaOpcija.getText().toString();
                 String pom=odabraniInterval.getText().toString();
                 int interval=Integer.parseInt(pom);
+                String prethodnaOpcija=getSherPrefNotifikacije();
                 setSharedPrefs(opcija,interval);
-                Toast.makeText(this.getApplicationContext(),"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
-                UpraviteljNotifikacija un=new UpraviteljNotifikacija();
-                un.pohraniPromjene(this.getApplicationContext(),opcija,interval);
+                un.pohraniPromjene(getApplicationContext(),opcija,prethodnaOpcija, interval);
+                Toast.makeText(getApplicationContext(),"Promijene evidentirane!",Toast.LENGTH_SHORT).show();
 
                 finish();
             }
@@ -72,6 +71,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
          */
         radioGroupOpcije= (RadioGroup)findViewById(R.id.radioGroupOpcijeNO);
         radioGroupIntervali=(RadioGroup)findViewById(R.id.radioGroupIntervalNO);
+        un=new UpraviteljNotifikacija();
         final NotifikacijaMoguceOpcije moguceOpcije=new NotifikacijaMoguceOpcije();
         int size=moguceOpcije.size();
         for (int i=0; i<size;i++){
@@ -92,6 +92,11 @@ public class NotifikacijeOpcije extends AppCompatActivity {
 
     }
 
+    private String getSherPrefNotifikacije(){
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String prethodniOdabir=preferences.getString("notifikacije",null);
+        return prethodniOdabir;
+    }
     private void setSharedPrefs(String notifikacije, int interval){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();

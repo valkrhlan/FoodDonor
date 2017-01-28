@@ -2,6 +2,7 @@ package com.coky.app.klase;
 
 import android.content.Context;
 
+import com.coky.app.firebase.MyNotificationManager;
 import com.coky.app.konfigurabilno.Alarm;
 
 import java.sql.Array;
@@ -20,15 +21,16 @@ public class NotifikacijaMoguceOpcije {
      */
 
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
-   // public Context mContext;
+    //private Context mContext;
 
 
     public NotifikacijaMoguceOpcije() {
-       // this.mContext=mContext;
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0))); //new Object zamijeniti sa stvarnom vrijednosti
+      //  this.mContext=mContext;
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0)));
         moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30)));
 
     }
+
 
     public Integer size(){
         return moguceOpcije.size();

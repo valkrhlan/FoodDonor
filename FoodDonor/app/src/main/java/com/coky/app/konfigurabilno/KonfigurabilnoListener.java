@@ -28,22 +28,27 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
     }
 
     @Override
-    public void obradiPromjenu(Context mContex, String opcija, int interval) {
+    public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
+
+        Toast.makeText(mContex,"Kofigurabilno obradi promjenu",Toast.LENGTH_SHORT).show();
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
         Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
-        if (opcija.equals("Konfigurabilno")){
-            if(ukljucen==-1 || ukljucen==0){
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("alarm_ukljucen", 1);
-                editor.apply();
-                alarm.setAlarm(mContex);
-            }
-        }else{
-            if(ukljucen==1){
-                Toast.makeText(mContex,"cancel alarm",Toast.LENGTH_SHORT).show();
-                alarm.cancelAlarm(mContex);
 
+        if (opcija.equals("Konfigurabilno")){
+            SharedPreferences.Editor editor=preferences.edit();
+            if(opcija!=prethodnaOpcija){
+                editor.putInt("alarm_ukljucen", 1);
+                alarm.setAlarm(mContex);
+            }else{
+                editor.putInt("alarm_ukljucen", 0);
             }
+            editor.apply();
+
+        }else{
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("alarm_ukljucen",0);
+            editor.apply();
+            alarm.cancelAlarm(mContex);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.coky.app.klase;
 
+import com.coky.app.loaders.SlanjePodatakaModulima;
+
 import java.util.List;
 
 /**
@@ -13,14 +15,22 @@ public class ItemNotifikacijaMoguceOpcije {
 
     public String opcija;
     public List<Integer> intervali;
+    public Object modul;
    // public Object listener;
 
-    public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali ) {
+    public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali) {
         this.opcija = opcija;
         this.intervali = intervali;
-        //this.listener = listener;
+        //this.modul = modul;
     }
 
+    /*public Object getModul() {
+        return modul;
+    }
+
+    public void setModul(Object modul) {
+        this.modul = modul;
+    }*/
 
     public String getOpcija() {
         return opcija;
@@ -38,12 +48,5 @@ public class ItemNotifikacijaMoguceOpcije {
         this.intervali = intervali;
     }
 
-   /* public Object getListener() {
-        return listener;
-    }
 
-    public void setListener(Object listener) {
-        this.listener = listener;
-    }
-    */
 }

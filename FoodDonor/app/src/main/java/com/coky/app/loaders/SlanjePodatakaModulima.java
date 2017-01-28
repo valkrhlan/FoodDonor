@@ -7,7 +7,7 @@ import android.content.Context;
  */
 
 public interface SlanjePodatakaModulima {
-    void obradiPromjenu(Context mContex, String opcija, int interval);
+    void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval);
     void dostaviPodatkeWS(Object data);
 
 }
