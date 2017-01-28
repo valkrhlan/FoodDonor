@@ -164,6 +164,7 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("tipKorisnika", tip);
         editor.putString("emailKorisnika", email);
+        editor.putString("grad", "Zagreb");
         editor.putBoolean("prijavljen", true);
         editor.putLong("timestamp",ts);
         editor.apply();
@@ -176,6 +177,7 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         editor.remove("tipKorisnika");
         editor.remove("emailKorisnika");
         editor.remove("notifikacije");
+        editor.remove("grad");
         editor.remove("interval");
         editor.remove("timestamp");
         editor.apply();

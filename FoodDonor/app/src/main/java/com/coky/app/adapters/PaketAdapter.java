@@ -63,7 +63,7 @@ public class PaketAdapter extends ArrayAdapter<Paket> {
         int tipK = prefs.getInt("tipKorisnika", 0);
 
 
-            if(paket.getPreuzimanje() != null && paket.getPreuzimanje().contains("1")){
+            if(paket.getId_volonter() != null){
                 convertView.setBackgroundColor(Color.parseColor("#42f462"));
                 viewHolder.paketPreuzimanje.setText("Preuzeo volonter " + paket.getId_volonter());
                 viewHolder.paketVrijemePreuzimanja.setText("Preuzeto: " + paket.getV_preuzeto());

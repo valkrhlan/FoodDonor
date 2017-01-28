@@ -36,10 +36,10 @@ public class GradoviAdapter extends ArrayAdapter<Gradovi> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         Gradovi grad = getItem(position);
-        Log.d("paket",grad.toString());
+        Log.d("grad",grad.toString());
         GradoviAdapter.ViewHolder viewHolder;
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.paket_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.grad_item, parent, false);
             viewHolder = new GradoviAdapter.ViewHolder();
             viewHolder.naziv = (TextView) convertView.findViewById(R.id.gradItem);
             convertView.setTag(viewHolder);
@@ -47,9 +47,7 @@ public class GradoviAdapter extends ArrayAdapter<Gradovi> {
         else{
             viewHolder = (GradoviAdapter.ViewHolder) convertView.getTag();
         }
-
         viewHolder.naziv.setText(grad.getNaziv().toString());
-
         return convertView;
     }
 }

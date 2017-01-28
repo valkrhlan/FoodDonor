@@ -7,12 +7,14 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.coky.app.GlavnaAktivnost;
 import com.coky.app.R;
 import com.coky.app.adapters.GradoviAdapter;
 import com.coky.app.adapters.PaketAdapter;
@@ -37,36 +39,46 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
 
     private ArrayList<Gradovi> gradovi;
     private GradoviAdapter gradoviAdapter;
-    private FragmentManager fragmentManager = getFragmentManager();
+    private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-
-
-    public GradoviFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //getActivity().setTitle("Odaberite grad");
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_gradovi, container, false);
         ButterKnife.bind(this,view);
+        fragmentManager = getActivity().getSupportFragmentManager();
         return view;
     }
 
-    private void getGradovi(){
-        WsDataLoader wdl = new WsDataLoader();
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d("grad", "1. onStart");
+        getGradovi();
+    }
 
+    private void getGradovi(){
+        Log.d("grad", "2. getGradovi");
+        WsDataLoader wdl = new WsDataLoader();
+        wdl.odaberiGrad(this);
     }
 
 
     private void addGradoviToArray(Gradovi grad){
-        if(grad == null){
+        if(gradovi == null){
             gradovi = new ArrayList<Gradovi>();
         }
         gradovi.add(grad);
+    }
+
+    private void azurirajGrad(int gradIndex){
+        String grad = gradovi.get(gradIndex).getNaziv();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("grad", grad);
+        editor.apply();
+        ((GlavnaAktivnost)getActivity()).setGrad(grad);
     }
 
     private void setGradoviAdapter(){
@@ -75,11 +87,7 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
         gradList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("gradKorisnik", gradovi.get(i).getNaziv() );
-                editor.apply();
-
+                azurirajGrad(i);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.remove(GradoviFragment.this);
                 fragmentManager.popBackStack();
@@ -91,6 +99,7 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {
+        Log.d("grad", "3. response");
         List<Gradovi> gradoviPomocnaLista = (List<Gradovi>) message;
         for(Gradovi grad : gradoviPomocnaLista){
 

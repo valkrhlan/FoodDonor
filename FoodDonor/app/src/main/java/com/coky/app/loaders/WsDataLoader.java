@@ -1,5 +1,7 @@
 package com.coky.app.loaders;
 
+import android.util.Log;
+
 import com.coky.core.entities.Korisnik;
 import com.coky.core.entities.RegistriraniKorisnik;
 import com.coky.webservice.FdWebServiceCaller;
@@ -40,6 +42,7 @@ public class WsDataLoader {
         FdWs.CallWsForDodajPaket(email,json,prijevoz);
     }
     public  void preuzmiPakete(String email, String odabrani, WsDataLoadedListener wsDataLoadedListener){
+        Log.d("paketi","1b. metoda preuzmi pakete (loaders)");
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForPreuzmiPakete(email, odabrani);
     }
@@ -65,6 +68,7 @@ public class WsDataLoader {
     }
 
     public void odaberiGrad(WsDataLoadedListener wsDataLoadedListener){
+        Log.d("grad", "2b. loader");
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForGradovi();
     }

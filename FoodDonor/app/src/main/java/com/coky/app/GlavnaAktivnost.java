@@ -26,6 +26,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
 
     private int tipKorisnika;
     private String emailKorisnika;
+    private String grad;
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -103,6 +104,7 @@ public class GlavnaAktivnost extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setEmailKorisnika(prefs.getString("emailKorisnika","test@test.test"));
         setTipKorisnika(prefs.getInt("tipKorisnika", 0));
+        setGrad(prefs.getString("grad","Zagreb"));
     }
 
     private void odjava(){
@@ -132,6 +134,14 @@ public class GlavnaAktivnost extends AppCompatActivity {
 
     public void setTipKorisnika(int tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
+    }
+
+    public String getGrad() {
+        return grad;
+    }
+
+    public void setGrad(String grad) {
+        this.grad = grad;
     }
 
     public void isNetworkAvailable() {
