@@ -1,9 +1,11 @@
 package com.coky.app.klase;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.coky.app.firebase.MyNotificationManager;
 import com.coky.app.konfigurabilno.Alarm;
+import com.coky.app.konfigurabilno.KonfigurabilnoListener;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -21,13 +23,14 @@ public class NotifikacijaMoguceOpcije {
      */
 
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
-    //private Context mContext;
+    private Context mContext;
+    private UpraviteljNotifikacija un;
 
-
-    public NotifikacijaMoguceOpcije() {
-      //  this.mContext=mContext;
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0)));
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30)));
+    public NotifikacijaMoguceOpcije(Context mContext,UpraviteljNotifikacija un) {
+        this.mContext=mContext;
+        this.un=un;
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0),new MyNotificationManager(mContext,un)));
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30),new KonfigurabilnoListener(mContext,un)));
 
     }
 
@@ -40,6 +43,9 @@ public class NotifikacijaMoguceOpcije {
     public String getOpcija(Integer i){
 
         return moguceOpcije.get(i).opcija;
+    }
+    public Object getModul(Integer i){
+        return moguceOpcije.get(i).modul;
     }
 
     public List<Integer> getInterval(Integer i){
@@ -66,12 +72,4 @@ public class NotifikacijaMoguceOpcije {
         this.moguceOpcije = moguceOpcije;
     }
 
-   /* public Context getmContext() {
-        return mContext;
-    }
-
-    public void setmContext(Context mContext) {
-        this.mContext = mContext;
-    }
-    */
 }

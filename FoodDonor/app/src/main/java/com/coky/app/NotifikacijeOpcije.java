@@ -73,7 +73,7 @@ public class NotifikacijeOpcije extends AppCompatActivity {
         radioGroupOpcije= (RadioGroup)findViewById(R.id.radioGroupOpcijeNO);
         radioGroupIntervali=(RadioGroup)findViewById(R.id.radioGroupIntervalNO);
         un=new UpraviteljNotifikacija();
-        final NotifikacijaMoguceOpcije moguceOpcije=new NotifikacijaMoguceOpcije();
+        final NotifikacijaMoguceOpcije moguceOpcije=un.notifikacijaMoguceOpcije;
         int size=moguceOpcije.size();
         for (int i=0; i<size;i++){
                 RadioButton radioButton=new RadioButton(this);

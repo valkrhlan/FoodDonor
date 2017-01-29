@@ -18,19 +18,19 @@ public class ItemNotifikacijaMoguceOpcije {
     public Object modul;
    // public Object listener;
 
-    public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali) {
+    public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali,Object modul) {
         this.opcija = opcija;
         this.intervali = intervali;
-        //this.modul = modul;
+        this.modul = modul;
     }
 
-    /*public Object getModul() {
+    public Object getModul() {
         return modul;
     }
 
     public void setModul(Object modul) {
         this.modul = modul;
-    }*/
+    }
 
     public String getOpcija() {
         return opcija;
