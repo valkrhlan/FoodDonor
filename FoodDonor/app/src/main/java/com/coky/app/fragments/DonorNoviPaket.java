@@ -185,7 +185,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
          String email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
          WsDataLoader wsDataLoader = new WsDataLoader();
          wsDataLoader.dodajPaket(email,json,prijevoz,this); //->sredit treba to na ws-u
-         //wsDataLoader.dodajPaket(email,json,this);
+
          }
   }
 

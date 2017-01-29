@@ -30,7 +30,6 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
     @Override
     public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
 
-        Toast.makeText(mContex,"Kofigurabilno obradi promjenu",Toast.LENGTH_SHORT).show();
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
         Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
 
@@ -56,7 +55,7 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
     }
 
     @Override
-    public void dostaviPodatkeWS(Object data) {
+    public void dostaviPodatkeWS(Context mContext,Object data) {
 
     }
 }

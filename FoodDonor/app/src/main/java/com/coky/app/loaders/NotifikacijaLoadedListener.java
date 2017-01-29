@@ -10,4 +10,6 @@ import android.graphics.drawable.Icon;
 
 public interface NotifikacijaLoadedListener {
     void onNotifikacijaLoaded(String title, String message, int slika);
+    void pozoviWS(String opcija, String param1, String param2);
+
 }

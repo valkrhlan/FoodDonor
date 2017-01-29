@@ -34,17 +34,15 @@ public class Alarm extends BroadcastReceiver{
         mCtx=context;
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
         String notifikacije=preferences.getString("notifikacije","prazno");
-       // Toast.makeText(context,"Alarm u OnReceivu!!!!!!!"+notifikacije,Toast.LENGTH_SHORT).show();
 
         if(notifikacije.equals("Konfigurabilno")){
-            SharedPreferences preferences2= PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-            String notifikacije2=preferences2.getString("emailKorisnika","prazno");
 
-            Toast.makeText(context,"Alarm u equals Konfigurabilno!!!!!!!"+notifikacije2,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Alarm u equals Konfigurabilno!!!!!!!",Toast.LENGTH_SHORT).show();
+
             //to do for ws
+
         }
         else {
-           // Toast.makeText(context,"Cancel Alarm u OnReceivu!!!!!!!",Toast.LENGTH_SHORT).show();
             cancelAlarm(context);
         }
             wl.release();

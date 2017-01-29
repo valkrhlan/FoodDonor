@@ -2,6 +2,7 @@ package com.coky.app.firebase;
 
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.coky.app.Prijava;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -36,7 +37,6 @@ public class MyFirebaseMessgingService extends FirebaseMessagingService{
             JSONObject data = json.getJSONObject("data");
             String title = data.getString("title");
             String message = data.getString("message");
-            String imageUrl = data.getString("image");
             MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
             Intent intent = new Intent(getApplicationContext(), Prijava.class);
             mNotificationManager.showSmallNotification(title, message, intent);

@@ -31,33 +31,46 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
 
     public MyNotificationManager(Context mCtx) {
         this.mCtx = mCtx;
+        this.notifikacijaLoadedListener=new UpraviteljNotifikacija();
     }
 
     public void showSmallNotification(String title, String message, Intent intent){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mCtx);
         String notifikacije=prefs.getString("notifikacije",null);
         if(notifikacije==null || notifikacije.equals("Firebase")) {
-            UpraviteljNotifikacija upraviteljNotifikacija = new UpraviteljNotifikacija();
-            upraviteljNotifikacija.onNotifikacijaLoaded(title, message, android.R.drawable.ic_menu_delete);
+             notifikacijaLoadedListener.onNotifikacijaLoaded(title, message, android.R.drawable.ic_menu_delete);
         }
-
     }
 
     @Override
     public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
 
-        //to do: obrisi ili postavi token
-      //  SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContex);
-        //Integer ukljucen=preferences.getInt("alarm_ukljucen",-1);
-      //  String prethodniOdabir=preferences.getString("notifikacije","prazno");
+        if(opcija.equals("Firebase")){
 
+            if(prethodnaOpcija!="Firebase" || prethodnaOpcija!="prazno"){
+                     posaljiPovratnuInformaciju(mContex,"dodajToken");
+            }
 
-        Toast.makeText(mContex,"Firebase obradi promjenu",Toast.LENGTH_SHORT).show();
+        }else{
+            if(prethodnaOpcija.equals("Firebase")){
+                posaljiPovratnuInformaciju(mContex,"obrisiToken");
+            }
+        }
 
     }
 
     @Override
-    public void dostaviPodatkeWS(Object data) {
+    public void dostaviPodatkeWS(Context mContext,Object data) {
+        if(data instanceof String){
+            Toast.makeText(mContext,data.toString(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void posaljiPovratnuInformaciju(Context mContext,String opcija){
+        SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+        String email=preferences.getString("emailKorisnika",null);
+        String token= SharedPrefManager.getInstance(mContext).getDeviceToken();
+        notifikacijaLoadedListener.pozoviWS(opcija,email,token);
 
     }
 }
