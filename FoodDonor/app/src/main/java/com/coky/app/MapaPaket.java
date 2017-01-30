@@ -31,10 +31,10 @@ import java.util.ArrayList;
 public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ArrayList<Paket> paketi;
-    private double lat1 = 45.52811759999999;
-    private double lat2 = 31.2354;
-    private double lon1 = 17.2437493;
-    private double lon2 = 77.7784;
+    private double lat1 = 46.3076267;
+    private double lat2 = 46.3097705;
+    private double lon1 = 16.3382566;
+    private double lon2 = 16.3468148;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,29 +60,28 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap map) {
+
+        mMap = map;
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         try {
-
-            mMap = map;
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.setMyLocationEnabled(true);
-            mMap.setTrafficEnabled(true);
-            mMap.setIndoorEnabled(true);
-            mMap.setBuildingsEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
-            //LocationManager Lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-            //Location l = Lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            double zoom = 13.6;
-            //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
-            LatLng pos1 = new LatLng(lat1, lon1);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
-
-            if (mMap != null) {
-                AddMarker(lat1, lon1);
-                AddMarker(lat2, lon2);
-            }
 
         } catch (SecurityException e) {
-            Toast.makeText(this, "Molimo vas Uključite GPS opciju i ponovno posjetite ovaj modul!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uključite dozvolu za GPS i storage! (Settings > Apps > Food donor > Permissions", Toast.LENGTH_SHORT).show();
         }
-    }
-}
+        mMap.setTrafficEnabled(true);
+        mMap.setIndoorEnabled(true);
+        mMap.setBuildingsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        //LocationManager Lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //Location l = Lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double zoom = 13.6;
+        //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
+        LatLng pos1 = new LatLng(lat1, lon1);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
+        if (mMap != null) {
+            AddMarker(lat1, lon1);
+            AddMarker(lat2, lon2);
+        }
+
+}}
