@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.coky.core.entities.Gradovi;
 import com.coky.core.entities.Korisnik;
+import com.coky.core.entities.ListaNotifikacija;
 import com.coky.core.entities.Notifikacija;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.RegistriraniKorisnik;
@@ -112,7 +113,7 @@ public class FdWebServiceCaller {
         call=fdWebService.brisiToken(email);
         HandleResponseFromCall("brisiToken");
     }
-    public void CallWsForGetNotifications(String email, long timestamp){
+    public void CallWsForGetNotifications(String email, String timestamp){
         FdWebService fdWebService=retrofit.create(FdWebService.class);
         call=fdWebService.dohvatiNotifikacije(email,timestamp);
         HandleResponseFromCall("dohvatiNotifikacije");
@@ -198,8 +199,9 @@ public class FdWebServiceCaller {
     private void handleDohvatiNotifikacije(Response<FdWebServiceResponse> response){
         Gson gson=new Gson();
         Notifikacija[] notifikacije=gson.fromJson(response.body().getData(),Notifikacija[].class);
+        String pom="test";
         if(fdWebServiceHandler!=null){
-            fdWebServiceHandler.onDataArrived(Arrays.asList(notifikacije),response.body().getNbResults());
+            fdWebServiceHandler.onDataArrived(notifikacije,response.body().getNbResults());
         }
     }
     private void handleDohvatiGradove(Response<FdWebServiceResponse> response){

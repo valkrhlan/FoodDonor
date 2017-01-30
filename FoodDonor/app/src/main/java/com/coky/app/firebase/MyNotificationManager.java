@@ -60,7 +60,8 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
     }
 
     @Override
-    public void dostaviPodatkeWS(Context mContext,Object data) {
+    public void dostaviPodatkeWS(Context mContext,Object data,NotifikacijaLoadedListener notifikacijaLoadedListener) {
+        this.notifikacijaLoadedListener=notifikacijaLoadedListener;
         if(data instanceof String){
             Toast.makeText(mContext,data.toString(),Toast.LENGTH_SHORT).show();
         }

@@ -82,6 +82,10 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForEvidentirajDolazak(idPaketa);
     }
+    public  void dohvatiNotifikacije(String email, String timestamp,WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForGetNotifications(email,timestamp);
+    }
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override

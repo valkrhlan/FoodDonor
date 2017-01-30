@@ -30,7 +30,7 @@ public class NotifikacijaMoguceOpcije {
         this.mContext=mContext;
         this.un=un;
         moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Firebase",Arrays.asList(0),new MyNotificationManager(mContext,un)));
-        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(10,20,30),new KonfigurabilnoListener(mContext,un)));
+        moguceOpcije.add(new ItemNotifikacijaMoguceOpcije("Konfigurabilno",Arrays.asList(30,60,120),new KonfigurabilnoListener(mContext,un)));
 
     }
 

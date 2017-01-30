@@ -85,6 +85,9 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener,WsData
             case "obrisiToken":
                 wsDataLoader.brisanjeTokena(param1, this);
                 break;
+            case "dohvatiNotifikacije":
+                wsDataLoader.dohvatiNotifikacije(param1,param2,this);
+                break;
         }
     }
 
@@ -92,7 +95,7 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener,WsData
     public void onWsDataLoaded(Object message, int tip) {
         for (int i=0; i<notifikacijaMoguceOpcije.size();i++){
             SlanjePodatakaModulima slanjePodatakaModulima=(SlanjePodatakaModulima)notifikacijaMoguceOpcije.getModul(i);
-            slanjePodatakaModulima.dostaviPodatkeWS(cp.dohvatiContext(),message);
+            slanjePodatakaModulima.dostaviPodatkeWS(cp.dohvatiContext(),message,this);
         }
     }
 }
