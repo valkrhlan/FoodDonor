@@ -1,23 +1,13 @@
 package com.coky.app.konfigurabilno;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
-import com.coky.app.Prijava;
-import com.coky.app.R;
-import com.coky.app.klase.NotifikacijaMoguceOpcije;
 import com.coky.app.klase.UpraviteljNotifikacija;
 import com.coky.app.loaders.NotifikacijaLoadedListener;
 import com.coky.app.loaders.SlanjePodatakaModulima;
-import com.coky.core.entities.ListaNotifikacija;
 import com.coky.core.entities.Notifikacija;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Valentina on 27.1.2017..
@@ -78,8 +68,7 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
 
     @Override
     public void dostaviPodatkeWS(Context mContext,Object data,NotifikacijaLoadedListener notifikacijaLoadedListener) {
-        String type=data.getClass().getName();
-        this.notifikacijaLoadedListener=notifikacijaLoadedListener;
+         this.notifikacijaLoadedListener=notifikacijaLoadedListener;
         if(data instanceof Notifikacija[]){
              String test="test";
             Notifikacija[] notifikacije=(Notifikacija[]) data;
@@ -89,13 +78,6 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
             }
         }
 
-         /*   if(data instanceof ListaNotifikacija){
-                ListaNotifikacija listaNotifikacija= (ListaNotifikacija) data;
-                for (int i=0;i<listaNotifikacija.size();i++){
-                    notifikacijaLoadedListener.onNotifikacijaLoaded(listaNotifikacija.getTitle(i),listaNotifikacija.getMessage(i),android.R.drawable.ic_dialog_email);
-                }
-
-            }*/
 
     }
 }

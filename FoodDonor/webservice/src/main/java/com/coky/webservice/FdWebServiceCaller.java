@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.coky.core.entities.Gradovi;
 import com.coky.core.entities.Korisnik;
-import com.coky.core.entities.ListaNotifikacija;
 import com.coky.core.entities.Notifikacija;
 import com.coky.core.entities.Paket;
 import com.coky.core.entities.RegistriraniKorisnik;

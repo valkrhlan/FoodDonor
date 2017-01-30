@@ -28,7 +28,6 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener,WsData
     /*
       klasa u kojoj se definira izgled notifikacije koja se prikazue korisniku
      */
-    public static final int ID_SMALL_NOTIFICATION = 235;
     public NotifikacijaMoguceOpcije notifikacijaMoguceOpcije;
     private ContextProvider cp;
     public UpraviteljNotifikacija() {
@@ -39,30 +38,9 @@ public class UpraviteljNotifikacija implements NotifikacijaLoadedListener,WsData
 
     @Override
     public void onNotifikacijaLoaded(String title, String message, int ikona) {
-
         Context mCtx=cp.dohvatiContext();
-        Intent intent = new Intent(mCtx, Prijava.class);
-        mCtx=cp.dohvatiContext();
-          PendingIntent resultPendingIntent= PendingIntent.getActivity(
-                mCtx,
-                ID_SMALL_NOTIFICATION,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        );
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
-        Notification notification;
-        notification=mBuilder.setSmallIcon(android.R.drawable.ic_menu_delete).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentIntent(resultPendingIntent)
-                .setContentTitle(title)
-                .setSmallIcon(ikona) //
-                .setContentText(message)
-                .build();
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-       android.app.NotificationManager notificationManager = (android.app.NotificationManager)mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
-       notificationManager.notify(ID_SMALL_NOTIFICATION,notification);
+        PrikazNotifikacija prikazNotifikacija=new PrikazNotifikacija();
+        prikazNotifikacija.prikaziNotifikaciju(title,message,ikona,mCtx);
     }
 
 
