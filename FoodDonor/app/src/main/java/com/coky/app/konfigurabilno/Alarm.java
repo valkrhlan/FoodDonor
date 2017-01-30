@@ -37,7 +37,7 @@ public class Alarm extends BroadcastReceiver{
 
         if(notifikacije.equals("Konfigurabilno")){
 
-            Toast.makeText(context,"Alarm u equals Konfigurabilno!!!!!!!",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context,"Alarm u equals Konfigurabilno!!!!!!!",Toast.LENGTH_SHORT).show();
             KonfigurabilnoListener konfigurabilnoListener=new KonfigurabilnoListener(mCtx);
             konfigurabilnoListener.pozoviWS(context);
 
