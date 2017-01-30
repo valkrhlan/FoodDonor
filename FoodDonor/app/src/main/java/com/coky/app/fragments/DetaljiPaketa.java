@@ -1,6 +1,7 @@
 package com.coky.app.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coky.app.GlavnaAktivnost;
+import com.coky.app.MapaPaket;
 import com.coky.app.R;
 import com.coky.app.adapters.StavkeDetaljiListAdapter;
 import com.coky.app.loaders.WsDataLoadedListener;
@@ -65,6 +67,9 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     @BindView(R.id.btnDesno)
     FloatingActionButton btnDesno;
 
+    @BindView(R.id.DD_karta)
+    TextView btnKarta;
+
     private ArrayAdapter<Stavka> stavkeDetaljiListAdapter;
     private List<Stavka> stavke = new ArrayList<Stavka>();
 
@@ -106,8 +111,10 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         btnDesno.setVisibility(View.GONE);
         if(tipKorisnika == 1 || data.getBoolean("pogledIzListeOdabranih") == true){
             btnOdaberi.setVisibility(View.GONE);
+            btnKarta.setVisibility(View.GONE);
         }else{
             btnOdaberi.setVisibility(View.VISIBLE);
+            btnKarta.setVisibility(View.VISIBLE);
         }
         if(tipKorisnika == 3){
             if(data.getBoolean("pogledIzListeOdabranih") == false){
@@ -116,9 +123,16 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
             }else{
                 btnDesno.setImageResource(R.drawable.ic_action_evidentirano);
                 btnDesno.setVisibility(View.VISIBLE);
+                btnKarta.setVisibility(View.GONE);
             }
 
         }
+    }
+
+    @OnClick(R.id.DD_karta)
+    public void btnKartaOnClick(){
+        Intent intent = new Intent(getActivity(),MapaPaket.class);
+        startActivity(intent);
     }
 
     private void addStavkeToArray(){
