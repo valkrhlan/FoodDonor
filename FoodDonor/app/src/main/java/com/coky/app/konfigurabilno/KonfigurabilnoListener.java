@@ -92,7 +92,7 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
              String test="test";
             Notifikacija[] notifikacije=(Notifikacija[]) data;
             for (Notifikacija notifikacija:notifikacije){
-                notifikacijaLoadedListener.onNotifikacijaLoaded(notifikacija.getTitle(),notifikacija.getMessage(),android.R.drawable.ic_dialog_email);
+                notifikacijaLoadedListener.onNotifikacijaLoaded(notifikacija.getTitle(),notifikacija.getMessage(),android.R.drawable.ic_menu_compass);
 
             }
         }

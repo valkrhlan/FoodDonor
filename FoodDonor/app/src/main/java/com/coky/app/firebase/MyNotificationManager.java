@@ -39,7 +39,7 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mCtx);
         String notifikacije=prefs.getString("notifikacije",null);
         if(notifikacije==null || notifikacije.equals("Firebase")) {
-             notifikacijaLoadedListener.onNotifikacijaLoaded(title, message, android.R.drawable.ic_menu_delete);
+             notifikacijaLoadedListener.onNotifikacijaLoaded(title, message, android.R.drawable.ic_dialog_info);
         }
     }
 
