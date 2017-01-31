@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,10 +57,10 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     ListView list;
 
     @BindView(R.id.DD_natrag)
-    TextView btnNatrag;
+    Button btnNatrag;
 
     @BindView(R.id.DD_odaberi)
-    TextView btnOdaberi;
+    Button btnOdaberi;
 
     @BindView(R.id.btnLijevo)
     FloatingActionButton btnLijevo;
@@ -68,7 +69,7 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     FloatingActionButton btnDesno;
 
     @BindView(R.id.DD_karta)
-    TextView btnKarta;
+    Button btnKarta;
 
     private ArrayAdapter<Stavka> stavkeDetaljiListAdapter;
     private List<Stavka> stavke = new ArrayList<Stavka>();
@@ -109,11 +110,13 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     private void setButtonVisibility(){
         btnLijevo.setVisibility(View.GONE);
         btnDesno.setVisibility(View.GONE);
+        btnKarta.setVisibility(View.GONE);
         if(tipKorisnika == 1 || data.getBoolean("pogledIzListeOdabranih") == true){
             btnOdaberi.setVisibility(View.GONE);
-            btnKarta.setVisibility(View.GONE);
         }else{
             btnOdaberi.setVisibility(View.VISIBLE);
+        }
+        if(tipKorisnika == 2){
             btnKarta.setVisibility(View.VISIBLE);
         }
         if(tipKorisnika == 3){
@@ -123,7 +126,6 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
             }else{
                 btnDesno.setImageResource(R.drawable.ic_action_evidentirano);
                 btnDesno.setVisibility(View.VISIBLE);
-                btnKarta.setVisibility(View.GONE);
             }
 
         }

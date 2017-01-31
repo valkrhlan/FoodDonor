@@ -1,17 +1,8 @@
 package com.coky.app;
 
-import android.*;
 import android.Manifest;
-import android.app.Fragment;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.provider.SyncStateContract;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,18 +11,12 @@ import android.widget.Toast;
 import com.coky.app.loaders.WsDataLoadedListener;
 import com.coky.app.loaders.WsDataLoader;
 import com.coky.core.entities.GoogleMapa;
-import com.coky.core.entities.Paket;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
 
 public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, WsDataLoadedListener {
 
@@ -67,12 +52,8 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, 
 
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(this, "Permission denied to read your ACCESS FINE LOCATION", Toast.LENGTH_SHORT).show();
                 }
+
                 return;
             }
 
