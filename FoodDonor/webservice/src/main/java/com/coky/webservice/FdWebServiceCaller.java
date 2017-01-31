@@ -2,6 +2,7 @@ package com.coky.webservice;
 
 import android.util.Log;
 
+import com.coky.core.entities.GoogleMapa;
 import com.coky.core.entities.Gradovi;
 import com.coky.core.entities.Korisnik;
 import com.coky.core.entities.Notifikacija;
@@ -143,6 +144,12 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("evidentirajDolazak");
     }
 
+    public void CallWsForPreuzmiKoordinate(String idPaketa){
+        FdWebService fdWebService=retrofit.create(FdWebService.class);
+        call=fdWebService.preuzmiKoordinate(idPaketa);
+        HandleResponseFromCall("preuzmiKoordinate");
+    }
+
 
     public void HandleResponseFromCall(final String method){
         if(call != null){
@@ -163,7 +170,9 @@ public class FdWebServiceCaller {
                                     handleDohvatiNotifikacije(response);
                                 }else if(method=="getGradovi"){
                                     handleDohvatiGradove(response);
-                                }else{
+                                }else if(method=="preuzmiKoordinate"){
+                                    handleDohvatiKoordinate(response);
+                                }                                else{
                                     fdWebServiceHandler.onDataArrived(response.body().getMessage().toString(),response.body().getNbResults());
 
                                 }
@@ -208,6 +217,14 @@ public class FdWebServiceCaller {
         Gradovi[] gradovi=gson.fromJson(response.body().getData(),Gradovi[].class);
         if(fdWebServiceHandler!=null){
             fdWebServiceHandler.onDataArrived(Arrays.asList(gradovi),response.body().getNbResults());
+        }
+    }
+
+    private void handleDohvatiKoordinate(Response<FdWebServiceResponse> response){
+        Gson gson=new Gson();
+        GoogleMapa[] koordinate=gson.fromJson(response.body().getData(),GoogleMapa[].class);
+        if(fdWebServiceHandler!=null){
+            fdWebServiceHandler.onDataArrived(Arrays.asList(koordinate),response.body().getNbResults());
         }
     }
 
