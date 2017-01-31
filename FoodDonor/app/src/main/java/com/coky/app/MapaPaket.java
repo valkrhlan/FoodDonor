@@ -92,7 +92,7 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //LocationManager Lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         //Location l = Lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double zoom = 13.6;
+        double zoom = 12.2;
         //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
         LatLng pos1 = new LatLng(lat1, lon1);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
