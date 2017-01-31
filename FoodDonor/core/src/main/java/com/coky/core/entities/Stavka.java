@@ -2,6 +2,9 @@ package com.coky.core.entities;
 
 /**
  * Created by Čoky on 10.1.2017..
+ *
+ * klasa koja predstavlja stavku paketa
+ * instancira se u klasi paket
  */
 
 public class Stavka {

@@ -1,22 +1,29 @@
 package com.coky.app.klase;
 
-import com.coky.app.loaders.SlanjePodatakaModulima;
 
 import java.util.List;
 
 /**
  * Created by Valentina on 30.12.2016..
+ *
+ * klasa koja predstavlja pojedinu mogućnost u listi svih mogućnosti u klasi NotifikacijaMOgućeOpcije
+ *
  */
 
 public class ItemNotifikacijaMoguceOpcije {
-    /*
-    klasa koja predstavlja pojedinu mogućnost u listi svih mogućnosti u klasi NotifikacijaMOgućeOpcije
-     */
 
     public String opcija;
+
+    /**
+     *
+     * @param intervali
+     *
+     * U slučaju da modul ne treba interval, postavlja se njegova vrijednost na 0
+     *
+     */
     public List<Integer> intervali;
     public Object modul;
-   // public Object listener;
+
 
     public ItemNotifikacijaMoguceOpcije(String opcija, List<Integer> intervali,Object modul) {
         this.opcija = opcija;

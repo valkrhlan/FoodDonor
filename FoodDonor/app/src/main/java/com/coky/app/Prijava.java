@@ -27,6 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Klasa koja obavlja zadatke vezane uz prijavu korisnika u aplikaciju
+ */
 public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
 
     @BindView(R.id.prijavaBtn)
@@ -61,6 +64,12 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         }
     }
 
+    /**
+     * Metoda u kojoj se obrađuju podatci dobiveni od web servisa
+     * točnije ispit poruke pogreške ili preusmjeranje na glavnu aktivnost
+     * @param message string parametar koji vraća web servis, govori nam o tome da li prijava uspješna ili ne
+     * @param tip parametar tipa int koji u slučaju uspješne prijave vraća 1, a u slučaju neuspješne vraća 0
+     */
     @Override
     public void onWsDataLoaded(Object message, final int tip) {
         if(tip != 0 && message.toString().startsWith("U")){
@@ -87,6 +96,11 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         }
     }
 
+    /**
+     * Metoda koje u slučaju ispravno unesenih podataka poziva web servis za autentikaciju na serverskoj strani
+     * u slučaju neispunjenih podataka ili nekog drugog propusta koji se otkriva u
+     * @param view
+     */
     @OnClick(R.id.prijavaBtn)
     public void prijavaBtnClick(View view){
         if(!editEmail.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()){
@@ -105,7 +119,11 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
 
     }
 
-
+    /**
+     * Metoda koja na klikom na gumb za registraciju se prijavljuje alert box za odabir registrcije pravne ili fizičke osob
+     * nakon odabira akacije na alert boxu pokreće aktivnost RegistracijaFizickiKorisnik ili RegistracijaPravniKorisnik
+     * @param view
+     */
     @OnClick(R.id.registracijaBtn)
     public void registracijaBtnClick(View view){
         AlertDialog alertDialog = new AlertDialog.Builder(Prijava.this).create();
@@ -136,7 +154,8 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         alertDialog.show();
     }
 
-    /*Nakon korisnikove odjave, briše se njegov firebase token u našem web servisu, a ujedno se brišu i podaci o korisniku*/
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -183,7 +202,10 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         editor.apply();
     }
 
-    /*Provjera je li korisnik pritisnuo 'natrag' ili odabrao opciju 'odjava'*/
+    /**
+     * metoda za provjeru da li je korisnik kliknuto natrag ili je odabrao opciju odjavi se
+     * @return bolean vrijednost, u slučaju da je korisnik nije prijavljen vraća false, ali je prijavljne vraća true
+     */
     private Boolean checkLoginPersistence(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         prijavljen = prefs.getBoolean("prijavljen",false);
@@ -195,6 +217,10 @@ public class Prijava extends AppCompatActivity implements WsDataLoadedListener {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * Metoda koje provjerava da li je uključen internet
+     * @return boolean vrijdnsot koja u slučau uključenog interneta vraća true, a ako je internet isključen vraća false
+     */
     private Boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -7,6 +7,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 /**
  * Created by Valentina on 22.12.2016..
+ * Klasa koja manipulira promjenom tokena
  */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
@@ -22,7 +23,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     }
 
     private void storeToken(String token) {
-   //spremanje tokena u shared prefs
         SharedPrefManager.getInstance(getApplicationContext()).saveDeviceToken(token);
     }
 }

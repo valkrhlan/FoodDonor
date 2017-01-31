@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 /**
  * Created by Čoky on 10.1.2017..
+ *
+ * Klasa koja se koristi za prijenos objekta u bundle struktri (rad prijenosa podataka između fragmenata)
+ *
  */
 
 public class Paket_Parcelabler implements Parcelable {

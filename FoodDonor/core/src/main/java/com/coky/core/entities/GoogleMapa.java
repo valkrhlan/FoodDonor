@@ -2,6 +2,9 @@ package com.coky.core.entities;
 
 /**
  * Created by Čoky on 31.1.2017..
+ *
+ * Klasa sa koridinatama za prikaz na lokacije donora i potrebitog korisnika na karti
+ *
  */
 
 public class GoogleMapa {

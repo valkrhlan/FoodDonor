@@ -9,6 +9,9 @@ import retrofit.http.Path;
 
 /**
  * Created by Čoky on 9.11.2016..
+ *
+ * anotacije na metode sučelja i njiovi parametri
+ *
  */
 
 public interface FdWebService {

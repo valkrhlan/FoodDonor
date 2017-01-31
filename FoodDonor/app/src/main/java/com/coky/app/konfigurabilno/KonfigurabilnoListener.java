@@ -11,6 +11,8 @@ import com.coky.core.entities.Notifikacija;
 
 /**
  * Created by Valentina on 27.1.2017..
+ * Klasa koja služi za komunikaciju prema firebase modularnoj implementaciji notifikacija
+ *
  */
 
 public class KonfigurabilnoListener implements SlanjePodatakaModulima {
@@ -26,6 +28,11 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
     public KonfigurabilnoListener(Context mContext){
         this.notifikacijaLoadedListener=new UpraviteljNotifikacija();
     }
+
+    /**
+     * Preko sučelja traži poziv web servisa za određenu akciju
+     * @param mContext kontekst aplikacije
+     */
     public void pozoviWS(Context mContext){
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mContext);
         String email=preferences.getString("emailKorisnika",null);
@@ -39,7 +46,13 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
         }
     }
 
-
+    /**
+     * Metoda koja obavlja akcije nakon izmjene opcije, točnije prema potrebi organzira dodavanje ili brisanje firebase tokena
+     * @param mContex kontekst alikacije
+     * @param opcija odabran opcija za dohvaćanje notifikacija
+     * @param prethodnaOpcija prethodno odabrana opcija za dohvaćanje notifikacija
+     * @param interval interval, za firebase je 0
+     */
     @Override
     public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
 
@@ -66,6 +79,12 @@ public class KonfigurabilnoListener implements SlanjePodatakaModulima {
         }
     }
 
+    /**
+     * Metoda koja dobiva podatke koji su rezultat pozivanja ws-a nakon promjene odabrane opcije
+     * @param mContext aplikacijski kontekst
+     * @param data podatci vraćeni od web servisa, u sučaju firebase to je običan strig o usješnosti imjene/dodavanja/brisanja tokena
+     * @param notifikacijaLoadedListener instanca sučelja za modularno komunikaciju koja je vratila podatke od ws-a
+     */
     @Override
     public void dostaviPodatkeWS(Context mContext,Object data,NotifikacijaLoadedListener notifikacijaLoadedListener) {
          this.notifikacijaLoadedListener=notifikacijaLoadedListener;

@@ -5,6 +5,9 @@ import android.content.Context;
 
 /**
  * Created by Valentina on 27.1.2017..
+ *
+ * klasa koja služi za dohvaćanje konteksta aplikacije
+ *
  */
 
 public class ContextProvider extends Application{

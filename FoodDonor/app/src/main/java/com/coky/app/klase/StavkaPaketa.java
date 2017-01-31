@@ -4,12 +4,13 @@ import com.coky.core.entities.SpinnerElement;
 
 /**
  * Created by Valentina on 6.12.2016..
+ *
+ * klasa koja predstavlja jednu stavku paketa kreiranog u frage+menut noviPaket
+ *
  */
 
 public class StavkaPaketa {
-    /*
-        klasa kojapredstavlja jednu stavku paketa kreiranog u frage+menut noviPaket
-    */
+
     String naziv;
     SpinnerElement vrsta;
     String kolicina;

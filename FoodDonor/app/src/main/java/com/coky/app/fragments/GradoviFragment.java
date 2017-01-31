@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Klasa za prikaz paketa čiji donori se nalaze u odabranog gradu
  */
 public class GradoviFragment extends Fragment implements WsDataLoadedListener{
 
@@ -58,13 +59,19 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
         getGradovi();
     }
 
+    /**
+     * metoda za dohvaćanje svih gradova iz baze pomoću ws-a
+     */
     private void getGradovi(){
         Log.d("grad", "2. getGradovi");
         WsDataLoader wdl = new WsDataLoader();
         wdl.odaberiGrad(this);
     }
 
-
+    /**
+     * Metoda koja u listu gradova dodaje novi grad
+     * @param grad novi grad koji se dodaje u listu gradova
+     */
     private void addGradoviToArray(Gradovi grad){
         if(gradovi == null){
             gradovi = new ArrayList<Gradovi>();
@@ -72,6 +79,10 @@ public class GradoviFragment extends Fragment implements WsDataLoadedListener{
         gradovi.add(grad);
     }
 
+    /**
+     * Metoda koja pokreće glavnu aktivnost s novim odabranim gradom
+     * @param gradIndex indeks grada koji je odabran
+     */
     private void azurirajGrad(int gradIndex){
         String grad = gradovi.get(gradIndex).getNaziv();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());

@@ -4,14 +4,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 /**
  * Created by Valentina on 30.12.2016..
+ * klasa za postavljanje alarma prilikom rebootanja uređaja
+ *
  */
 
 public class MyAlarmService extends Service {
-    //klasa za postavljanje alarma prilikom rebootanja uređaja
 
     Alarm alarm=new Alarm();
 
@@ -22,8 +22,6 @@ public class MyAlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-       // Toast.makeText(this,"Alarm u MyAlarmService!!!!!!!",Toast.LENGTH_SHORT).show();
-
         alarm.setAlarm(this.getApplicationContext());
         return START_STICKY;
     }

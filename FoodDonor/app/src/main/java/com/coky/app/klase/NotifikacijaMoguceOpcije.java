@@ -1,26 +1,23 @@
 package com.coky.app.klase;
 
 import android.content.Context;
-import android.content.Intent;
-
 import com.coky.app.firebase.MyNotificationManager;
-import com.coky.app.konfigurabilno.Alarm;
 import com.coky.app.konfigurabilno.KonfigurabilnoListener;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Valentina on 30.12.2016..
+ *
+ * klasa koja će nakom implementacije ofigurabilnog načina slanja obavijesti
+ * definirati izgled mogućih načina odabira priakza notifikacija, bilo konfigurabilo, pomoću firebae ili nešto treće
+ *
  */
 
+
 public class NotifikacijaMoguceOpcije {
-    /*
-    klasa koja će nakom implementacije ofigurabilnog načina slanja obavijesti
-    definirati izgled mogućih načina odabira priakza notifikacija, bilo konfigurabilo, pomoću firebae ili nešto treće
-     */
 
     public List<ItemNotifikacijaMoguceOpcije> moguceOpcije= new ArrayList<>();
     private Context mContext;

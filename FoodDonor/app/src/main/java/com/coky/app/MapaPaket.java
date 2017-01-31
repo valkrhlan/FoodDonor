@@ -41,6 +41,7 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, 
         wsDataLoader.preuzmiKoordinate(paketID,this);
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -103,6 +104,12 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, 
         }
 
     }
+
+    /**
+     * Metoda a obradu podataka vraćenih sa web servisa
+     * @param message atribut tipa GoogleMapa koji vraća web servis
+     * @param tip atribut koji govori da li je uspješno dohvaceno ili ne, 1 uspjesno, a 0 neuspjesno
+     */
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {

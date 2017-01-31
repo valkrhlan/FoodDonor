@@ -38,6 +38,7 @@ import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
+ * fragment za prikaz popisa paketa ovisno o tipu korisnika
  */
 public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
 
@@ -158,6 +159,9 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         vrijemePreuzeto.setText(paket.getV_preuzeto() != null ? "Paket preuzet: " +  paket.getV_preuzeto() : "");
     }
 
+    /**
+     * Metoda za vraćanje na popis svih paketa
+     */
     @OnClick(R.id.DD_natrag)
     public void btnNatragOnClick(){
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -166,6 +170,10 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         fragmentTransaction.commit();
     }
 
+    /**
+     * Metoda koja donoru i volonteru omogućuje da odaberu  paket za preuimanje/transport
+     * nakon odabira poziva se ws
+     */
     @OnClick(R.id.DD_odaberi)
     public void btnOdaberiOnClick(){
         ((GlavnaAktivnost)getActivity()).isNetworkAvailable();
@@ -194,6 +202,12 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
         wsDataLoader.evidentirajDolazak(paket.getId(),this);
     }
 
+    /**
+     * Metoda koja nakon uspješnog zabilježavnja odabira paketa na ws, pošalje notifikaciju
+     *
+     * @param message poruka dobivena od ws-a, u ovom slučaju je popis
+     * @param tip u slučaju neispravnog dohvaćanja je 0,inace je broj dohvaćenih paketa
+     */
     @Override
     public void onWsDataLoaded(Object message, int tip) {
         WsDataLoader wsDataLoader = new WsDataLoader();

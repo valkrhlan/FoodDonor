@@ -2,7 +2,11 @@ package com.coky.webservice.responses;
 
 /**
  * Created by Čoky on 9.11.2016..
+ *
+ * Klasa koje predstavlja izgled odgovora koji se prima sa web servisa
+ * izrađena je na temelju parametara unutar jsona koji ws vraća ko odgovor
  */
+
 
 public class FdWebServiceResponse {
     public String status;

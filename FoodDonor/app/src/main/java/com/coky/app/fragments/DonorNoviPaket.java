@@ -33,6 +33,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Klasa koja omogućuj dodavanje novog paketa
  */
 public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
 
@@ -97,14 +98,26 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         return  fragmentView;
     }
 
+    /**
+     * metoda za poziv web servisa kako bi nam vratio podatke potrebne za popunjavanje spinnera
+     */
     public void dohvatiVrsteHraneJedinice(){
         WsDataLoader wsDataLoader = new WsDataLoader();
         wsDataLoader.dohvatiVrstaJedinica(this);
     }
 
+    /**
+     * Metoda koja obrađuje odgovor dobiven od web servisa, ako se vrati poruka koja je VrstaJedinica
+     * popunjavaju se sinneri, a u slučaju da je vraćen string s porukom o dodavanju uspješnosti novog
+     * paketa šalje se notifikacija
+     * @param message Podatci koji su dohvaćeni
+     * @param tip O kad je neuspješno dohvaćanje, 1 kad je uspješno dohvaćanje s ws-a
+     */
     @Override
     public void onWsDataLoaded(Object message, int tip) {
-        //prikaz vrste hrane i jedinica hrane koji su uspjesno dohvaceni s web servisa
+        /**
+         *  prikaz vrste hrane i jedinica hrane koji su uspjesno dohvaceni s web servisa
+         */
         if(message instanceof VrstaJedinica){
             VrstaJedinica vrstaJedinica = (VrstaJedinica) message;
             List<SpinnerElement> pom=vrstaJedinica.getVrsta();
@@ -142,7 +155,11 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         }
     }
 
-    //provjera kroisnickog unosa,prije dodavanja nove stavke
+    /**
+     * Metoda za provjeru kroisničkog unosa prije dodavanja nove stavke
+     * @return
+     */
+
     private boolean validacija() {
         String rez="";
         EditText nazivHrane=(EditText)pomFragmentView.findViewById(R.id.editNazivHraneNP);
@@ -167,6 +184,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
         }
     }
 
+
  private void dodajNoviPaket(){
      if(stavke.isEmpty()){
          Toast.makeText(getActivity().getBaseContext(),"Potrebno je dodati barem jednu stavku!",Toast.LENGTH_SHORT).show();
@@ -184,7 +202,7 @@ public class DonorNoviPaket extends Fragment implements  WsDataLoadedListener{
          Log.d("json:",json);
          String email=((GlavnaAktivnost)getActivity()).getEmailKorisnika();
          WsDataLoader wsDataLoader = new WsDataLoader();
-         wsDataLoader.dodajPaket(email,json,prijevoz,this); //->sredit treba to na ws-u
+         wsDataLoader.dodajPaket(email,json,prijevoz,this);
 
          }
   }

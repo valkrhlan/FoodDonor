@@ -12,6 +12,9 @@ import com.coky.app.Prijava;
 
 /**
  * Created by Valentina on 30.1.2017..
+ *
+ * klasa za kreiranje i prikaz nove notifikacije
+ *
  */
 
 public class PrikazNotifikacija {
@@ -20,6 +23,7 @@ public class PrikazNotifikacija {
     public PrikazNotifikacija() {
 
     }
+
     public void prikaziNotifikaciju(String title, String message, int ikona,Context mCtx){
 
         SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(mCtx);

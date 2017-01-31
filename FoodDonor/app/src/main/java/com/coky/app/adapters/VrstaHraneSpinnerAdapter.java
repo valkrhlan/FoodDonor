@@ -31,7 +31,6 @@ public class VrstaHraneSpinnerAdapter extends ArrayAdapter<SpinnerElement> {
     public SpinnerElement getItem(int position){
         return  values[position];
     }
-    //int nemre umjesto long?? pogledat zakaj nije oke
     public long getItemId(int position){
         return position;
     }

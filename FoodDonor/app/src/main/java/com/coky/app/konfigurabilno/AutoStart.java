@@ -18,7 +18,7 @@ public class AutoStart extends BroadcastReceiver {
         if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
 
             SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(context);
-            String notifikacije=preferences.getString("notifikacije",null);
+            String notifikacije=preferences.getString("notifikacije","prazno");
             if(notifikacije.equals("Konfigurabilno")){
                 alarm.setAlarm(context.getApplicationContext());
             }

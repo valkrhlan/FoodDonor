@@ -1,6 +1,5 @@
 package com.coky.app;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Klasa koja dinamički genrira prikaz mogućih opcija za dohvaćanje paketa
+ * također dalje obrađuje korisnikov odabir
+ */
 public class NotifikacijeOpcije extends AppCompatActivity {
 
     private RadioGroup radioGroupOpcije;
@@ -30,6 +33,12 @@ public class NotifikacijeOpcije extends AppCompatActivity {
     @BindView(R.id.btnPohraniPromjeneNO)
     Button btnPohraniPromijene;
 
+    /**
+     * metoda koja provjerava dali su odabrani intervali i opcija
+     * u slučaju da su svi podatci ispravni,delegira obradu promjene klasi Upravitelj notifikacija
+     * koja je zadužena za modularnu komunikaciju
+     * @param view
+     */
     @OnClick(R.id.btnPohraniPromjeneNO)
     public void btnPohraniPromijeneNOClick(View view){
         if(radioGroupOpcije.getCheckedRadioButtonId()==-1){
@@ -106,6 +115,10 @@ public class NotifikacijeOpcije extends AppCompatActivity {
             editor.apply();
         }
 
+    /**
+     * Metoda za odabir opcije i intervala pri kreiranju fragmena
+     * ako ima spremljenih podataka u Shared Prefs onda njih odabire,ako posavi na prvu moguću opciju
+     */
     private void postaviOpcije() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String notifikacije = prefs.getString("notifikacije", null);
@@ -126,6 +139,11 @@ public class NotifikacijeOpcije extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * Metoda koja pri odabiru neke od ponuđenih opcija dinamički generira pripadne intervale za tu opciju
+     * @param moguceOpcije klasa mogućih opcija na temelju kojih generiraju radio buttoni za inervale
+     */
     private void postaviIntervale(NotifikacijaMoguceOpcije moguceOpcije){
         if(radioGroupIntervali.getChildCount()>0){
             radioGroupIntervali.removeAllViews();

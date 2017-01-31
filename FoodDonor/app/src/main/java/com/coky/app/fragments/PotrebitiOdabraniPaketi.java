@@ -28,6 +28,7 @@ import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Klasa koja omogućuje prikaz odabranih paketa volontera i potrebitih korisnika
  */
 public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedListener {
 
@@ -46,7 +47,9 @@ public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedLis
     private WsDataLoader wsDataLoader;
 
     public PotrebitiOdabraniPaketi() {
-        // Required empty public constructor
+        /**
+         * Required empty public constructor
+         */
     }
 
     @Override
@@ -76,6 +79,11 @@ public class PotrebitiOdabraniPaketi extends Fragment implements WsDataLoadedLis
         paketi.add(paket);
     }
 
+    /**
+     * napravi se list view sa fragmentima od kojih svaki predstavlja jedan paket, te se klikom na
+     * njih otvara novi fragment koji predstavalja detalje odabranog paketa
+     * @param brojPaketa lista id-eva svih paketa iz popisa dobivenog od ws-a
+     */
     private void setPaketAdapter(ArrayList<Integer> brojPaketa){
         paketAdapter = new PaketAdapter(getActivity(), paketi, brojPaketa);
         listView.setAdapter(paketAdapter);

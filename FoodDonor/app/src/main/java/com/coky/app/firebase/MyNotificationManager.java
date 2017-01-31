@@ -1,17 +1,12 @@
 package com.coky.app.firebase;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.widget.Toast;
 
-import com.coky.app.R;
 import com.coky.app.klase.UpraviteljNotifikacija;
 import com.coky.app.loaders.NotifikacijaLoadedListener;
 import com.coky.app.loaders.SlanjePodatakaModulima;
@@ -34,6 +29,12 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
         this.notifikacijaLoadedListener=new UpraviteljNotifikacija();
     }
 
+    /**
+     * Metoda pomoću koje se upravitelja notifikacija obaviještava da je pristigla nova notifikacija koju treba prikazati
+     * @param title naslov notifikacije
+     * @param message poruka notifikacije
+     * @param intent intent
+     */
     public void showSmallNotification(String title, String message, Intent intent){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mCtx);
         String notifikacije=prefs.getString("notifikacije",null);
@@ -42,6 +43,13 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
         }
     }
 
+    /**
+     *
+     * @param mContex kontekst aplikacije
+     * @param opcija string parametar koji predstavlja opciju koju je kroisnik odabrao za prikaz notifikacija
+     * @param prethodnaOpcija string parametar koji predstavlja opciju koja je prethodno bila odabrana
+     * @param interval interval opcije
+     */
     @Override
     public void obradiPromjenu(Context mContex, String opcija,String prethodnaOpcija, int interval) {
 
@@ -59,6 +67,12 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
 
     }
 
+    /**
+     *
+     * @param mContext kontekst aplikacije
+     * @param data podatci koje su dohvaćeni sa web servisa
+     * @param notifikacijaLoadedListener instanca listenera za komunikaciju s modulima
+     */
     @Override
     public void dostaviPodatkeWS(Context mContext,Object data,NotifikacijaLoadedListener notifikacijaLoadedListener) {
         this.notifikacijaLoadedListener=notifikacijaLoadedListener;
@@ -67,6 +81,11 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
         }
     }
 
+    /**
+     * Metoda koja zahtijeva da se iz klase UpraviteljNotifikacija pozove neka metoda web servisa
+     * @param mContext aplikacijski kontekst
+     * @param opcija opcija koja označava koju metodu sa ws treba pozvati
+     */
     private void posaljiPovratnuInformaciju(Context mContext,String opcija){
         SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(mContext);
         String email=preferences.getString("emailKorisnika",null);

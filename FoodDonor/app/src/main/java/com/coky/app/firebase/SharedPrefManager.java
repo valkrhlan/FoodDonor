@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 /**
  * Created by Valentina on 22.12.2016..
+ *
+ * Klasa za dohvaćanje i brisanje tokena iz Shared pref
+ *
  */
 
 public class SharedPrefManager {
@@ -25,7 +28,7 @@ public class SharedPrefManager {
         return mInstance;
     }
 
-    //spremanje tokena u shared preferences
+
     public boolean saveDeviceToken(String token){
         SharedPreferences sharedPreferences=mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

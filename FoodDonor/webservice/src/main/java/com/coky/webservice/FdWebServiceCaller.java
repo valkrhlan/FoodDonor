@@ -150,7 +150,12 @@ public class FdWebServiceCaller {
         HandleResponseFromCall("preuzmiKoordinate");
     }
 
-
+    /**
+     * ovisno o emtodi koja se poziva rukuje odgovorima od web servisa
+     * neke metode zahtjevaju da se vraća obićan string,a neke da se vrati skup podataka
+     *
+     * @param method
+     */
     public void HandleResponseFromCall(final String method){
         if(call != null){
             call.enqueue(new Callback<FdWebServiceResponse>() {
@@ -189,12 +194,22 @@ public class FdWebServiceCaller {
         }
     }
 
+    /**
+     * metoda koja kao odgovor vraća klasu VrstaJedinica koja se kasnije koristi za popunjavanje spinner elemenata pri dodavanju novog paketa
+     *
+     * @param response
+     */
     private void handleVstaJedinica(Response<FdWebServiceResponse> response){
             Gson gson = new Gson();
             VrstaJedinica vrstaJedinicaItem=gson.fromJson(response.body().getData(),VrstaJedinica.class);
             fdWebServiceHandler.onDataArrived((Object)vrstaJedinicaItem,response.body().getNbResults());
     }
 
+    /**
+     * Kaoresponse vraća niz paketa za određenog koisnika
+     *
+     * @param response
+     */
     private void handlePreuzetiPaketi(Response<FdWebServiceResponse> response) {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd") // response JSON format
@@ -204,6 +219,12 @@ public class FdWebServiceCaller {
             fdWebServiceHandler.onDataArrived(Arrays.asList(paketi),response.body().getNbResults());
         }
     }
+
+    /**
+     * Metoda koja vraća niz notifikacija koje su dohvaćene sa web servisa
+     *
+     * @param response
+     */
     private void handleDohvatiNotifikacije(Response<FdWebServiceResponse> response){
         Gson gson=new Gson();
         Notifikacija[] notifikacije=gson.fromJson(response.body().getData(),Notifikacija[].class);
@@ -212,6 +233,7 @@ public class FdWebServiceCaller {
             fdWebServiceHandler.onDataArrived(notifikacije,response.body().getNbResults());
         }
     }
+    
     private void handleDohvatiGradove(Response<FdWebServiceResponse> response){
         Gson gson=new Gson();
         Gradovi[] gradovi=gson.fromJson(response.body().getData(),Gradovi[].class);
@@ -220,6 +242,11 @@ public class FdWebServiceCaller {
         }
     }
 
+    /**
+     * Metoda koja vraća  2 para kordinata (longitude i latitude za gradove iz kojih su donor i potrebiti
+     *
+     * @param response
+     */
     private void handleDohvatiKoordinate(Response<FdWebServiceResponse> response){
         Gson gson=new Gson();
         GoogleMapa koordinate=gson.fromJson(response.body().getData(),GoogleMapa.class);

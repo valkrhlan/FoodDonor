@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 /**
  * Created by Valentina on 22.12.2016..
+ * Klasa koja proširuje FirebaseMessagingService
  */
 
 public class MyFirebaseMessgingService extends FirebaseMessagingService{
@@ -31,6 +32,10 @@ public class MyFirebaseMessgingService extends FirebaseMessagingService{
         }
     }
 
+    /**
+     * Metoda koja dobiva json objekt od Firebase servisa, parsira ga i proslijeđuje klasi MyNotificationManager
+     * @param json json objekt koji se dobiva od Firebase servisa
+     */
     private void sendPushNotification(JSONObject json) {
         Log.e(TAG, "Notification JSON " + json.toString());
         try {

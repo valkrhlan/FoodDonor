@@ -29,6 +29,7 @@ import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Klasa za prikaz popisa paketa kod različitih tipova korisnika
  */
 public class PopisPaketa extends Fragment implements WsDataLoadedListener {
 
@@ -80,6 +81,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         wsDataLoader.preuzmiPakete(email, "ne", grad, this);
     }
 
+    /**
+     * metoda koja ovisno o tipu prijavljenog korisnika generira ikone na floating buttonima
+     * volonter može vidjeti listu gradova i vlastite pakete, donor samo dodavanje paketa
+     * ,a potrebiti samo vlastite pakete
+     */
     private void setFloatingButtonIcons(){
         btnLijevo.setVisibility(View.GONE);
         if(tipKorisnika == 2){
@@ -95,6 +101,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         }
     }
 
+
     private void setTextViewVisibility(){
         if(tipKorisnika != 2){
             textViewGrad.setVisibility(View.GONE);
@@ -103,6 +110,10 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         }
     }
 
+    /**
+     * metoda za dodavanje paketa u listu paketa
+     * @param paket jedan paket
+     */
     private void addPaketToArray(Paket paket){
         if(paketi == null){
             Log.d("paketi","3. new paketi");
@@ -111,6 +122,11 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         paketi.add(paket);
     }
 
+    /**
+     * Metoda za punjenje list viewa sa runo izrađenim fragmentima, od kojih svaki
+     * definira jedan paket
+     * @param brojPaketa kolikoo je paketa pristiglo preko web servisa
+     */
     private void setPaketAdapter(ArrayList<Integer> brojPaketa){
         //setFloatingButtonIcons();
         Log.d("paketi","4. new Paket Adapter");
@@ -132,6 +148,9 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         });
     }
 
+    /**
+     * OnClick event za novi paket ili za prikaz odabranih paketa
+     */
     @OnClick(R.id.btnLijevo)
     public void btnLijevoOnClick() {
         Fragment odabirGrada = new GradoviFragment();
@@ -141,6 +160,9 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
         transaction.commit();
     }
 
+    /**
+     * OnClick event za prikaz popisa gradova kod volontera
+     */
     @OnClick(R.id.btnDesno)
     public void btnDesnoOnClick(){
         if(tipKorisnika == 1){  //DONOR
@@ -157,6 +179,7 @@ public class PopisPaketa extends Fragment implements WsDataLoadedListener {
             transaction.commit();
         }
     }
+
 
     @Override
     public void onWsDataLoaded(Object message, int tip) {

@@ -1,9 +1,7 @@
 package com.coky.app.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.TextView;
 
 import com.coky.app.R;
 import com.coky.core.entities.Gradovi;
-import com.coky.core.entities.Paket;
+
 
 import java.util.ArrayList;
 

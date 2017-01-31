@@ -18,6 +18,10 @@ import android.view.MenuItem;
 
 import com.coky.app.fragments.PopisPaketa;
 
+/**
+ * Klasa koja proširuje AppCompatActivity
+ * na njoj se prikazuju različiti fragmenti za prikaz popisa paketa ili za kreiranje novog paketa
+ */
 
 public class GlavnaAktivnost extends AppCompatActivity {
     
@@ -57,6 +61,11 @@ public class GlavnaAktivnost extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * @param item odabrani item na meniju (notifikacije ili odjava)
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -89,7 +98,11 @@ public class GlavnaAktivnost extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Metoda u
+     * @param fragment fragmnent koji se treba kreirati
+     * @param tag string oji predstvalja oznaku fragmenta
+     */
     private void createInitialFragment(Fragment fragment, String tag){
         fragmentCreated = true;
         fragmentManager = getSupportFragmentManager();
@@ -115,7 +128,10 @@ public class GlavnaAktivnost extends AppCompatActivity {
 
     private void opcije(){
         Intent intent = new Intent(GlavnaAktivnost.this,NotifikacijeOpcije.class);
-        startActivityForResult(intent, 2); //Ovo naredbom se "čeka" na dva podatka iz aktivnosti NotifikacijeOpcije. Ako nije potrebno preuzeti nikakve podake, nek se ova naredba promjeni u startActivity(intent);
+        /**
+         * //Ovo naredbom se "čeka" na dva podatka iz aktivnosti NotifikacijeOpcije
+         */
+        startActivityForResult(intent, 2);
 
     }
 
@@ -143,6 +159,10 @@ public class GlavnaAktivnost extends AppCompatActivity {
         this.grad = grad;
     }
 
+    /**
+     * metoda za provjeru dostupnosti interneta
+     * ako nema interneta korisnik se ne može prijaviti u aplikaciju
+     */
     public void isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
