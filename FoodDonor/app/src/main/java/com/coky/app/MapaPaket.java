@@ -1,5 +1,7 @@
 package com.coky.app;
 
+import android.*;
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.coky.app.loaders.WsDataLoadedListener;
+import com.coky.app.loaders.WsDataLoader;
+import com.coky.core.entities.GoogleMapa;
 import com.coky.core.entities.Paket;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -28,21 +33,52 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
+public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, WsDataLoadedListener {
+
+    public MapaPaket() {
+    }
+
+    private String paketID;
+
     private GoogleMap mMap;
-    private ArrayList<Paket> paketi;
-    private double lat1 = 45.52811759999999;
-    private double lat2 = 31.2354;
-    private double lon1 = 17.2437493;
-    private double lon2 = 77.7784;
+
+    private double lat1 /*= 46.3076267*/;
+    private double lat2 /*= 46.3097705*/;
+    private double lon1 /*= 16.3382566*/;
+    private double lon2 /*= 16.3468148*/;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_paket);
-        MapFragment mMapFragment = (com.google.android.gms.maps.MapFragment) this.getFragmentManager().findFragmentById(R.id.mapfragment);
-        mMapFragment.getMapAsync(this);
+        paketID = getIntent().getExtras().getString("paketID");
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.preuzmiKoordinate(paketID,this);
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission denied to read your ACCESS FINE LOCATION", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     public void AddMarker(double lat, double lon) {
@@ -60,29 +96,45 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap map) {
+
+        mMap = map;
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         try {
-
-            mMap = map;
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.setMyLocationEnabled(true);
-            mMap.setTrafficEnabled(true);
-            mMap.setIndoorEnabled(true);
-            mMap.setBuildingsEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
-            //LocationManager Lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-            //Location l = Lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            double zoom = 13.6;
-            //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
-            LatLng pos1 = new LatLng(lat1, lon1);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
-
-            if (mMap != null) {
-                AddMarker(lat1, lon1);
-                AddMarker(lat2, lon2);
-            }
 
         } catch (SecurityException e) {
-            Toast.makeText(this, "Molimo vas Uključite GPS opciju i ponovno posjetite ovaj modul!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uključite dozvolu za GPS i storage! (Settings > Apps > Food donor > Permissions", Toast.LENGTH_SHORT).show();
         }
+        mMap.setTrafficEnabled(true);
+        mMap.setIndoorEnabled(true);
+        mMap.setBuildingsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        //LocationManager Lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //Location l = Lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double zoom = 13.6;
+        //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
+        LatLng pos1 = new LatLng(lat1, lon1);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
+        Log.d("mapa", "AddMarkers");
+        if (mMap != null) {
+            AddMarker(lat1, lon1);
+            AddMarker(lat2, lon2);
+        }
+
+    }
+
+    @Override
+    public void onWsDataLoaded(Object message, int tip) {
+        GoogleMapa koordinate = (GoogleMapa) message;
+        lat1 = koordinate.getLat_donor();
+        lon1 = koordinate.getLng_donor();
+        lat2 = koordinate.getLat_potrebiti();
+        lon2 = koordinate.getLng_potrebiti();
+        Log.d("mapa", "onWsDataLoaded");
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        MapFragment mMapFragment = (com.google.android.gms.maps.MapFragment) this.getFragmentManager().findFragmentById(R.id.mapfragment);
+        mMapFragment.getMapAsync(this);
     }
 }

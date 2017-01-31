@@ -132,6 +132,9 @@ public class DetaljiPaketa extends Fragment implements WsDataLoadedListener {
     @OnClick(R.id.DD_karta)
     public void btnKartaOnClick(){
         Intent intent = new Intent(getActivity(),MapaPaket.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("paketID", paket.getId());
+        intent.putExtras(mBundle);
         startActivity(intent);
     }
 

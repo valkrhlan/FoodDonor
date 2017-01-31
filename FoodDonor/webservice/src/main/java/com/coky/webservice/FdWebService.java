@@ -97,4 +97,8 @@ public interface FdWebService {
     @GET("evidentirajDolazak/{idPaketa}/")
     Call<FdWebServiceResponse>evidentirajDolazak(
             @Path("idPaketa") String idPaketa);
+
+    @GET("preuzmiKoordinate/{idPaketa}/")
+    Call<FdWebServiceResponse>preuzmiKoordinate(
+            @Path("idPaketa") String idPaketa);
 }
