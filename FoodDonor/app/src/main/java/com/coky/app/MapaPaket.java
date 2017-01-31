@@ -17,6 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.coky.app.loaders.WsDataLoadedListener;
+import com.coky.app.loaders.WsDataLoader;
+import com.coky.core.entities.GoogleMapa;
 import com.coky.core.entities.Paket;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -30,40 +33,27 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
+public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback, WsDataLoadedListener {
 
     public MapaPaket() {
     }
 
-    private Paket p;
-
-    public MapaPaket(Paket paket) {
-        p = paket;
-    }
-
+    private String paketID;
 
     private GoogleMap mMap;
-    private ArrayList<Paket> paketi;
-    private double lat1 = 46.3076267;
-    private double lat2 = 46.3097705;
-    private double lon1 = 16.3382566;
-    private double lon2 = 16.3468148;
+
+    private double lat1 /*= 46.3076267*/;
+    private double lat2 /*= 46.3097705*/;
+    private double lon1 /*= 16.3382566*/;
+    private double lon2 /*= 16.3468148*/;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_paket);
-
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        if(p != null){
-
-
-        };
-        MapFragment mMapFragment = (com.google.android.gms.maps.MapFragment) this.getFragmentManager().findFragmentById(R.id.mapfragment);
-        mMapFragment.getMapAsync(this);
-
+        paketID = getIntent().getExtras().getString("paketID");
+        WsDataLoader wsDataLoader = new WsDataLoader();
+        wsDataLoader.preuzmiKoordinate(paketID,this);
     }
 
     @Override
@@ -125,10 +115,26 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
         //LatLng location = new LatLng(l.getLatitude(),l.getLongitude() );
         LatLng pos1 = new LatLng(lat1, lon1);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, (float) zoom));
+        Log.d("mapa", "AddMarkers");
         if (mMap != null) {
             AddMarker(lat1, lon1);
             AddMarker(lat2, lon2);
         }
 
+    }
+
+    @Override
+    public void onWsDataLoaded(Object message, int tip) {
+        GoogleMapa koordinate = (GoogleMapa) message;
+        lat1 = koordinate.getLat_donor();
+        lon1 = koordinate.getLng_donor();
+        lat2 = koordinate.getLat_potrebiti();
+        lon2 = koordinate.getLng_potrebiti();
+        Log.d("mapa", "onWsDataLoaded");
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        MapFragment mMapFragment = (com.google.android.gms.maps.MapFragment) this.getFragmentManager().findFragmentById(R.id.mapfragment);
+        mMapFragment.getMapAsync(this);
     }
 }

@@ -5,19 +5,19 @@ package com.coky.core.entities;
  */
 
 public class GoogleMapa {
-    private int lat_donor;
-    private int lng_donor;
-    private int lat_potrebiti;
-    private int lng_potrebiti;
+    private double lat_donor;
+    private double lng_donor;
+    private double lat_potrebiti;
+    private double lng_potrebiti;
 
-    public GoogleMapa(int lat_donor, int lng_donor, int lat_potrebiti, int lng_potrebiti) {
+    public GoogleMapa(double lat_donor, double lng_donor, double lat_potrebiti, double lng_potrebiti) {
         this.lat_donor = lat_donor;
         this.lng_donor = lng_donor;
         this.lat_potrebiti = lat_potrebiti;
         this.lng_potrebiti = lng_potrebiti;
     }
 
-    public int getLat_donor() {
+    public double getLat_donor() {
         return lat_donor;
     }
 
@@ -25,7 +25,7 @@ public class GoogleMapa {
         this.lat_donor = lat_donor;
     }
 
-    public int getLng_donor() {
+    public double getLng_donor() {
         return lng_donor;
     }
 
@@ -33,7 +33,7 @@ public class GoogleMapa {
         this.lng_donor = lng_donor;
     }
 
-    public int getLat_potrebiti() {
+    public double getLat_potrebiti() {
         return lat_potrebiti;
     }
 
@@ -41,7 +41,7 @@ public class GoogleMapa {
         this.lat_potrebiti = lat_potrebiti;
     }
 
-    public int getLng_potrebiti() {
+    public double getLng_potrebiti() {
         return lng_potrebiti;
     }
 

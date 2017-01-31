@@ -222,9 +222,9 @@ public class FdWebServiceCaller {
 
     private void handleDohvatiKoordinate(Response<FdWebServiceResponse> response){
         Gson gson=new Gson();
-        GoogleMapa[] koordinate=gson.fromJson(response.body().getData(),GoogleMapa[].class);
+        GoogleMapa koordinate=gson.fromJson(response.body().getData(),GoogleMapa.class);
         if(fdWebServiceHandler!=null){
-            fdWebServiceHandler.onDataArrived(Arrays.asList(koordinate),response.body().getNbResults());
+            fdWebServiceHandler.onDataArrived(koordinate,response.body().getNbResults());
         }
     }
 
