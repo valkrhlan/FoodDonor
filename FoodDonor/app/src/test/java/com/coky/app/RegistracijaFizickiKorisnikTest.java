@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
  * Created by Čoky on 30.1.2017..
  */
 public class RegistracijaFizickiKorisnikTest {
+
     @Test
     public void validate() throws Exception {
         Boolean output;
