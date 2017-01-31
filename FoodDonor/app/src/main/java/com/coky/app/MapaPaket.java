@@ -1,5 +1,7 @@
 package com.coky.app;
 
+import android.*;
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +31,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
+
+    public MapaPaket() {
+    }
+
+    private Paket p;
+
+    public MapaPaket(Paket paket) {
+        p = paket;
+    }
+
+
     private GoogleMap mMap;
     private ArrayList<Paket> paketi;
     private double lat1 = 46.3076267;
@@ -40,9 +53,42 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_paket);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        if(p != null){
+
+
+        };
         MapFragment mMapFragment = (com.google.android.gms.maps.MapFragment) this.getFragmentManager().findFragmentById(R.id.mapfragment);
         mMapFragment.getMapAsync(this);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission denied to read your ACCESS FINE LOCATION", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     public void AddMarker(double lat, double lon) {
@@ -84,4 +130,5 @@ public class MapaPaket extends AppCompatActivity implements OnMapReadyCallback {
             AddMarker(lat2, lon2);
         }
 
-}}
+    }
+}
