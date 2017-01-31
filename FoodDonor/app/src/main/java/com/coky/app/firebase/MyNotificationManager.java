@@ -71,6 +71,10 @@ public class MyNotificationManager implements SlanjePodatakaModulima{
         SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(mContext);
         String email=preferences.getString("emailKorisnika",null);
         String token= SharedPrefManager.getInstance(mContext).getDeviceToken();
+        SharedPreferences.Editor  editor=preferences.edit();
+        long ts=System.currentTimeMillis()/1000;
+        editor.putLong("timestamp",ts);
+        editor.apply();
         notifikacijaLoadedListener.pozoviWS(opcija,email,token);
 
     }
