@@ -86,6 +86,11 @@ public class WsDataLoader {
         this.wsDataLoadedListener=wsDataLoadedListener;
         FdWs.CallWsForGetNotifications(email,timestamp);
     }
+    public  void preuzmiKoordinate(String idPaketa,WsDataLoadedListener wsDataLoadedListener){
+        this.wsDataLoadedListener=wsDataLoadedListener;
+        FdWs.CallWsForPreuzmiKoordinate(idPaketa);
+    }
+
 
     FdWebServiceHandler responseHandler = new FdWebServiceHandler() {
         @Override
